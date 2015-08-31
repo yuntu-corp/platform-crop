@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.shoppingcart.dao.manual.ShoppingCartDAO">
+	<resultMap type="ShoppingCart" id="resultShoppingCart">  
+        <id column="id" property="id" />
+        <result column="count" property="count" />
+        <association column="id_goods" property="goods" select="com.unitever.module.goods.dao.manual.GoodsDAO.get"/>
+        <association column="id_customer" property="customer" select="com.unitever.module.customer.dao.manual.CustomerDAO.get"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultShoppingCart" parameterType="String">
+		select * from ds_shoppingcart 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultShoppingCart">
+		select * from ds_shoppingcart 
+	</select>
+	
+	<insert id="save" parameterType="ShoppingCart">
+		insert into ds_shoppingcart(id,id_goods,id_customer,count,ft,lt,fu,lu) value(#{id},#{goods.id},#{customer.id},#{count},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	
+	<update id="update" parameterType="ShoppingCart">
+		update ds_shoppingcart
+		<set>
+			<if test="goods != null and goods.id != null">id_goods=#{goods.id},</if>
+			<if test="customer !=null and customer.id != null">id_customer=#{customer.id},</if>
+			<if test="count != null">count=#{count},</if>
+		</set>
+		where id=#{id}
+	</update>
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="String">
+		delete from ds_shoppingcart where id=#{id} 
+	</delete>
+	<select id="getShoppingCartListWithShoppingCart" resultMap="resultShoppingCart" parameterType="ShoppingCart">
+		select * from ds_shoppingcart 
+		<where>
+			1=1
+			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="goods != null and goods.id !=null">
+				and id_goods=#{goods.id}
+			</if>
+			<if test="customer != null and customer.id !=null">
+				and id_customer=#{customer.id}
+			</if>
+			<if test="count !=null">
+				and count=#{count}
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,55 @@
+
+/**页面顶部菜单lavalamp效果**/
+.box_header {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 10px 0;
+}
+
+.box_header .box_title {
+    color: #000000;
+    font: bold 22px/35px "微软雅黑",Arial,Helvetica,sans-serif;
+    min-width: 150px;
+    display: inline;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;    
+}
+
+.box_header .box_nav{
+    display: inline;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+.box_header .box_nav ul li {
+    display: inline;
+    float: left;
+}
+
+.box_header .box_nav ul li.backLava {
+    border-bottom: 3px solid #4e8800;
+    bottom: 0;
+    display: block;
+    float: none;
+    margin: 0;
+    z-index: 1;
+}
+
+.box_header .box_nav ul li.selectedLava a {
+    color: #4e8800;
+    font-weight: bold;
+}
+
+.box_header .box_nav a {
+    border-right: 1px solid #CCCCCC;
+    color: #333333;
+    display: block;
+    line-height: 15px;
+    margin: 10px 0;
+    padding: 0 10px;
+    position: relative;
+    z-index: 2;
+}

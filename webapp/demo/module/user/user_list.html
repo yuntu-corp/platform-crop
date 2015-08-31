@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>用户列表显示</title>
+		<#include "*/common/meta.html">
+		<#include "*/common/base.html">
+		<script src="${path }/platform/component/swfupload/js/swfupload.js"></script>
+		<script src="${path }/platform/component/swfupload/js/swfupload.queue.js"></script>
+		<script src="${path }/platform/component/swfupload/js/jquery.swfupload.js"></script>
+	<script type="text/javascript">
+		
+		function refreshUserList(){
+			window.location="${path}/dm/user/list";
+		}
+
+		function addUser(){
+			var url = "${path}/dm/user/input";
+			$.dialog.load(url,{
+				id: 'dialog-addUser',
+				title:"添加用户",
+				width:700,
+				height:600,
+				ok:function(){
+					com.ue.platform.module.user.doSave();
+					return false;
+				}
+			})
+		}
+		
+		
+		function toEdit(id){
+			var url = "${path}/dm/user/input?id="+id;
+			$.dialog.load(url,{
+				id: 'dialog-addUser',
+				title:"修改用户",
+				width:700,
+				height:600,
+				ok:function(){
+					com.ue.platform.module.user.doSave();
+					return false;
+				}
+			})
+		}
+		
+		function doDelete(id){
+			confirm("确定要删除吗？",function(){
+				$.ajax({
+				 	type: "POST",
+				  	url: '${path}/dm/user/delete/'+id,
+				  	processData:true,
+				  	success: function(data){
+				  		refreshUserList();
+				  	}
+				 });
+			});
+		}
+		
+		
+		$(document).ready(function(){
+		})
+		
+	</script>
+	</head>
+	<body>
+		<h1>这是UserController对应的user_list.html</h1>
+		<input type="button" value="添加用户" onclick="addUser()">
+		<div>
+			<table border="0" cellpadding="3" cellspacing="1">
+				<tr align="center">
+					<th width="300">ID</th>
+					<th width="300">姓名</th>
+					<th width="300">年龄</th>
+					<th width="300">邮箱</th>
+					<th width="300">部门</th>
+					<th width="300">操作</th>
+				</tr>
+				<#if list??>
+	        		<#list list as entity>
+					<tr align="center">
+						<td>${entity.id}</td>
+						<td>${entity.name}</td>
+						<td>${entity.getAgeView(entity.age!0)!}</td>
+						<td>${entity.email!}</td>
+						<td>
+							<#if entity.dept??>  
+								${entity.dept.name!}
+							</#if>  
+						</td>
+						<td>
+							<a href="javascript:void(0);" onclick="toEdit('${entity.id}')">修改</a>
+							<a href="javascript:void(0);" onclick="doDelete('${entity.id}')">删除</a>
+						</td>
+					</tr>
+					</#list>
+		        </#if>
+			</table>
+		</div>
+		<div>
+			<h3><a href="${path}/demo/index.jsp">返回</a></h3>
+		</div>
+	</body>
+</html>

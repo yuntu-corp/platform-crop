@@ -1,0 +1,1872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+	<description>"To make it easier to access dynamic data;
+                    the Apache Struts framework includes a library of custom tags.
+                    The tags interact with the framework's validation and internationalization features;
+                    to ensure that input is correct and output is localized.
+                    The Struts Tags can be used with JSP FreeMarker or Velocity."</description>
+	<display-name>"UI Tags"</display-name>
+	<tlib-version>2.2.3</tlib-version>
+	<short-name>ui</short-name>
+	<uri>http://dc.hzth.com/tags</uri>
+	<!-- TextField -->
+	<tag>
+		<name>textfield</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.TextFieldTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render an HTML input field of type text</description>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML maxlength attribute</description>
+			<name>maxlength</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Whether the input is readonly</description>
+			<name>readonly</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML size attribute</description>
+			<name>size</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of placeholder element.</description>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- Form -->
+	<tag>
+		<name>form</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.FormTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Renders an input form</description>
+		<attribute>
+			<description>Set action name to submit to, without .action suffix</description>
+			<name>action</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML form enctype attribute</description>
+			<name>enctype</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML form method attribute</description>
+			<name>method</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML form target attribute</description>
+			<name>target</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML form target attribute</description>
+			<name>onsubmit</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- integer -->
+	<tag>
+		<name>integer</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.IntegerTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render an HTML input field of type text</description>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML maxlength attribute</description>
+			<name>maxlength</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Whether the input is readonly</description>
+			<name>readonly</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML size attribute</description>
+			<name>size</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of placeholder element.</description>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>minValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>maxValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- float -->
+	<tag>
+		<name>float</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.FloatTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render an HTML input field of type text</description>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML maxlength attribute</description>
+			<name>maxlength</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Whether the input is readonly</description>
+			<name>readonly</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML size attribute</description>
+			<name>size</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of placeholder element.</description>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>minValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>maxValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>decimalScale</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- password -->
+	<tag>
+		<name>password</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.PasswordTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render an HTML input field of type text</description>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML maxlength attribute</description>
+			<name>maxlength</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML size attribute</description>
+			<name>size</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of placeholder element.</description>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- Textarea -->
+	<tag>
+		<name>textarea</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.TextareaTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render HTML textarea tag.</description>
+		<attribute>
+			<description>HTML cols attribute</description>
+			<name>cols</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onchange attribute on rendered html element</description>
+			<name>onchange</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Whether the textarea is readonly</description>
+			<name>readonly</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML rows attribute</description>
+			<name>rows</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the maxlength of validate element.</description>
+			<name>maxlength</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of placeholder element.</description>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- Hidden -->
+	<tag>
+		<name>hidden</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.HiddenTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render a hidden input field</description>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- Radio -->
+	<tag>
+		<name>radio</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.RadioTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render a radio input field</description>
+		<attribute>
+			<description>The label name to use for element</description>
+			<name>label</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The labelIgnoreI18n name to use for element</description>
+			<name>labelEnableI18n</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The actual HTML value attribute of the checkbox.</description>
+			<name>fieldValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- Checkbox -->
+	<tag>
+		<name>checkbox</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.CheckboxTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render a radio input field</description>
+		<attribute>
+			<description>The label name to use for element</description>
+			<name>label</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The labelIgnoreI18n name to use for element</description>
+			<name>labelEnableI18n</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The actual HTML value attribute of the checkbox.</description>
+			<name>fieldValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of input element.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value of validate element.</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- RadioList -->
+	<tag>
+		<name>radiolist</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.RadioListTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render a list of checkboxes</description>
+		<attribute>
+			<description>Set the html tableLayout attribute on rendered html element if tableLayout is false ,will not render table</description>
+			<name>tableLayout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html accesskey attribute on rendered html element</description>
+			<name>accesskey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The clos  to use for element</description>
+			<name>cols</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Iterable source to populate from. If the list is a Map (key, value), the Map key will become the option 'value' parameter and the Map value will become the option body.</description>
+			<name>list</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Property of list objects to get field value from</description>
+			<name>listKey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Property of list objects to get field content from</description>
+			<name>listValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>If set to true, the rendered element will indicate that input is required</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- CheckboxList -->
+	<tag>
+		<name>checkboxlist</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.CheckboxListTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render a list of checkboxes</description>
+		<attribute>
+			<description>Set the html tableLayout attribute on rendered html element if tableLayout is false ,will not render table</description>
+			<name>tableLayout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html accesskey attribute on rendered html element</description>
+			<name>accesskey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The clos  to use for element</description>
+			<name>cols</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Iterable source to populate from. If the list is a Map (key, value), the Map key will become the option 'value' parameter and the Map value will become the option body.</description>
+			<name>list</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Property of list objects to get field value from</description>
+			<name>listKey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Property of list objects to get field content from</description>
+			<name>listValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>If set to true, the rendered element will indicate that input is required</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- Select -->
+	<tag>
+		<name>select</name>
+		<tag-class>com.unitever.platform.component.baseform.tag.SelectTag</tag-class>
+		<body-content>JSP</body-content>
+		<description>Render a list of checkboxes</description>
+		<attribute>
+			<description>Set the html accesskey attribute on rendered html element</description>
+			<name>accesskey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css class to use for element</description>
+			<name>cssClass</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The css style definitions for element to use</description>
+			<name>cssStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html disabled attribute on rendered html element</description>
+			<name>disabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>HTML id attribute</description>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Iterable source to populate from. If the list is a Map (key, value), the Map key will become the option 'value' parameter and the Map value will become the option body.</description>
+			<name>list</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Property of list objects to get field value from</description>
+			<name>listKey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Property of list objects to get field content from</description>
+			<name>listValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>The name to set for element</description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onblur attribute on rendered html element</description>
+			<name>onblur</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onclick attribute on rendered html element</description>
+			<name>onclick</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onfocus attribute on rendered html element</description>
+			<name>onfocus</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeydown attribute on rendered html element</description>
+			<name>onkeydown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeypress attribute on rendered html element</description>
+			<name>onkeypress</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onkeyup attribute on rendered html element</description>
+			<name>onkeyup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousedown attribute on rendered html element</description>
+			<name>onmousedown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmousemove attribute on rendered html element</description>
+			<name>onmousemove</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseout attribute on rendered html element</description>
+			<name>onmouseout</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseover attribute on rendered html element</description>
+			<name>onmouseover</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html onmouseup attribute on rendered html element</description>
+			<name>onmouseup</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>If set to true, the rendered element will indicate that input is required</description>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html tabindex attribute on rendered html element</description>
+			<name>tabindex</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Set the html title attribute on rendered html element</description>
+			<name>title</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the value.</description>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the headerKey.</description>
+			<name>headerKey</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the headerValue.</description>
+			<name>headerValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the multiple.</description>
+			<name>multiple</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Preset the multiple.</description>
+			<name>editEnable</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	<!-- i18n -->
+	<tag>
+		<name>i18n</name>
+		<tag-class>com.unitever.platform.component.i18n.tag.I18nTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>code</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>i18nParam</name>
+		<tag-class>com.unitever.platform.component.i18n.tag.I18nParamTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>value</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<!-- 富文本编辑器(UEditor) -->
+	<tag>
+		<name>UEditor</name>
+		<tag-class>com.unitever.platform.component.ueditor.tag.UEditorTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>zIndex</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>wordCount</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>autoHeightEnabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>simpleEnabled</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+<!-- 附件上传 -->
+	<tag>
+		<name>attachmentUpload</name>
+		<tag-class>com.unitever.platform.component.attachment.tag.AttachmentUploadTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>id</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>model</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>fieldName</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>configCode</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>finishCallback</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>deleteCallback</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+<!-- 附件查看标签 -->
+	<tag>
+		<name>attachmentView</name>
+		<tag-class>com.unitever.platform.component.attachment.tag.AttachmentViewTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>showAll</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>model</name>
+			<rtexprvalue>true</rtexprvalue>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>fieldName</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkUser</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>period</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showZipUrl</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+<!-- 附件URL标签，可实现自定义下载，图片查看 -->
+	<tag>
+		<name>attachmentUrl</name>
+		<tag-class>com.unitever.platform.component.attachment.tag.AttachmentUrlTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>model</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>fieldName</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkUser</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>period</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+<!-- 分页标签 -->
+	<tag>
+		<name>pageBar</name>
+		<tag-class>com.unitever.platform.component.page.tag.PageBarTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pageInfo</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>formId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>containerId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>changePageSize</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>changePageSizeNumber</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- 树标签 -->
+	<tag>
+		<name>tree</name>
+		<tag-class>com.unitever.platform.component.tree.tag.TreeTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>nodes</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkEnable</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>dropdown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cascade</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>expandLevel</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- 数据字典：树-->
+	<tag>
+		<name>dictTree</name>
+		<tag-class>com.unitever.platform.component.dictionary.tag.DictTreeTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>dictCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkValue</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkStyle</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkEnable</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>dropdown</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cascade</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>expandLevel</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>required</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>placeholder</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- 数据字典：下拉选择 -->
+	<tag>
+		<name>dictSelect</name>
+		<tag-class>com.unitever.platform.component.dictionary.tag.DictSelectTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>dictCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>headerKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>headerValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>required</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>other</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- 数据字典：复选列表 -->
+	<tag>
+		<name>dictCheck</name>
+		<tag-class>com.unitever.platform.component.dictionary.tag.DictCheckBoxTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>dictCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>checkValue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cols</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssStyle</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>required</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>other</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<!-- 数据字典：显示值 -->
+	<tag>
+		<name>dictView</name>
+		<tag-class>com.unitever.platform.component.dictionary.tag.DictViewTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>dictCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>valueCode</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>isFullPath</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

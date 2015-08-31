@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.goods.dao.manual.GoodsDAO">
+
+	<resultMap type="Goods" id="resultGoods">  
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="kind" property="kind" />
+        <result column="originalprice" property="originalPrice" />
+        <result column="price" property="price" />
+        <result column="size" property="size" />
+        <result column="note" property="note" />
+        <association property="user" javaType="User">
+        	<id column="id_user" property="id" />  
+        </association>
+	</resultMap>
+	<!-- 新增用户 -->
+	<insert id="save" parameterType="Goods">
+		insert into ds_goods(id,name,kind,originalprice,price,size,note,id_user,ft,lt,fu,lu) value(#{id},#{name},#{kind},#{originalPrice},#{price},#{size},#{note},#{user.id},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	<select id="getAll" resultMap="resultGoods" >
+   		select * From ds_goods
+	</select>
+	<!-- 删除用户 -->
+	<delete id="delete" parameterType="String">
+		delete from  ds_goods where id=#{id} 
+	</delete>
+	<select id="get" resultMap="resultGoods" parameterType="String">
+   		select * From ds_goods 
+   		<where> 
+			id =#{id}
+		</where> 
+	</select>
+	<update id="update" parameterType="Goods">
+		update ds_goods
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="kind != null">kind=#{kind},</if>
+			<if test="originalPrice != null">originalprice=#{originalPrice},</if>
+			<if test="price != null">price=#{price},</if>
+			<if test="size != null">size=#{size},</if>
+			<if test="note != null">note=#{note},</if>
+			<if test="user != null and user.id != null">id_user=#{user.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	<select id="getGoodsListWithGoods" resultMap="resultGoods" parameterType="Goods">
+   		select * From ds_goods 
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="name != null and name!=''">
+			     and name like CONCAT('%','${name}','%' )  
+			</if>
+			<if test="kind!=null">
+				and kind=#{kind}
+			</if>
+			<if test="price!=null">
+				and price=#{price}
+			</if>
+			<if test="size!=null">
+				and size=#{size}
+			</if>
+			<if test="note!=null">
+				and note=#{note}
+			</if>
+			<if test="user != null and user.id != null">
+				and id_user=#{user.id}
+			</if>
+		</where> 
+	</select>
+</mapper>

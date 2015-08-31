@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.platform.component.attachment.dao.manual.AttachmentConfigDAO">
+    <!-- sp namespace:映射StudentMapper的接口 -->
+    
+    <resultMap type="AttachmentConfig" id="resultAttachmentConfigMap">  
+        <id column="id" property="id" />  
+        <result column="code" property="code"/>  
+        <result column="saveDir" property="saveDir"/>  
+        <result column="dirLevel" property="dirLevel"/>  
+        <result column="fileSize" property="fileSize"/>  
+        <result column="fileCount" property="fileCount"/>  
+        <result column="extension" property="extension"/>  
+        <result column="description" property="description"/>  
+        <result column="ft" property="ft"/>  
+        <result column="lt" property="lt"/>  
+        <result column="fu" property="fu"/>  
+        <result column="lu" property="lu"/>  
+    </resultMap>  
+    
+    
+    <!-- 添加一条数据 -->
+    <insert id="save" keyProperty="id" useGeneratedKeys="false" parameterType="AttachmentConfig">
+        insert into sys_attachmentconfig(id,code,saveDir,dirLevel,fileSize,fileCount,extension,description,ft,fu) 
+        values(#{id},#{code},#{saveDir},#{dirLevel},#{fileSize},#{fileCount},#{extension},#{description},#{ft},#{fu})
+    </insert>
+    
+    <update id="update" parameterType="AttachmentConfig">
+        update sys_attachmentconfig 
+        <set>
+         <if test="code != null and code != '' ">  
+            code=#{code},  
+         </if>  
+         <if test="saveDir != null and saveDir != '' ">  
+            saveDir=#{saveDir},  
+         </if>  
+         <if test="dirLevel != null and dirLevel != '' ">  
+            dirLevel=#{dirLevel},  
+         </if>  
+         <if test="fileSize != null and fileSize != '' ">  
+            fileSize=#{fileSize}, 
+         </if>  
+         <if test="fileCount != null and fileCount != '' ">  
+            fileCount=#{fileCount}, 
+         </if>  
+         <if test="extension != null and extension != '' ">  
+            extension=#{extension}, 
+         </if>  
+         <if test="description != null and description != '' ">  
+            description=#{description}, 
+         </if>  
+         <if test="'lt' != null and 'lt' != ''">  
+            lt=#{lt}, 
+         </if>  
+         <if test="lu != null and lu != '' ">  
+            lu=#{lu} 
+         </if>  
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from sys_attachmentconfig where id=#{id}
+    </delete>
+    
+    <sql id="selectSql">
+		select * from sys_attachmentconfig
+	</sql>
+    
+    <!-- 获取一条数据 -->
+    <select id="get"  resultMap="resultAttachmentConfigMap">
+        <include refid="selectSql" /> where id=#{id}
+    </select>
+    
+    <select id="getAll" resultMap="resultAttachmentConfigMap">  
+        <include refid="selectSql" />
+    </select> 
+       
+    <select id="getAttachmentConfigWithCode" resultMap="resultAttachmentConfigMap">  
+        <include refid="selectSql" /> where code=#{code}
+    </select>
+    
+    <select id="findAttachmentConfigWithCodeAndNotId" resultMap="resultAttachmentConfigMap" parameterType="Map">  
+        <include refid="selectSql" /> where code=#{code} 
+        <if test="id != null and id != '' ">  
+             and id != #{id} 
+        </if>  
+    </select>    
+</mapper>

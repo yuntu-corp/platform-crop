@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.evaluation.dao.manual.EvaluationDAO">
+	<resultMap type="Evaluation" id="resultEvaluation">  
+        <id column="id" property="id" />
+        <result column="content" property="content" />
+        <result column="level" property="level" />
+        <result column="ft" property="ft" />
+        <association column="id_goods" property="goods" select="com.unitever.module.goods.dao.manual.GoodsDAO.get"/>
+        <association column="id_customer" property="customer" select="com.unitever.module.customer.dao.manual.CustomerDAO.get"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultEvaluation" parameterType="String">
+		select * from ds_evaluation 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultEvaluation">
+		select * from ds_evaluation 
+	</select>
+	
+	<insert id="save" parameterType="Evaluation">
+		insert into ds_evaluation(id,id_goods,id_customer,content,level,ft,lt,fu,lu) value(#{id},#{goods.id},#{customer.id},#{content},#{level},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	
+	<update id="update" parameterType="Evaluation">
+		update ds_evaluation
+		<set>
+			<if test="goods != null and goods.id != null">id_goods=#{goods.id},</if>
+			<if test="customer !=null and customer.id != null">id_customer=#{customer.id},</if>
+			<if test="content != null">content=#{content},</if>
+			<if test="level != null">level=#{level},</if>
+		</set>
+		where id=#{id}
+	</update>
+	<select id="getEvaluationListWithEvaluation" resultMap="resultEvaluation" parameterType="Evaluation">
+		select * from ds_evaluation 
+		<where>
+			1=1
+			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="goods != null and goods.id !=null">
+				and id_goods=#{goods.id}
+			</if>
+			<if test="customer != null and customer.id !=null">
+				and id_customer=#{customer.id}
+			</if>
+			<if test="content !=null">
+				and content=#{content}
+			</if>
+			<if test="level !=null">
+				and level=#{level}
+			</if>
+		</where>
+	</select>
+</mapper>

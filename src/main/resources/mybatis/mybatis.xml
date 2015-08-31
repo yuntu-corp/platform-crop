@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- setting节点里配置的值会直接改写Configuration对应的变量值，这些变量描述的是Mybatis的全局运行方式 -->
+	<settings>
+		<!-- 
+		设置参数			描述				有效值			默认值
+		cacheEnabled	这个配置使全局的映射器启用或禁用缓存。	true | false	true
+		lazyLoadingEnabled	全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载。	true | false	true
+		aggressiveLazyLoading	当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。	true | false	true
+		multipleResultSetsEnabled	允许或不允许多种结果集从一个单独的语句中返回（需要适合的驱动）。	true | false	true
+		useColumnLabel	使用列标签代替列名。不同的驱动在这方便表现不同。参考驱动文档或充分测试两种方法来决定所使用的驱动。	true | false	true
+		useGeneratedKeys	允许JDBC支持生成的键。需要适合的驱动。如果设置为true则这个设置强制生成的键被使用，尽管一些驱动拒绝兼容但仍然有效（比如Derby）。	true | false	false
+		autoMappingBehavior	指定MyBatis如何自动映射列到字段/属性。PARTIAL只会自动映射简单，没有嵌套的结果。FULL会自动映射任意复杂的结果（嵌套的或其他情况）。	NONE,PARTIAL,FULL	PARTIAL
+		 -->
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	
+	<plugins>  
+       <plugin interceptor="com.unitever.platform.core.mybatis.PageInterceptor">  
+           <property name="databaseType" value="mysql"/>  
+       </plugin>  
+    </plugins>  
+	
+    <!-- 别名是为 Java 类型命名一个短的名字。它只用在 XML 配置文件里，用来减少类完全限定名的多余部分。 -->
+	<!-- Mybatis默认已使用的别名： 别名~映射的类型
+	_byte~byte			_long~long		_short~short		_int~int		_integer~int		_double~double			_float~float
+	_boolean~boolean	string~String	byte~Byte			long~Long		short~Short			int~Integer				integer~Integer
+	double~Double		float~Float		boolean~Boolean		date~Date		decimal~BigDecimal	bigdecimal~BigDecimal
+	object~Object		map~Map			hashmap~HashMap		list~List		arraylist~ArrayList	collection~Collection	iterator~Iterator
+	-->
+	
+<!--     <typeAliases> -->
+<!-- 		<typeAlias alias="page" type="com.unitever.platform.core.dao.Page" /> -->
+<!-- 	</typeAliases> -->
+    
+    
+    <!-- 类型处理器 无论是MyBatis在预处理语句中设置一个参数，还是从结果集中取出一个值时，类型处理器被用来将获取的值以合适的方式转换成Java类型。 -->
+	<!-- Mybatis已经有的类型处理器:
+		类型处理器				Java 类型			JDBC 类型
+		BooleanTypeHandler	Boolean，boolean		任何兼容的布尔值
+		ByteTypeHandler		Byte，byte		任何兼容的数字或字节类型
+		ShortTypeHandler		Short，short		任何兼容的数字或短整型
+		IntegerTypeHandler		Integer，int		任何兼容的数字和整型
+		LongTypeHandler		Long，long		任何兼容的数字或长整型
+		FloatTypeHandler		Float，float		任何兼容的数字或单精度浮点型
+		DoubleTypeHandler		Double，double		任何兼容的数字或双精度浮点型
+		BigDecimalTypeHandler		BigDecimal		任何兼容的数字或十进制小数类型
+		StringTypeHandler		String		CHAR和VARCHAR类型
+		ClobTypeHandler		String		CLOB和LONGVARCHAR类型
+		NStringTypeHandler		String		NVARCHAR和NCHAR类型
+		NClobTypeHandler		String		NCLOB类型
+		ByteArrayTypeHandler		byte[]		任何兼容的字节流类型
+		BlobTypeHandler		byte[]		BLOB和LONGVARBINARY类型
+		DateTypeHandler		Date（java.util）		TIMESTAMP类型
+		DateOnlyTypeHandler		Date（java.util）		DATE类型
+		TimeOnlyTypeHandler		Date（java.util）		TIME类型
+		SqlTimestampTypeHandler		Timestamp（java.sql）		TIMESTAMP类型
+		SqlDateTypeHandler		Date（java.sql）		DATE类型
+		SqlTimeTypeHandler		Time（java.sql）		TIME类型
+		ObjectTypeHandler		Any		其他或未指定类型
+		EnumTypeHandler		Enumeration类型		VARCHAR-任何兼容的字符串类型，作为代码存储（而不是索引） 
+		
+	<typeHandlers>
+		<typeHandler javaType="String" jdbcType="VARCHAR" handler="org.mybatis.example.ExampleTypeHandler" />
+	</typeHandlers>
+	 -->
+    
+    <!-- Mappers用于告诉Mybatis去哪里寻找sql映射文件
+    <mappers>
+    	<mapper resource="mapper/flourishing/framework/user/UserMapper.xml"/>
+    </mappers> 
+    -->
+</configuration>

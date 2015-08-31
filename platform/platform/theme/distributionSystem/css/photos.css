@@ -1,0 +1,53 @@
+body{
+	margin:0;
+	background-color:#fff;
+	
+	}
+*{
+	color:#4c4c4c;
+	font-size:18px;
+	}
+	
+		
+.Product_Container{
+	padding:0 2%;
+	margin-top:8px;
+	}
+.Product_message{
+	margin:6px 8px 0 8px;
+	line-height: 30px;
+	}
+.Product{
+	width:100%;
+	text-align:center;
+	overflow:hidden;
+	}
+.Price{
+	color:#ff2e31;
+	padding:0;
+	margin-left:6px;
+	}
+.originalPrice{
+	color: #BCBCBC;
+	font-size: 12px;
+	padding-left: 10px;
+	text-decoration: line-through;
+}
+.free{
+	background-color:#000;
+	color:#fff;
+	width:30px;
+	height:20px;
+	font-size:12px;
+	float:right;
+	text-align:center;
+	margin:6px 8px 0 0;
+	}
+.Specification{
+	font-size:12px;
+	color:#919191;
+	}	
+.line{
+	border-bottom:1px solid #ccc;
+	margin:8px 0 8px 0;
+	}

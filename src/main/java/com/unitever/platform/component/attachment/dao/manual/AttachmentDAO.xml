@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.platform.component.attachment.dao.manual.AttachmentDAO">
+    <!-- sp namespace:映射StudentMapper的接口 -->
+    
+    
+    <resultMap type="Attachment" id="resultAttachmentMap">  
+        <id column="id" property="id" />  
+        <result column="id_owner" property="id_owner"/>  
+        <result column="path" property="path"/>  
+        <result column="sourceFilename" property="sourceFilename" />
+        <result column="serverFilename" property="serverFilename" />
+        <result column="fileNum" property="fileNum" />
+        <result column="fileSize" property="fileSize" />
+        <result column="fileKind" property="fileKind" />
+        <result column="status" property="status" />
+        <result column="configCode" property="configCode" />
+        <result column="ft" property="ft"/>  
+        <result column="lt" property="lt"/>  
+        <result column="fu" property="fu"/>  
+        <result column="lu" property="lu"/> 
+    </resultMap>  
+    
+    <!-- 添加一条数据 -->
+    <insert id="save" keyProperty="id" useGeneratedKeys="false" parameterType="Attachment">
+        insert into sys_attachment(id,id_owner,path,sourceFilename,serverFilename,fileNum,fileSize,fileKind,status,configCode,ft,fu) 
+        values(#{id},#{id_owner},#{path},#{sourceFilename},#{serverFilename},#{fileNum},#{fileSize},#{fileKind},#{status},#{configCode},#{ft},#{fu})
+    </insert>
+    
+    <update id="update" parameterType="Attachment">
+        update sys_attachment 
+        <set>
+         <if test="id_owner != null and id_owner != '' ">  
+            id_owner=#{id_owner},  
+         </if>  
+         <if test="path != null and path != '' ">  
+            path=#{path},  
+         </if>  
+         <if test="sourceFilename != null and sourceFilename != '' ">  
+            sourceFilename=#{sourceFilename},  
+         </if>  
+         <if test="serverFilename != null and serverFilename != '' ">  
+            serverFilename=#{serverFilename}, 
+         </if>  
+         <if test="fileNum != null and fileNum != '' ">  
+            fileNum=#{fileNum}, 
+         </if>  
+         <if test="fileSize != null and fileSize != '' ">  
+            fileSize=#{fileSize}, 
+         </if>  
+         <if test="fileKind != null and fileKind != '' ">  
+            fileKind=#{fileKind}, 
+         </if>  
+         <if test="status != null and status != '' ">  
+            status=#{status}, 
+         </if>  
+         <if test="configCode != null and configCode != '' ">  
+            configCode=#{configCode}, 
+         </if>  
+         <if test="'lt' != null and 'lt' != ''">  
+            lt=#{lt}, 
+         </if>  
+         <if test="lu != null and lu != '' ">  
+            lu=#{lu} 
+         </if>  
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <update id="updateNum" parameterType="Map">
+        update sys_attachment set fileNum = fileNum-1 where id_owner=#{ownerId} and fileNum=#{fileNum}
+    </update> 
+    
+    <update id="logicDelete" parameterType="Map">
+        update sys_attachment set status = #{status},id_owner = null where id=#{id}
+    </update> 
+    
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from sys_attachment where id=#{id}
+    </delete>
+    
+    <sql id="selectSql">
+	    select * from sys_attachment 
+	</sql>
+    
+    <!-- 获取一条数据 -->
+    <select id="get"  resultMap="resultAttachmentMap">
+        <include refid="selectSql" /> where id=#{id}
+    </select>
+    
+    <select id="getAttachmentsWithOwnerId"  resultMap="resultAttachmentMap" parameterType="Map">
+        <include refid="selectSql" /> where id_owner=#{ownerId} and status=#{status} order by ft,sourceFilename 
+    </select>
+    
+    <select id="getAll" resultMap="resultAttachmentMap">  
+        <include refid="selectSql" />
+    </select>    
+    
+        
+    <select id="getPage" resultMap="resultAttachmentMap" parameterType="page">  
+        <include refid="selectSql" />
+    </select>    
+</mapper>

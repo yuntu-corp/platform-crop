@@ -1,0 +1,72 @@
+.pageBar {
+    /* background: url("../../jqGrid/images/ui-jqgrid-th-bg.gif") repeat-x scroll left bottom #fff; */
+    background:#efefef;
+    line-height: 50px;
+    position: relative;
+}
+.pageBar .page-num {
+    border: 1px solid #bbbbbb;
+    font-size: 14px;
+    height: 14px;
+    margin: auto 5px;
+    text-align: center;
+    width: 20px;
+}
+.pageBar a {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+.pageNum {
+    font-size: 14px;
+    height: 21px;
+    line-height: 18px;
+    list-style: outside none none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+.pageNum li {
+    cursor: pointer;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+.pageNum li p {
+    background: url("../../jqGrid/images/pic.png") no-repeat scroll 0 0 transparent;
+    height: 20px;
+    margin: 0 0 0 -1px;
+    padding-top: 1px;
+    text-align: center !important;
+    width: 25px !important;
+}
+.pageNum li p.select a {
+    color: #ffffff !important;
+    font-weight: normal !important;
+}
+.pageNum li p a {
+    color: #333333 !important;
+    font-weight: normal !important;
+}
+.pageNum li.top p {
+    background-position: 0 -22px;
+    margin-left: 0;
+}
+.pageNum li.top p.select {
+    background-position: 0 0;
+}
+.pageNum li.center p {
+    background-position: 0 -44px;
+}
+.pageNum li.center p.select {
+    background-position: -26px -44px;
+}
+.pageNum li.bottom p {
+    background-position: -26px -22px;
+}
+.pageNum li.bottom p.select {
+    background-position: -26px 0;
+}
+.pageBar .gray{
+    color: gray !important;
+}

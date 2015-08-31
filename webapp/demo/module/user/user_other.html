@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>用户列表显示</title>
+		<#include "*/common/meta.html">
+		<#include "*/common/base.html">
+	<script type="text/javascript">
+		function commit1_1(){
+			var formData=$("#form1_1").serialize();
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/commitUser1",
+			  	data:formData,
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+		
+		function commit1_2(){
+			var formData=$("#form1_2").serialize();
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/commitUser2",
+			  	data:formData,
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+	
+		function commit2_1(){
+			var formData=$("#form2_1").serialize();
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/commitMap1",
+			  	data:formData,
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+		
+		function commit2_2(){
+			var formData=$("#form2_2").serialize();
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/commitMap2",
+			  	data:formData,
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+		
+		function commit3_1(){
+			var formData=$("#form3_1").serialize();
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/commitList1",
+			  	data:formData,
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+		
+		function commit3_2(){
+			var formData=$("#form3_2").serialize();
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/commitList2",
+			  	data:formData,
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+		
+		function getUserListJson(){
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/getUserListJson/userType_1/userDeptId_2?userName=Bond",
+			  	dataType:"json",
+			  	success: function(data){
+			  		alert(data.length);
+			  	}
+			 });
+		}
+		
+		function createStaticPage(){
+			 $.ajax({
+			 	type: "POST",
+			  	url: "${path}/dm/user/createStaticPage?id=123",
+			  	success: function(data){
+			  		alert(data);
+			  	}
+			 });
+		}
+		
+		$(document).ready(function(){
+		})
+		
+	</script>
+	</head>
+	<body>
+		<h1>${title}</h1>
+		<div>
+			<form id="form1_1">
+				<input name="name" placeholder="名称" value="名称">
+				<input name="email" placeholder="email" value="email">
+				<input name="dept.name" placeholder="部门名称" value="部门名称">
+				<input type="button" onclick="commit1_1()" value="对象提交1">
+			</form>
+			<hr>
+			<form id="form1_2">
+				<input name="user.name" placeholder="名称" value="名称">
+				<input name="user.email" placeholder="email" value="email">
+				<input name="user.dept.name" placeholder="部门名称" value="部门名称">
+				<input type="button" onclick="commit1_2()" value="对象提交2">
+			</form>
+			<hr>
+			<form id="form2_1">
+				<input name="valMap['name']" placeholder="名称" value="名称">
+				<input name="valMap['email']" placeholder="email" value="email">
+				<input type="button" onclick="commit2_1()" value="map提交1">
+			</form>
+			<form id="form2_2">
+				<input name="valMap['student'].name" placeholder="学生名称" value="学生名称">
+				<input name="valMap['student'].email" placeholder="学生email" value="学生email">
+				<input name="valMap['student'].dept.name" placeholder="学生部门" value="学生部门">
+				<input name="valMap['teacher'].name" placeholder="教师名称" value="教师名称">
+				<input type="button" onclick="commit2_2()" value="map提交2">
+			</form>
+			<hr>
+			<form id="form3_1">
+				<input type="text" name="nameList[0]" value="名称1">
+				<input type="text" name="nameList[1]" value="名称2">
+				<input type="text" name="nameList[2]" value="名称3">
+				<input type="text" name="nameList[3]" value="名称4">
+				<input type="button" onclick="commit3_1()" value="提交简单List">
+			</form>
+			<form id="form3_2">
+				<input type="text" name="userList[0].name" value="教师1">
+				<input type="text" name="userList[0].dept.name" value="部门1">
+				<input type="text" name="userList[1].name" value="教师2">
+				<input type="text" name="userList[1].dept.name" value="部门2">
+				<input type="button" onclick="commit3_2()" value="提交复杂List">
+			</form>
+			<hr>
+			<form id="form_upload" action="${path}/dm/user/upload" method="post" enctype="multipart/form-data">
+				<input type="file" name="file" />
+				<input type="submit" value="Submit" />
+			</form>
+			<hr>
+				<input type="button" onclick="getUserListJson()" value="获取用户集合JSON">
+			<hr>
+				<input type="button" onclick="createStaticPage()" value="生成静态页">
+			
+		</div>
+		<div>
+			<h3><a href="${path}/demo/index.jsp">返回</a></h3>
+		</div>
+	</body>
+</html>

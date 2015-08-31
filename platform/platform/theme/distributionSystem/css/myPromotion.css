@@ -1,0 +1,62 @@
+/*css重置*/
+body{
+	margin:0;
+	}
+*{
+	color:#4c4c4c;
+	font-size:14px;
+	text-decoration:none;
+	}
+ul{
+	margin:0;
+	padding:0;
+	}
+li{
+	list-style:none;
+	}
+
+/*header*/
+.myListings_header{
+	width:100%;
+	padding:12px 4%;
+	background-color:#f9a32d;
+	border-bottom:1px solid #f99000;
+	margin:0;
+}
+.glyphicon-menu-left{
+	display:block;
+	float:left;
+	margin-top:2px;
+	line-height: 2;
+}
+.title{
+	color:#fff;
+	text-align:center;
+	display:block;
+	font-size:20px;
+		}
+		
+/*banner*/
+.mylistings_banner{
+	width:100%;
+	}
+
+/*代理*/
+.glyphicon-globe{
+	color:#ffd800;
+	}
+.Mypromotion img{
+	width:30px;
+	height:30px;
+	margin:8px;
+	}
+.Mypromotion{
+	background-color:#fff;
+	margin:10px 0;
+	overflow:hidden;
+	margin:8px 7%;
+	width:86%;
+	}
+.image_border_circle{
+	border-radius:25px;
+}

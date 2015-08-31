@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.level.dao.manual.LevelDAO">
+
+	<resultMap type="Level" id="resultLevel">  
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="proportion" property="proportion" />
+        <result column="level" property="level" />
+        <result column="kind" property="kind" />
+        <association property="user" javaType="User">
+        	<id column="id_user" property="id" />  
+        </association>
+    </resultMap>
+    
+    <select id="getAll" resultMap="resultLevel" >
+   		select * from ds_level
+	</select>
+    
+    <select id="get" resultMap="resultLevel" parameterType="String">
+   		select * From ds_level 
+   		<where> 
+			id =#{id}
+		</where> 
+	</select>
+	
+	<insert id="save" parameterType="Level">
+		insert into ds_level(id,name,proportion,level,kind,id_user,ft,lt,fu,lu) value(#{id},#{name},#{proportion},#{level},#{kind},#{user.id},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	
+	<update id="update" parameterType="Level">
+		update ds_level
+		<set>
+			<if test="proportion != null">proportion=#{proportion}</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from ds_level where id=#{id} 
+	</delete>
+	
+	<select id="getLevelWithUserIdKind" resultMap="resultLevel" parameterType="String">
+   		select * From ds_level 
+   		<where>
+   			1=1
+			<if test="user != null and user.id != null">
+				and id_user=#{user.id}
+			</if>
+			<if test="kind != null">
+				and kind=#{kind}
+			</if>
+		</where> 
+	</select>
+</mapper>

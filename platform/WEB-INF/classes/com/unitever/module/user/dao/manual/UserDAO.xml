@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.user.dao.manual.UserDAO">
+    
+    <resultMap type="User" id="resultListUser">  
+        <id column="id" property="id" />
+        <result column="username" property="username"/>  
+        <result column="password" property="password"/>  
+        <result column="name" property="name" />
+        <result column="wechatnum" property="weChatNum" />
+        <result column="type" property="type" />
+        <result column="accesstoken" property="accessToken" />
+        <result column="jsapiticket" property="jsapiTicket" />
+        <result column="expirestime" property="expiresTime" />
+        <result column="appid" property="appId" />
+        <result column="appsecret" property="appSecret" />
+        <result column="mchid" property="mchId" />
+        <result column="apisecret" property="apiSecret" />
+        <result column="discount" property="discount" />
+        <result column="customerserviceurl" property="customerServiceUrl" />
+        <result column="wealthmodeurl" property="wealthModeUrl" />
+        <result column="businesscultureurl" property="businessCultureUrl" />
+    </resultMap>
+    
+    <!-- 获取一条数据 -->
+    <select id="get" resultMap="resultListUser">
+     	select * from ds_user where id=#{id} 
+    </select>
+	<!-- 获取一条数据 -->
+    <select id="getAll" resultMap="resultListUser">
+     	select * from ds_user
+    </select>
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from ds_user where id=#{id}
+    </delete>
+    
+    <!-- 更新一条数据 -->
+    <update id="update" parameterType="User">
+        update ds_user 
+        <set>
+	         <if test="name != null and name != '' ">  
+	            name=#{name},  
+	         </if>
+	         <if test="username != null and username != '' ">  
+	            username=#{username},  
+	         </if>
+	         <if test="password != null and password != '' ">  
+	            password=#{password},  
+	         </if>
+	         <if test="accessToken != null and accessToken != '' ">  
+	            accesstoken=#{accessToken},  
+	         </if>
+	         <if test="jsapiTicket != null and jsapiTicket != '' ">  
+	            jsapiTicket=#{jsapiTicket},  
+	         </if>
+	         <if test="expiresTime != null and expiresTime != '' ">  
+	            expirestime=#{expiresTime},  
+	         </if>
+	         <if test="appId != null and appId != '' ">  
+	            appid=#{appId},  
+	         </if>
+	         <if test="appSecret != null and appSecret != '' ">  
+	            appsecret=#{appSecret},  
+	         </if>
+	         <if test="mchId != null and mchId != '' ">  
+	            mchid=#{mchId},  
+	         </if>
+	         <if test="apiSecret != null and apiSecret != '' ">  
+	            apisecret=#{apiSecret},  
+	         </if>
+	         <if test="discount != null and discount != '' ">  
+	            discount=#{discount},  
+	         </if>
+	         <if test="customerServiceUrl != null and customerServiceUrl != '' ">  
+	            customerserviceurl=#{customerServiceUrl},  
+	         </if>
+	         <if test="wealthModeUrl != null and wealthModeUrl != '' ">  
+	            wealthmodeurl=#{wealthModeUrl},  
+	         </if>
+	         <if test="businessCultureUrl != null and businessCultureUrl != '' ">  
+	            businesscultureurl=#{businessCultureUrl},  
+	         </if>
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <select id="getUserWithLoginName" resultMap="resultListUser">
+    	select * from ds_user where username=#{username} 
+    </select>
+    <select id="getUserWithWeChatNum" resultMap="resultListUser">
+    	select * from ds_user where wechatnum=#{weChatNum} 
+    </select>
+</mapper>

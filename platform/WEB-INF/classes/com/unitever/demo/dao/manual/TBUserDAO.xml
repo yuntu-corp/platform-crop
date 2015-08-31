@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.demo.dao.manual.TBUserDAO">
+    <!-- sp namespace:映射StudentMapper的接口 -->
+    
+    <resultMap type="TBUser" id="resultListUser">  
+        <id column="id" property="id" />  
+        <result column="name" property="name"/>  
+        <result column="email" property="email" />
+        <result column="age" property="age" />
+        <association property="dept" column="id_dept" select="com.unitever.platform.core.test.mybatis.dao.manual.DeptManualDao.get"/>
+    </resultMap>
+    
+    <resultMap type="TBUser" id="resultUserMap">  
+        <id column="u_id" property="id" />  
+        <result column="u_name" property="name"/>  
+        <result column="u_email" property="email"/>  
+        <result column="u_age" property="age" />
+        <result column="d_id" property="deptId" />
+        <association property="dept" javaType="TBDept">
+        	<id column="d_id" property="id" />  
+        	<result column="d_name" property="name"/>
+        </association>
+<!--         <association property="dept" resultMap="deptResultMap"/> -->
+    </resultMap>  
+    
+    <resultMap type="TBDept" id="deptResultMap">  
+        <id column="d_id" property="id" />  
+        <result column="d_name" property="name"/>
+    </resultMap>  
+    
+    <!-- 添加一条数据 -->
+    <insert id="save" keyProperty="id" useGeneratedKeys="false" parameterType="TBUser">
+        insert into tb_user(id,name,email,age,id_dept) values(#{id},#{name},#{email},#{age},#{deptId})
+    </insert>
+    
+    <update id="update" parameterType="TBUser">
+        update tb_user 
+        <set>
+         <if test="name != null and name != '' ">  
+            name=#{name},  
+         </if>  
+         <if test="email != null and email != '' ">  
+            email=#{email},  
+         </if>  
+         <if test="age != null and age != '' ">  
+            age=#{age},  
+         </if>  
+         <if test="deptId != null and deptId != '' ">  
+            id_dept=#{deptId}
+         </if>  
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from tb_user where id=#{id}
+    </delete>
+    
+    <sql id="user_join_dept_sql">
+	    select u.id u_id,u.name u_name,u.email u_email,u.age u_age ,d.id d_id,d.name d_name from tb_user u left join tb_dept d on u.id_dept=d.id 
+	</sql>
+    
+    <!-- 获取一条数据 -->
+    <select id="get"  resultMap="resultUserMap">
+        <include refid="user_join_dept_sql" /> where u.id=#{id}
+    </select>
+    
+    <select id="getUsersWithDeptId"  resultMap="resultListUser">
+        select id,name,email,age,id_dept from tb_user where id_dept=#{deptId}
+    </select>
+    
+    <select id="getAll1" resultMap="resultListUser">  
+        select * from tb_user  
+    </select>    
+    
+    <select id="getAll" resultMap="resultUserMap">  
+        <include refid="user_join_dept_sql" />
+    </select>    
+    
+    <select id="getPage1" resultMap="resultListUser" parameterType="page">  
+        select * from tb_user  
+    </select>
+        
+    <select id="getPage" resultMap="resultUserMap" parameterType="page">  
+        <include refid="user_join_dept_sql" />
+    </select>    
+</mapper>

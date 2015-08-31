@@ -1,0 +1,41 @@
+
+/**遮罩效果**/
+.loadmask {
+    background-color: #000000;
+    height: 100%;
+    left: 0;
+    opacity: 0.3;
+    background:#CCCCCC\9!important; 
+    filter:alpha(opacity=30);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 201201;
+    zoom:1;
+}
+.loadmask-msg {
+    background: none repeat scroll 0 0 #F4F4F4;
+    border: 1px solid #BBBBBB;
+    left: 0;
+    padding: 2px;
+    position: absolute;
+    top: 0;
+    z-index: 201202;
+}
+.loadmask-msg div {
+    background: url("images/loading.gif") no-repeat scroll 5px 5px #FBFBFB;
+    border: 1px solid #BFBFBF;
+    color: #222222;
+    cursor: wait;
+    line-height: 16px;
+    padding: 5px 10px 5px 25px;
+}
+.masked {
+    overflow: hidden !important;
+}
+.masked-relative {
+    position: relative !important;
+}
+.masked-hidden {
+    visibility: hidden !important;
+}

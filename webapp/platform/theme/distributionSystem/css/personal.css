@@ -1,0 +1,163 @@
+/*css重置*/
+body{
+	margin:0;
+	padding:0;
+	list-style:none;
+	background-color:#F3F3F3;
+	color:#4c4c4c;
+	font-size:14px;
+	text-decoration:none;
+}
+a{
+	color: #4c4c4c!important;
+}
+/*基本信息*/
+.msg-container{
+	background-image:url(../images/wcAgen_bg.jpg);
+	overflow:hidden;
+	width:100%;
+	padding:0 3%;
+}
+.img-circle{
+	float:left;
+	margin:12px 0;
+	width:60px;
+	height:60px;
+}
+.msg{
+	float:left;
+	margin:10px 0 0 14px;
+	color:#fff;
+}
+.msg h4{
+	font-weight:700;
+}
+.glyphicon-menu-right{
+	display:block;
+	float:right;
+	line-height:40px;
+}
+/*提现*/
+.withdrawal-management{
+	width:100%;
+	padding:8px 3%;
+	overflow:hidden;
+	background-color:#fff;
+	border-bottom:1px solid #f99000;
+}
+.account-balance{
+	float:left;
+}
+.balance{
+	color:#FF2F32;
+}
+.withdrawals{
+	float:right;
+	color:#fff;
+	background-color:#f99000;
+	padding:0 6px;
+	border-radius:2px;
+}
+.glyphicon-credit-card{
+	color:#fff;
+	margin-right:2px;
+}
+/*我的收藏*/
+.favorites-container{
+	width:100%;
+	padding:0 3%;
+	background-color:#fff;
+	margin-top:10px;
+	overflow:hidden;
+	line-height:40px;
+	border-top:1px solid #E5E5E5;
+}
+.favorites{
+	margin:0;
+	float:left;
+}
+/*佣金模块*/
+.commission{
+	text-align:center;
+	background-color:#fff;
+	font-size:14px;
+	margin:0 0 10px 0;
+	overflow:hidden;
+}
+.commission-module{
+	float:left;
+	padding:10px 0;
+	border:1px solid #e6e6e6;
+	width:33.33%;
+}
+.commission-module p{
+	font-weight:700;
+}
+.commission-module div{
+	font-size: 12px;
+}
+.color-blue{
+	color:#5bbfdd;
+}
+.color-red{
+	color:#ff2e31;
+}
+.color-yellow{
+	color:#fdda33;
+}
+/*代理管理*/
+.shop{
+	border-top:1px solid #E5E5E5;
+	border-bottom:1px solid #E5E5E5;
+	margin-bottom:67px;
+}
+.line{
+	border-top:1px solid #E5E5E5;
+	width:94%;
+	margin:0 3%;
+}
+.shop-content{
+	width:100%;
+	padding:0 3%;
+	background-color:#fff;
+	overflow:hidden;
+	display:block;
+}
+.glyphicon-user{
+	color:#5bc0de;
+}
+.glyphicon-send{
+	color:#ffd800;
+}
+.glyphicon-piggy-bank{
+	color:#f56257;
+}
+.shop-content-tit{
+	line-height:40px;
+	margin:0;
+	float:left;
+}
+/*导航*/
+.main-nav{
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	background-image:url(../images/nav_bg.png);
+	border-top:1px solid #E5E5E5;
+	border-bottom:1px solid #E5E5E5;
+}
+.nav-icon{
+	float:left;
+	text-align:center;
+	width:33%;
+	margin:10px 0 4px 0;
+}
+.nav-icon img{
+	width:26px;
+}
+.nav-icon span{
+	font-size: 12px;
+	color:#9F9F9F;
+	display: block;
+}

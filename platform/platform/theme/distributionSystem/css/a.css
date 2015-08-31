@@ -1,0 +1,126 @@
+/*css重置*/
+body{
+	margin:0;
+	background-color:#f1f5f6;
+	}
+*{
+	font-family:"方正中等线_GBK";
+	color:#4c4c4c;
+	font-size:14px;
+	}
+	
+/**/
+.btn-info:hover{
+    background-color: #ff4a5e;
+    color: #fff;
+	border:1px solid #ed3e51;
+}
+/*msg*/
+.msg_container{
+	background-color:#fff;
+	border:1px solid #e6e6e6;
+	overflow:hidden;
+	}
+h4{
+	font-weight:700;
+	}
+.msg_bg{
+	/* width:96%;
+	margin:0 2%; */
+	
+	}
+.msg_phpto{
+	float:left;
+	margin:20px 10px;
+	width:103px;
+	height:95px;
+	}
+.msg{
+	float:left;
+	margin:14px 0 10px 0;
+	width: 60%
+	}
+.moneycoin{
+	color:#ff4a5e;
+	font-size:16px;
+	}
+.money{
+	color:#ff4a5e;
+	font-weight:700;
+	font-size:20px;
+	}
+.number a{
+	border:1px solid #e6e6e6;
+	padding:4px 12px;
+	font-size:16px;
+	color:#6d6d6d;
+	text-decoration:none;
+	}
+.number{
+	}
+/*功能区*/
+form{
+	background-color:#fff;
+	border:1px solid #e6e6e6;
+	margin:10px 0;
+	}
+.form-horizontal input{
+	line-height:68px;
+	border: 1px solid #e6e6e6;
+    border-radius: 4px;
+	width:96%;
+	margin:18px 7px;	
+	}
+.form-group,.note,.btn{
+	width:96%;
+	margin:14px 2%;
+	}
+.note{
+	line-height:20px;
+	color:#999;
+	padding-bottom:5px;
+	font-size:14px;
+	}
+/*结账*/
+.check_container{
+	text-align:center;
+	background-color:#fff;
+	font-size:16px;
+	padding:17px 0;
+	margin:10px 0;
+	border:1px solid #e6e6e6;
+	}
+.check{
+	color:#ff4a5e;
+	}
+/*提交订单*/
+.button_container{
+	background-color:#fff;
+	border:1px solid #e6e6e6;
+	}
+.btn-info {
+    background-color: #f25162;
+    color: #fff;
+}
+.btn {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height:36px;
+    text-align: center;
+	display:block;
+}
+.form-count{
+	border:1px solid #e6e6e6;
+	font-size:16px;
+	color:#6d6d6d;
+	text-decoration:none;
+	width: 50px;
+	text-align: center;
+	height: 29px;
+}
+
+
+
+
+

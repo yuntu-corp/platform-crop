@@ -1,0 +1,39 @@
+/*默认的表格样式*/
+.co_table{width: 100%; margin-bottom: 12px;border: 1px solid #787878; table-layout: fixed; border-collapse: collapse; }
+.co_table tr:hover{background: #eff6f5!important;}
+.co_table th{padding-bottom: 1px; color: #565656; border: 1px solid #787878; background: #eee;font-size: 14px; line-height: 31px; text-align: center; }
+.co_table td{padding: 3px 5px; color: #888686;border: 1px solid #787878; font-size: 12px; line-height: 24px; vertical-align: middle; }
+.co_table th, .co_table td{text-align: center;white-space: normal; word-break: break-all; }
+a.co_table_a{margin-left: 10px;color: #149f90; font-size: 13px; text-decoration: none;}
+a.co_table_a:hover{text-decoration: underline;}
+
+/*默认表单样式*/
+.form_item{ display:block; padding:5px; position:relative; font:normal 14px/30px "宋体";+zoom:1; /*overflow: hidden;*/}
+.form_item:after{ clear:both; height:0; line-height:0; font-size:0; content:""; display:block; visibility:visible;}
+.form_item .tit{ width:20%; min-height:30px; _height:30px; _overflow:visible; text-align:right; line-height:30px; float:left; color: #149f90;}
+.form_item .tit em{ color:#f00; margin-right:5px;}
+.form_item .bdmain{line-height:30px; width:70%; float:left; color: #626666;}
+.form_item .bdmain span{ margin-right:10px; display:inline-block;}
+.form_item .bdmain input,.co_form .formInput textarea{ vertical-align:middle; margin:0 2px;}
+.form_item .form-msg-advanced{color:#F00; vertical-align:middle; line-height:30px; display:inline-block; +display:inline;+zoom:1; margin-left:5px; font-size: 12px;}
+.form_item label{ vertical-align:middle; }
+.form_item .validator_error{ line-height:16px;}
+.formfieldset{position: relative;margin: 10px; border: 1px solid #ccc; border-radius: 4px; }
+.formfieldset legend{margin-left: 10px; padding: 3px 20px;color: #333; border-radius: 4px; background: #e9e9e9; font-weight: bold; }
+
+.placeholder{color: #a9aaa9;}
+.textarea{padding: 5px;border: 1px solid #787878; background-color: #fff; }
+.textarea:focus{outline: 0;}
+.input{height: 26px; padding: 0 5px; border: 1px solid #787878; background-color: #fff; font-size: 12px;line-height: 26px; }
+select{border: 1px solid #787878;}
+.input:focus{outline: 0;}
+
+/*默认按钮样式*/
+a.cobtn{display: inline-block;width: 86px; height: 30px; margin: 5px; color: #fff; background: #149f90; font: normal 14px/30px '宋体'; line-height: 30px; cursor: pointer; text-align: center; vertical-align: middle; white-space: nowrap; +display:inline; zoom:1;}
+a.cobtn:hover{background: #28b5a6;}
+a.cobtn_white{color: #149f90;border: 1px solid #149f90; background: #eff6f5; }
+a.cobtn_white:hover{color: #fff;}
+
+.w200{width: 200px;}
+.co_normal{color: #149f90;}
+.co_disable{color: #f52f0e;}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.order.dao.manual.OrderDAO">
+
+	<resultMap type="Order" id="resultOrder">  
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="kind" property="kind" />
+        <result column="receiver" property="receiver" />
+        <result column="receiverphonenum" property="receiverPhoneNum" />
+        <result column="receiveaddress" property="receiveAddress" />
+        <result column="date" property="date" />
+        <result column="state" property="state" />
+        <result column="logisticname" property="logisticName" />
+        <result column="logisticnum" property="logisticNum" />
+        <association property="user" javaType="User">
+        	<id column="id_user" property="id" />  
+        </association>
+        <association property="customer" column="id_customer" select="com.unitever.module.customer.dao.manual.CustomerDAO.get"/>
+        <collection property="orderGoodsList" column="id" select="com.unitever.module.ordergoods.dao.manual.OrderGoodsDAO.getOrderGoodsListWithOrderId"/>
+    </resultMap>
+    
+    <select id="getAll" resultMap="resultOrder" >
+   		select * from ds_order order by date desc
+	</select>
+    
+    <select id="get" resultMap="resultOrder" parameterType="String">
+   		select * From ds_order 
+   		<where> 
+			id =#{id}
+		</where> 
+	</select>
+    
+	<insert id="save" keyProperty="id" parameterType="Order">
+		insert into ds_order(id,code,kind,id_customer,receiver,receiverphonenum,receiveaddress,date,state,id_user,ft,lt,fu,lu) values
+		(#{id},#{code},#{kind},#{customer.id},#{receiver},#{receiverPhoneNum},#{receiveAddress},#{date},#{state},#{user.id},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	
+	<update id="update" parameterType="Order">
+		update ds_order
+		<set>
+			<if test="code != null">code=#{code},</if>
+			<if test="kind != null">kind=#{kind},</if>
+			<if test="customer !=null and customer.id != null">id_customer=#{customer.id},</if>
+			<if test="receiver != null">receiver=#{receiver},</if>
+			<if test="receiverPhoneNum != null">receiverphonenum=#{receiverPhoneNum},</if>
+			<if test="receiveAddress != null">receiveaddress=#{receiveAddress},</if>
+			<if test="date != null">date=#{date},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="logisticName != null">logisticname=#{logisticName},</if>
+			<if test="logisticNum != null">logisticnum=#{logisticNum},</if>
+			<if test="user !=null and user.id != null">id_user=#{user.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	<select id="getOrderListWithOrder" resultMap="resultOrder" parameterType="Order">
+   		select * From ds_order 
+   		<where> 
+			1=1
+			<if test="id != null">
+			     and id=#{id}
+			</if>
+			<if test="code != null and code!=''">
+			     and code=#{code}
+			</if>
+			<if test="kind!=null and kind != ''">
+				and kind=#{kind}
+			</if>
+			<if test="customer!=null and customer.id!=null">
+				and id_customer=#{customer.id}
+			</if>
+			<if test="receiver!=null">
+				and receiver=#{receiver}
+			</if>
+			<if test="receiverPhoneNum!=null">
+				and receiverPhoneNum=#{receiverPhoneNum}
+			</if>
+			<if test="receiveAddress!=null">
+				and receiveAddress=#{receiveAddress}
+			</if>
+			<if test="startDate != null and startDate != ''">
+				and date&gt;=#{startDate} 
+			</if>
+			<if test="endDate != null and endDate != ''">
+				and date&lt;=#{endDate}
+			</if>
+			<if test="state!=null and state!=''">
+				and state=#{state}
+			</if>
+			<if test="logisticName!=null">
+				and logisticName=#{logisticName}
+			</if>
+			<if test="logisticNum!=null">
+				and logisticNum=#{logisticNum}
+			</if>
+			<if test="user !=null and user.id!=null">
+				and id_user=#{user.id}
+			</if>
+		</where> 
+		order by date desc
+	</select>
+</mapper>

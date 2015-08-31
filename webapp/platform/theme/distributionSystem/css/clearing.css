@@ -1,0 +1,190 @@
+/*css重置*/
+body{
+	margin:0;
+	background-color:#F3F3F3;
+	}
+*{
+	color:#4c4c4c;
+	font-size:14px;
+	text-decoration:none;
+	}
+a{
+	color:#fff;}
+img{
+	display:block;
+	border:none;
+	}
+input{
+	margin:0;
+	padding:0;
+	border:none;
+	}
+
+	
+/*header*/
+.clearing-header{
+	width:100%;
+	padding:12px 4%;
+	background-color:#f99000;
+	border-bottom:1px solid #f99000;
+	margin:0;
+	}
+.glyphicon-menu-left{
+	display:block;
+	float:left;
+	margin-top:2px;
+	line-height: 2;
+	color: #fff;
+}
+.title{
+	color:#fff;
+	text-align:center;
+	display:block;
+	font-size:20px;
+		}
+		
+/*购物结算*/
+.item-settlement{
+	width:100%;
+	padding:12px 3%;
+	position:fixed;
+	bottom:0;
+	background-color:#fff;
+	overflow:hidden;
+	border-top:1px solid #e5e5e5;
+	height:60px;
+	}
+.item-information{
+	float:left;
+	}
+.item-quantity{
+	font-size:12px;
+	line-height:12px;
+	}
+.clearing{
+	display:block;
+	float:right;
+	background-color:#f99000;
+	padding:6px 44px;
+	font-size:16px;
+	border-radius:2px;
+	}
+.total-price{
+	font-size:12px;
+	}
+.item-price{
+	color:#FF2F32;
+	font-size:14px;
+	}
+	
+/*购物清单*/
+.clearing-list{
+	border-bottom:1px solid #e5e5e5;
+	}
+.clearing-prompt{
+	color:#939393;
+	background-color:#fff;
+	width:100%;
+	padding:6px 3%;
+	font-size:12px;
+	border-bottom:1px solid #e5e5e5;
+	}
+.clearing-product{
+	width:100%;
+	padding:6px 3%;
+	background-color:#fff;
+	overflow:hidden;
+	}
+.clearing-img{
+	width:60px;
+	float:left;
+	}
+.clearing-information{
+	float:left;
+	margin-left:4px;
+	width: 60%;
+	}
+.clearing-specification{
+	color:#939393;
+	}
+.clearing-pice{
+	float:right;
+	}
+.clearing-money,.clearing-quantity{
+	color:#000;
+	}
+
+/*收货地址*/
+.shipping-address{
+	margin-bottom:10px;
+	background-color:#fff;
+	}
+.address-header{
+	width:100%;
+	padding:6px 3%;
+	border-bottom:1px solid #e5e5e5;
+	background-color:#fff;
+	color:#939393;
+	font-size: 12px;
+	}
+.contacts{
+	padding:6px 3%;
+	width:100%;
+	line-height: 30px;
+	border-bottom:1px solid #e5e5e5;
+}	
+.contacts img{
+	float: left;
+	margin-top: 7px;
+	margin-right: 7px;
+	width: 13px;
+}	
+	
+.contacts-now{
+	padding:6px 3%;	
+	width:100%;
+	border-bottom:1px solid #e5e5e5;
+	line-height: 30px;
+	}
+.shoping-text1{
+	margin-left:35px;}
+.shoping-text{
+	margin-left:18px;
+	width:60%;
+	}
+
+/**/	
+.clearing-shipment{
+	width:100%;
+	padding:6px 3%;
+	background-color:#fff;
+	border-bottom:1px solid #e5e5e5;
+	overflow:hidden;
+	}
+.clearing-reduce{
+	display:block;
+	float:right;
+	}
+.shipment{
+	display:block;
+	float:left;
+	}
+.clearing-quantity{
+	text-align:right;
+	}
+	
+.clearing-calculate{
+	width:100%;
+	padding:6px 3%;
+	background-color:#fff;
+	margin-bottom:69px;
+	border-bottom:1px solid #e5e5e5;
+	overflow:hidden;
+	}
+.clearing-total{
+	float:left;
+	}
+.total-money{
+	float:right;
+	}
+	

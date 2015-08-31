@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.platform.component.attachment.dao.manual.AttachmentSettingDAO">
+    <!-- sp namespace:映射StudentMapper的接口 -->
+    
+    <resultMap type="AttachmentSetting" id="resultAttachmentSettingUser">  
+        <id column="id" property="id" />  
+        <result column="limitFileExtention" property="limitFileExtention"/>  
+        <result column="type" property="type" />
+        <result column="ftpAddress" property="ftpAddress" />
+        <result column="ftpPort" property="ftpPort" />
+        <result column="ftpPath" property="ftpPath" />
+        <result column="ftpUserName" property="ftpUserName" />
+        <result column="ftpPassword" property="ftpPassword" />
+        <result column="ft" property="ft"/>  
+        <result column="lt" property="lt"/>  
+        <result column="fu" property="fu"/>  
+        <result column="lu" property="lu"/> 
+    </resultMap>
+    
+    <!-- 添加一条数据 -->
+    <insert id="save" keyProperty="id" useGeneratedKeys="false" parameterType="AttachmentSetting">
+        insert into sys_attachmentsetting(id,limitFileExtention,type,ftpAddress,ftpPort,ftpPath,ftpUserName,ftpPassword,ft,fu) 
+        values(#{id},#{limitFileExtention},#{type},#{ftpAddress},#{ftpPort},#{ftpPath},#{ftpUserName},#{ftpPassword},#{ft},#{fu})
+    </insert>
+    
+    <update id="update" parameterType="AttachmentSetting">
+        update sys_attachmentsetting 
+        <set>
+         <if test="limitFileExtention != null and limitFileExtention != '' ">  
+            limitFileExtention=#{limitFileExtention},  
+         </if>  
+         <if test="type != null and type != '' ">  
+            type=#{type},  
+         </if>  
+         <if test="ftpAddress != null and ftpAddress != '' ">  
+            ftpAddress=#{ftpAddress},  
+         </if>  
+         <if test="ftpPort != null and ftpPort != '' ">  
+            ftpPort=#{ftpPort}, 
+         </if>  
+         <if test="ftpPath != null and ftpPath != '' ">  
+            ftpPath=#{ftpPath}, 
+         </if>  
+         <if test="ftpUserName != null and ftpUserName != '' ">  
+            ftpUserName=#{ftpUserName}, 
+         </if>  
+         <if test="ftpPassword != null and ftpPassword != '' ">  
+            ftpPassword=#{ftpPassword}, 
+         </if>  
+		 <if test="'lt' != null and 'lt' != ''">  
+            lt=#{lt}, 
+         </if>  
+         <if test="lu != null and lu != '' ">  
+            lu=#{lu} 
+         </if>  
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from sys_attachmentsetting where id=#{id}
+    </delete>
+    
+    <sql id="selectSql">
+	    select * from sys_attachmentsetting 
+	</sql>
+    
+    <!-- 获取一条数据 -->
+    <select id="get"  resultMap="resultAttachmentSettingUser">
+        <include refid="selectSql" /> where u.id=#{id}
+    </select>
+    
+    <select id="getAll" resultMap="resultAttachmentSettingUser">  
+        <include refid="selectSql" />
+    </select>    
+</mapper>

@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+div.hzth-tooltip .tooltip-tl {
+	background: url(../images/tl.png) 0 bottom no-repeat;
+	position: relative; /* for close button */
+}
+
+div.hzth-tooltip .tooltip-tr {
+	padding: 0px 15px 0px 15px;
+	background: url(../images/tr.png) 100% bottom no-repeat;
+}
+
+div.hzth-tooltip .tooltip-t {
+	background: url(../images/t.png) 0 bottom repeat-x;
+	height:25px;
+}
+
+div.hzth-tooltip .tooltip-l {
+	background: url(../images/l.png) 0 0 repeat-y;
+}
+
+div.hzth-tooltip .tooltip-r {
+	padding: 0px 15px 0px 15px;
+	background: url(../images/r.png) 100% 0 repeat-y;
+}
+
+div.hzth-tooltip .tooltip-m {
+	background: #ffffff;
+	width:100%;
+	overflow: hidden;
+}
+
+div.hzth-tooltip .tooltip-bl {
+	background: url(../images/bl.png) 0 0 no-repeat;
+}
+
+div.hzth-tooltip .tooltip-br {
+	padding: 0px 15px 0px 15px;
+	background: url(../images/br.png) 100% 0 no-repeat;
+}
+
+div.hzth-tooltip .tooltip-b {
+	background: url(../images/b.png) 0 0 repeat-x;
+	height:25px;
+}
+
+
+div.hzth-tooltip .tooltip-b .tooltip-c-arrow {
+	background: url(../images/bca.png) 50% 0 no-repeat;
+	height:25px;
+}
+
+div.hzth-tooltip .tooltip-b .tooltip-l-arrow {
+	background: url(../images/bla.png) 0 0 no-repeat;
+	height:25px;
+}
+
+div.hzth-tooltip .tooltip-b .tooltip-r-arrow {
+	background: url(../images/bra.png) 100% 0 no-repeat;
+	height:25px;
+}
+
+div.hzth-tooltip .tooltip-t .tooltip-c-arrow {
+	background: url(../images/tca.png) 50% 0 no-repeat;
+	height:25px;
+}
+
+div.hzth-tooltip .tooltip-t .tooltip-l-arrow {
+	background: url(../images/tla.png) 0 0 no-repeat;
+	height:25px;
+}
+
+div.hzth-tooltip .tooltip-t .tooltip-r-arrow {
+	background: url(../images/tra.png) 100% 0 no-repeat;
+	height:25px;
+}
+
+
+div.hzth-tooltip a.tooltip-close {
+  display:block;
+  overflow:hidden;
+	position: absolute;
+	top: 21px;
+	right: 10px;
+	width: 18px;
+	height: 18px;
+	background: url(../images/close.png) 0 0 no-repeat;
+	cursor: pointer;
+}
+
+div.hzth-tooltip a.tooltip-close span {
+  display:none;
+}

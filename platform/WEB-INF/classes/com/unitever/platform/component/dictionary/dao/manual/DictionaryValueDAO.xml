@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.platform.component.dictionary.dao.manual.DictionaryValueDAO">
+    <!-- sp namespace:映射StudentMapper的接口 -->
+    
+    <resultMap type="DictionaryValue" id="resultModelMap">  
+        <id column="id" property="id" />  
+        <result column="id_parent" property="parentId"/>  
+        <result column="code" property="code"/>  
+        <result column="value" property="value"/>  
+        <result column="valueI18n" property="valueI18n"/>  
+        <result column="num" property="num"/>  
+        <result column="description" property="description"/>  
+        <result column="enableFlag" property="enableFlag"/>  
+        <result column="editableFlag" property="editableFlag"/>  
+        <result column="systemFlag" property="systemFlag"/>  
+        <result column="ft" property="ft"/>  
+        <result column="lt" property="lt"/>  
+        <result column="fu" property="fu"/>  
+        <result column="lu" property="lu"/>  
+		<association property="dictionary" javaType="Dictionary">
+        	<id column="id_dictionary" property="id" />  
+        	<result column="d_name" property="name"/>
+        	<result column="d_code" property="code"/>
+        </association>
+    </resultMap>  
+    
+    <resultMap type="DictionaryValue" id="resultModelJoinParentMap">  
+        <id column="id" property="id" />  
+        <result column="id_parent" property="parentId"/>  
+        <result column="code" property="code"/>  
+        <result column="value" property="value"/>  
+        <result column="valueI18n" property="valueI18n"/>  
+        <result column="num" property="num"/>  
+        <result column="description" property="description"/>  
+        <result column="enableFlag" property="enableFlag"/>  
+        <result column="editableFlag" property="editableFlag"/>  
+        <result column="systemFlag" property="systemFlag"/>  
+        <result column="ft" property="ft"/>  
+        <result column="lt" property="lt"/>  
+        <result column="fu" property="fu"/>  
+        <result column="lu" property="lu"/>  
+		<association property="parent" javaType="DictionaryValue">
+        	<id column="id_parent" property="id" />  
+        	<result column="p_value" property="value"/>
+        	<result column="p_code" property="code"/>
+        </association>
+    </resultMap>  
+    
+    <!-- 添加一条数据 -->
+    <insert id="save" keyProperty="id" useGeneratedKeys="false" parameterType="DictionaryValue">
+        insert into sys_dictionaryvalue(id,id_dictionary,id_parent,code,value,valueI18n,num,description,enableFlag,editableFlag,systemFlag,ft,fu) 
+        values(#{id},#{dictionary.id},#{parentId},#{code},#{value},#{valueI18n},#{num},#{description},#{enableFlag},#{editableFlag},#{systemFlag},#{ft},#{fu})
+    </insert>
+    
+    <update id="update" parameterType="DictionaryValue">
+        update sys_dictionaryvalue 
+        <set>
+         <if test="dictionary != null and dictionary.id != '' ">  
+            id_dictionary=#{dictionary.id},  
+         </if>  
+         <if test="parentId != '' ">  
+            id_parent=#{parentId},  
+         </if>  
+         <if test="code != null and code != '' ">  
+            code=#{code},  
+         </if>  
+         <if test="value != null and value != '' ">  
+            value=#{value},  
+         </if>  
+         <if test="valueI18n != null and valueI18n != '' ">  
+            valueI18n=#{valueI18n}, 
+         </if>  
+         <if test="num != null and num != '' ">  
+            num=#{num}, 
+         </if>  
+         <if test="description != null and description != '' ">  
+            description=#{description}, 
+         </if>  
+         <if test="enableFlag != null and enableFlag != '' ">  
+            enableFlag=#{enableFlag}, 
+         </if>  
+         <if test="editableFlag != null and editableFlag != '' ">  
+            editableFlag=#{editableFlag}, 
+         </if>  
+         <if test="systemFlag != null and systemFlag != '' ">  
+            systemFlag=#{systemFlag}, 
+         </if>  
+         <if test="'lt' != null and 'lt' != ''">  
+            lt=#{lt}, 
+         </if>  
+         <if test="lu != null and lu != '' ">  
+            lu=#{lu} 
+         </if>  
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <update id="updateWithEnableFlag" parameterType="map">
+    	update sys_dictionaryvalue set enableFlag=#{enableFlag} where id=#{id}
+    </update>
+    
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from sys_dictionaryvalue where id=#{id}
+    </delete>
+    
+    <delete id="deleteWithDictId">
+        delete from sys_dictionaryvalue where id_dictionary=#{dictId}
+    </delete>
+    
+    <sql id="selectSql">
+		select * from sys_dictionaryvalue dv
+	</sql>
+	
+    <sql id="selectJoinDictSql">
+		select d.name d_name, d.code d_code, dv.* from sys_dictionaryvalue dv join sys_dictionary d on d.id = dv.id_dictionary
+	</sql>
+	
+    <sql id="selectJoinParentSql">
+		select p.value p_value, p.code p_code, dv.* from sys_dictionaryvalue dv join sys_dictionary d on d.id = dv.id_dictionary left join sys_dictionaryvalue p on p.id = dv.id_parent
+	</sql>
+    
+    <!-- 获取一条数据 -->
+    <select id="get"  resultMap="resultModelMap">
+        <include refid="selectJoinDictSql" /> where dv.id=#{id}
+    </select>
+    
+    <select id="getAll" resultMap="resultModelMap">  
+        <include refid="selectJoinDictSql" />
+    </select> 
+    
+    <select id="getWithDictIdAndValueAndExclude" resultMap="resultModelMap" parameterType="Map">  
+        <include refid="selectSql" /> where dv.id_dictionary=#{dictId} and dv.value=#{value}
+        <if test="excludeValue != null ">  
+         and dv.value!=#{excludeValue}
+    	</if>
+    </select> 
+    
+    <select id="getWithDictIdAndCodeAndExclude" resultMap="resultModelMap" parameterType="Map">  
+        <include refid="selectSql" /> where dv.id_dictionary=#{dictId} and dv.code=#{code} 
+        <if test="excludeCode != null ">  
+         and dv.code!=#{excludeCode}
+    	</if>
+    </select> 
+    
+    <select id="getPageWithGeneralDict" resultMap="resultModelMap" parameterType="page">  
+        <include refid="selectJoinDictSql" /> where dv.kind=#{params.dictKind} and dv.editableFlag=#{params.dictEditableFlag} 
+        <if test="params.dictId != null ">  
+         and dv.id_dictionary=#{params.dictId}
+    	</if>
+    </select> 
+    
+    <select id="getListWithDict" resultMap="resultModelMap" parameterType="map">  
+        <include refid="selectJoinDictSql" /> where dv.enableFlag=#{enableFlag} and dv.id_dictionary=#{dictId} 
+        <if test="excludeId != null ">  
+          and dv.id!=#{excludeId}
+    	</if>
+    	 order by dv.num,dv.code
+    </select> 
+    
+    <select id="getListWithTreeAndSameLevel" resultMap="resultModelMap" parameterType="map">  
+        <include refid="selectJoinDictSql" /> where dv.id_dictionary=#{dictId} 
+        <if test="parentId != null ">  
+         and dv.id_parent=#{parentId}
+    	</if>
+        <if test="parentId == null ">  
+         and dv.id_parent is null
+    	</if>
+    </select> 
+    
+    <select id="getListWithDictCode" resultMap="resultModelMap" parameterType="map">  
+        <include refid="selectJoinDictSql" /> where dv.enableFlag=#{enableFlag} and d.code=#{dictCode} order by dv.num,dv.code
+    </select> 
+    
+    <select id="getListWithDictCodeAndJoinParent" resultMap="resultModelJoinParentMap" parameterType="map">  
+        <include refid="selectJoinParentSql" /> where dv.enableFlag=#{enableFlag} and d.code=#{dictCode} order by dv.num,dv.code
+    </select> 
+    
+    <select id="getWithDictCodeAndValueCode" resultMap="resultModelMap" parameterType="map">  
+        <include refid="selectJoinDictSql" /> where d.code=#{dictCode} and dv.code=#{valueCode}
+    </select> 
+    
+    <select id="getWithDictCodeAndValue" resultMap="resultModelMap" parameterType="map">  
+        <include refid="selectJoinDictSql" /> where d.code=#{dictCode} and dv.value=#{value}
+    </select> 
+    
+    <select id="getMaxOrderNumWithGeneral" resultType="Integer">  
+        select ifnull(max(num),0) num from sys_dictionaryvalue where id_dictionary=#{dictId} limit 1
+    </select> 
+    
+    <select id="getMaxOrderNumWithTree" resultType="Integer" parameterType="map">  
+        select ifnull(max(num),0) num from sys_dictionaryvalue where id_dictionary=#{dictId}
+        <if test="parentId != null ">  
+         and id_parent=#{parentId}
+    	</if>
+        <if test="parentId == null ">  
+         and id_parent is null
+    	</if>
+    	 limit 1
+    </select> 
+</mapper>

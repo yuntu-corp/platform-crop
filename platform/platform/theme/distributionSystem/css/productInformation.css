@@ -1,0 +1,220 @@
+*{
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-size:14px;
+}
+body{
+	margin:0;
+	background-color:#F3F3F3;
+	}
+	
+/*header*/
+.appraisal-header{
+	width:100%;
+	padding:12px 4%;
+	background-color:#f99000;
+	border-bottom:1px solid #f99000;
+	margin:0;
+	}
+.glyphicon-menu-left{
+	display:block;
+	float:left;
+	margin-top:2px;
+	line-height: 2;
+	color: #fff;
+}
+.title{
+	color:#fff;
+	text-align:center;
+	display:block;
+	font-size:20px;
+		}
+
+/*基本信息*/
+.product-banner{
+	display:block;
+	width:100%;
+	
+	}
+.product-information{
+	width:100%;
+	padding:10px 3%;
+	overflow:hidden;
+	background-color:#fff;
+	margin-bottom:10px;
+	border-bottom:1px solid #e5e5e5;
+	}
+.product-msg{
+	margin-top:4px;
+	}
+.product-left{
+	float:left;
+	}
+.product-money{
+	font-size:16px;
+	color:#FF2F32;
+	}
+.product-primary{
+	font-size:12px;
+	color:#939393;
+	text-decoration:line-through;
+	margin:0 10px;
+	}
+.product-sales{
+	font-size:10px;
+	background-color:#000;
+	color:#fff;
+	padding:0 6px;
+	}
+.product-collect{
+	display:block;
+	float:right;
+	width:40px;
+	padding-top:6px;
+	}
+.collect{
+	font-size:12px;
+	display:block;
+	text-align:center;
+	margin-top:2px;
+	color:#4c4c4c;
+	}
+.collect-con{
+	width:20px;
+	display:block;
+	margin:auto;
+	}
+.product-line{
+	width:1px;
+	background-color:#e5e5e5;
+	height:40px;
+	float:right;
+	margin:0 8px;
+	}
+	
+	
+/*商品信息*/
+.notice{
+	overflow:hidden;
+	background-color:#fff;
+	margin-bottom:80px;
+	border-top:1px solid #e5e5e5;
+	border-bottom:1px solid #e5e5e5;
+	}
+.notice-tit{
+	width:100%;
+	padding:10px 3% 10px 3%;
+	height:46px;
+	position:relative;
+	overflow:hidden;
+	border-radius:2px;
+	border-bottom:1px solid #e5e5e5;
+	
+	}
+.notice-tit ul{
+	position:absolute;
+	width:100%;
+	left:-1px;
+	}
+.notice-tit li{
+	float:left;
+	width:50%;
+	height:26px;
+	line-height:26px;
+	text-align:center;
+	overflow:hidden;
+	
+	}
+.notice-tit li a{
+	color:#4c4c4c!important;
+	}
+	
+
+.notice-tit li.select a{
+	padding:0;
+	color:#f99000!important;
+	border-bottom:1px solid #f99000;
+	}
+.notice-con{
+	margin-top:10px;
+	}		
+.notice-con .mod ul li{
+	width:100%;
+	}
+.notice-img{
+	width:100%;
+	}
+	
+	
+/*评价*/
+.mod-container{
+	width:100%;
+	padding:0 3%;
+	}
+.mod-namemsg{
+	display:block;
+	overflow:hidden;
+	}
+.mod-img{
+	width:36px!important;
+	height:36px;
+	display:block;
+	float:left;
+	border-radius:50%;
+	}
+.mod-msg{
+	float:left;
+	width:84%;
+	margin:0 0 12px 6px;
+	border-bottom:1px solid #e5e5e5;
+	}
+.mod-nickname{
+	color:#f99000;
+	float:left;
+	}
+.mod-date{
+	color:#939393;
+	float:right;
+	}
+.appraisal,.mod-name,.mod-nickname,.mod-date{
+	display:block;
+	font-size:12px;
+	}
+.mod-name{
+	color:#939393;
+	}
+.appraisal{
+	margin:6px 0;
+	}
+	
+/**/
+.buy-now{
+	width:100%;
+	position:fixed;
+	bottom:0;
+	text-align:center;
+	}
+.buy-button{
+	display:block;
+	color:#fff;
+	background-color:#f99000;
+	width:75%;
+	float:right;
+	line-height:50px;
+	font-size:16px;
+	}
+.now-car{
+	display:block;
+	background-color:#313131;
+	color:#fff;
+	overflow:hidden;
+	width:25%;
+	font-size:10px;
+	float:left;
+	height:50px;
+	padding-top:10px;
+	}
+.glyphicon-shopping-cart,.cart-icon{
+	display:block;
+	}

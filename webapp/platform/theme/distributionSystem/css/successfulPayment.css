@@ -1,0 +1,51 @@
+body{
+	margin:0;
+	padding:0;
+	background-color:#F8F8F8;
+	}
+*{
+	color:#4c4c4c;
+	font-size:14px;
+	}
+img{
+	margin:0;
+	}
+
+.paysuccess_tipsbg{
+	width:100%;
+	}
+.paysuccess_container{
+	border-bottom:1px solid #e6e6e6;
+	line-height:22px;
+	padding:12px 4%;
+	background-color:#fff;
+	}
+.shipping_address,.disbursements{
+	color:#8B8B8B;
+	}
+.safety_tips{
+	margin-top:8px;
+	border:1px solid #e6e6e6;
+	line-height:22px;
+	padding:12px 4%;
+	background-color:#fff;
+	}
+.disbursements{
+	color:#4c4c4c;
+	}
+.symbol{
+	color:#ff4a5e;
+	}
+.disbursements_money{
+	color:#ff4a5e;
+	font-size:18px;
+	}
+.return{
+	width:100%;
+	line-height:22px;
+	background-color:#fff;
+	border:1px solid #e6e6e6;
+	border-radius:2px;
+	margin-top:12px;
+	color:#8B8B8B;
+	}

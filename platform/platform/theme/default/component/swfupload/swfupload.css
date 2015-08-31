@@ -1,0 +1,61 @@
+
+/*upload Style*/
+div.uploadStyle{
+}
+div.uploadBtn {
+	position: relative;
+}
+div.uploadBtn .swfupload{
+	float:left;
+	margin:5px auto auto 5px;
+}
+div.uploadBtn .btn{
+	position:absolute;
+	left:0;
+	top:0;
+	z-index: -100;
+}
+div.uploadBtn span{
+	margin-left:100px;
+	color:#333;
+	font-size:14px;
+	display:block;
+	line-height:30px;
+}
+div.uploadBtn span b{
+	color:green;
+	font-weight: normal;
+}
+div.newFileArea,div.oldFileArea{
+	border: 1px solid #CCCCCC;
+	border-radius: 4px;
+	color: #333333;
+	font: 14px Arial, Helvetica, sans-serif;
+	min-height: 270px;
+	width: 100%;
+	margin:10px auto 5px;
+	padding:auto 5px;
+	background: url("form-input-bg.png") no-repeat scroll left top transparent;
+}
+div.newFileArea:hover,div.oldFileArea:hover{
+	border: 1px solid #00CCFF;
+}
+div.newFileArea ul,div.oldFileArea ul{
+	margin:10px;
+	list-style: none;
+}
+div.newFileArea ul li,div.oldFileArea ul li{
+	margin:5px auto;
+	font-size:14px;
+	color:#333;
+}
+
+div.progressArea{
+	line-height:30px;
+	color:#333;
+	font-size:12px;
+}
+div.progressArea em{
+	margin:auto 5px;
+	color:red;
+}

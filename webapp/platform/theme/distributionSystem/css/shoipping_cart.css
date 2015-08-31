@@ -1,0 +1,145 @@
+/*css重置*/
+body{
+	margin:0;
+	background-color:#F3F3F3;
+	}
+*{
+	color:#4c4c4c;
+	font-size:14px;
+	text-decoration:none;
+	}
+a{
+	color:#fff;}
+
+	
+/*header*/
+.myCommission-header{
+	width:100%;
+	padding:12px 4%;
+	background-color:#f99000;
+	border-bottom:1px solid #f99000;
+	margin:0;
+	}
+.glyphicon-share-alt{
+	display:block;
+	float:left;
+	margin-top:2px;
+	}
+.title{
+	color:#fff;
+	text-align:center;
+	display:block;
+	font-size:20px;
+		}
+		
+/*订单详情*/
+.order{
+	margin-bottom:200px;
+	}
+.logistics-num{
+	width:100%;
+	padding:6px 3%;
+	background-color:#fff;
+	border-top:1px solid #E5E5E5;
+	color:#939393;
+	font-size:12px;
+	}
+.logistics{
+	color:#939393;
+	}
+	
+	
+.order-details{
+	width:100%;
+	padding:6px 3%;
+	overflow:hidden;
+	background-color:#fff;
+	border-top:1px solid #e5e5e5;
+	}
+.order-img{
+	display:block;
+	float:left;
+	width:50px;
+	}
+.order-information{
+	float:left;
+	margin-left:4px;
+	margin-bottom:4px;
+	width:80%;
+	}
+.orderProduct-specifications{
+	float:left;
+	color:#000;
+	margin-top:6px;
+	}
+.quantity{
+	float:right;
+	color:#000;
+	margin-top:6px;
+	}
+.symbol{
+	color:#f99000;
+	}
+.order-bg{
+	width:100%;
+	display:block;
+	border:none;
+	}
+	
+/*购物结算*/
+.item-settlement{
+	width:100%;
+	padding:6px 3%;
+	position:fixed;
+	bottom:58px;
+	background-color:#fff;
+	overflow:hidden;
+	border-top:1px solid #e5e5e5;
+	}
+.item-information{
+	float:left;
+	}
+.item-quantity{
+	line-height:16px;}
+.clearing{
+	display:block;
+	float:right;
+	background-color:#f99000;
+	padding:6px 40px;
+	font-size:16px;
+	border-radius:2px;
+	}
+.total-price{
+	font-size:12px;
+	}
+.item-price{
+	color:#FF2F32;
+	font-size:14px;
+	}
+
+
+
+/*����*/
+.main-nav{
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	background-image:url(../images/nav_bg.png);
+	border-top:1px solid #E5E5E5;
+	border-bottom:1px solid #E5E5E5;
+}
+.nav-icon{
+	float:left;
+	text-align:center;
+	width:33%;
+	margin:10px 0 4px 0;
+}
+.nav-icon img{
+	width:26px;
+}
+.nav-icon span{
+	font-size: 12px;
+	color:#9F9F9F;
+	display: block;
+}

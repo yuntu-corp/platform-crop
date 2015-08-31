@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.customer.dao.manual.CustomerDAO">
+	<resultMap type="Customer" id="resultCustomer">  
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="wechatnum" property="weChatNum" />
+        <result column="kind" property="kind" />
+        <result column="commission" property="commission" />
+        <result column="cash" property="cash" />
+        <result column="id_media" property="mediaId" />
+        <association column="id_user" property="user" select="com.unitever.module.user.dao.manual.UserDAO.get" />
+        <association column="id_customer" property="parent" select="com.unitever.module.customer.dao.manual.CustomerDAO.get"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultCustomer" parameterType="String">
+		select * from ds_customer 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultCustomer">
+		select * from ds_customer 
+	</select>
+	
+	<insert id="save" parameterType="Customer">
+		insert into ds_customer(id,name,wechatnum,id_customer,kind,commission,cash,id_user,ft,lt,fu,lu) value(#{id},#{name},#{weChatNum},#{parent.id},#{kind},#{commission},#{cash},#{user.id},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	
+	<update id="update" parameterType="Customer">
+		update ds_customer
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="weChatNum != null">weChatNum=#{weChatNum},</if>
+			<if test="parent!=null and parent.id != null">id_customer=#{parent.id},</if>
+			<if test="kind != null">kind=#{kind},</if>
+			<if test="commission != null">commission=#{commission},</if>
+			<if test="cash != null">cash=#{cash},</if>
+			<if test="mediaId != null">id_media=#{mediaId},</if>
+			<if test="user !=null and user.id != null">id_user=#{user.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	<select id="getCustomerListWithCustomer" resultMap="resultCustomer" parameterType="Customer">
+		select * from ds_customer 
+		<where>
+			1=1
+			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="name != null and name!=''">
+			     and name like CONCAT('%','${name}','%' )  
+			</if>
+			<if test="weChatNum !=null">
+				and weChatNum=#{weChatNum}
+			</if>
+			<if test="parent != null and parent.id!=null">
+				and id_customer=#{parent.id}
+			</if>
+			<if test="kind !=null and kind !=''">
+				and kind=#{kind}
+			</if>
+			<if test="commission !=null">
+				and commission=#{commission}
+			</if>
+			<if test="cash !=null">
+				and cash=#{cash}
+			</if>
+			<if test="user != null and user.id !=null">
+				and id_user=#{user.id}
+			</if>
+		</where>
+	</select>
+</mapper>

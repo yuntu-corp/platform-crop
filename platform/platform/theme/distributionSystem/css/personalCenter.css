@@ -1,0 +1,124 @@
+body{
+	margin:0;
+	}
+*{
+	color:#4c4c4c;
+	font-size:14px;
+	text-decoration:none;
+	}
+ul{
+	margin:0;
+	padding:0;
+	}
+li{
+	list-style:none;
+	}
+
+/*基本信息*/
+.header_container{
+	text-align:center;
+	margin:20px 0 10px 0;
+	}
+.img-circle{
+	width:100px;
+	height:100px;
+	
+	}
+.header_container p{
+	color:#ff4a5e;
+	}
+
+/*佣金模块*/
+.Commission_container{
+	text-align:center;
+	background-color:#fff;
+	font-size:16px;
+	margin:20px 0 16px 0;
+	overflow:hidden;
+	}
+.listings,.commission,.withdrawal_commission{
+	float:left;
+	padding-top:18px;
+	padding-bottom:18px;
+	border:1px solid #e6e6e6;
+	width:33.33%;
+	}
+.listungs_nub,.commission_amount,.withdrawal_amount{
+	font-weight:700;
+	font-size:18px;
+	}{
+	font-weight:700;
+	font-size:28px;
+	}
+.listungs_nub{
+	color:#5bbfdd;
+	}
+.commission_amount{
+	color:#ff2e31;
+	}
+.withdrawal_amount{
+	color:#fdda33;
+	}
+	
+/*管理模块*/
+.MyListings,.myCommission{
+	background-color:#fff;
+	margin:10px 0;
+	}
+.agent_listings{
+	float:right;
+	width:34px;
+	line-height:20px;
+	margin-top:10px;
+	background-color:#6ad1ef;
+	color:#fff;
+	font-size:14px;
+	text-align:center;
+	border-radius:2px;
+	}
+.Mypromotion img{
+	width:30px;
+	height:30px;
+	margin:8px;
+	}
+.myCommission{
+	line-height:40px;
+	background-color:#f5fbfd;
+	margin:0;
+	}
+.Mypromotion{
+	background-color:#fff;
+	margin:10px 0;
+	overflow:hidden;
+	margin:8px 7%;
+	width:86%;
+	}
+.MyListings_Titl{
+	line-height:40px;
+	padding:8px 4%;
+	background-color:#f5fbfd;
+	border:1px solid #c6e9f5;
+	margin:0;
+	}
+.ul{
+	margin:16px 0;
+	}
+.glyphicon-home{
+	color:#5bc0de;
+	}
+.glyphicon-globe{
+	color:#ffd800;
+	}
+.glyphicon-menu-right{
+	float:right;
+	margin-top:12px;
+	color:#919191;
+	}
+.glyphicon-credit-card{
+	margin-top:14px;
+	float:left;
+	color:#f56257;
+	}
+.image_border_circle{
+	border-radius:25px;
+}

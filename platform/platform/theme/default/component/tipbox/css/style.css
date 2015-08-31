@@ -1,0 +1,169 @@
+
+/*信息提示盒子样式*//* TODO 图片文件不全*/
+div.succes-small {
+    background: url("../images/icons/16x16/accept.png") no-repeat scroll 14px 50% #C3FBAA;
+    border: 1px solid #51BE21;
+    min-height:30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.info-small {
+    background: url("../images/icons/16x16/help.png") no-repeat scroll 14px 50% #AEE6FD;
+    border: 1px solid #3E9BFC;
+    min-height:30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.error-small {
+    background: url("../images/icons/16x16/delete.png") no-repeat scroll 14px 50% #FEBFBF;
+    border: 1px solid #F74C4C;
+    min-height:30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.warning-small {
+    background: url("../images/icons/16x16/error.png") no-repeat scroll 14px 50% #FFFAB2;
+    border: 1px solid #D5C913;
+    min-height:30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.msg-small {
+    background: url("../images/icons/16x16/light_1.gif") no-repeat scroll 14px 50% #FFFFFF;
+    border: 1px solid #CCCCCC;
+    min-height:30px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.succes-small p, div.info-small p, div.error-small p, div.warning-small p, div.msg-small p {
+    font-size: 12px;
+    line-height:20px;
+    margin: 5px 25px 5px 40px;
+    width: auto!important;
+}
+div.succes-small .delx-box, div.info-small .delx-box, div.error-small .delx-box, div.warning-small .delx-box, div.msg-small .delx-box {
+    background: url("../images/close-x.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    height: 12px;
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    width: 12px;
+}
+div.succes-in {
+    background: url("../images/icons/32x32/dialog-apply-32.png") no-repeat scroll 14px 50% #C3FBAA;
+    border: 1px solid #51BE21;
+    cursor: pointer;
+    min-height: 40px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.info-in {
+    background: url("../images/icons/32x32/gnome-dialog-question-32.png") no-repeat scroll 14px 50% #AEE6FD;
+    border: 1px solid #3E9BFC;
+    cursor: pointer;
+    min-height: 40px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.error-in {
+    background: url("../images/icons/32x32/gnome-emblem-important-32.png") no-repeat scroll 14px 50% #FEBFBF;
+    border: 1px solid #F74C4C;
+    cursor: pointer;
+    min-height: 40px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.warning-in {
+    background: url("../images/icons/32x32/gnome-dialog-warning-32.png") no-repeat scroll 14px 50% #FFFAB2;
+    border: 1px solid #D5C913;
+    cursor: pointer;
+    min-height: 40px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.msg-in {
+    background: url("../images/icons/32x32/gnome-dialog-information-32.png") no-repeat scroll 14px 50% #FFFFFF;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+    min-height: 40px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.succes-in p, div.info-in p, div.error-in p, div.warning-in p, div.msg-in p {
+    float: left;
+    font-size: 12px;
+    line-height:20px;
+    margin: 10px 10px 10px 60px;
+    width: auto!important;
+}
+div.succes-in .delx, div.info-in .delx, div.error-in .delx, div.warning-in .delx, div.msg-in .delx {
+    color: #666666;
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    right: 8px;
+    top: 5px;
+}
+div.succes-big {
+    background: url("../images/dialog-apply-64.png") no-repeat scroll 14px 50% #C3FBAA;
+    border: 1px solid #51BE21;
+    cursor: pointer;
+    min-height: 84px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.info-big {
+    background: url("../images/gnome-dialog-question-64.png") no-repeat scroll 14px 50% #AEE6FD;
+    border: 1px solid #3E9BFC;
+    cursor: pointer;
+    min-height: 84px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.error-big {
+    background: url("../images/gnome-emblem-important-64.png") no-repeat scroll 14px 50% #FEBFBF;
+    border: 1px solid #F74C4C;
+    cursor: pointer;
+    min-height: 84px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.warning-big {
+    background: url("../images/gnome-dialog-warning-64.png") no-repeat scroll 14px 50% #FFFAB2;
+    border: 1px solid #D5C913;
+    cursor: pointer;
+    min-height: 84px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.msg-big {
+    background: url("../images/gnome-dialog-information-64.png") no-repeat scroll 14px 50% #FFFFFF;
+    border: 1px solid #CCCCCC;
+    cursor: pointer;
+    min-height: 84px;
+    margin-bottom: 10px;
+    position: relative;
+}
+div.succes-big h2, div.info-big h2, div.error-big h2, div.warning-big h2, div.msg-big h2 {
+    float: left;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 10px 0 0 94px;
+    width: auto;
+}
+div.succes-big p, div.info-big p, div.error-big p, div.warning-big p, div.msg-big p {
+    color: #666666;
+    float: left;
+    font-size: 14px;
+    margin: 5px 10px 14px 94px;
+    width: auto!important;
+}
+div.succes-big .delx, div.info-big .delx, div.error-big .delx, div.warning-big .delx, div.msg-big .delx {
+    color: #666666;
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    right: 8px;
+    top: 5px;
+}

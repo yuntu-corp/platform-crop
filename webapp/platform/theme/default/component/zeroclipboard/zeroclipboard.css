@@ -1,0 +1,9 @@
+.zeroclipboard-is-hover{
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#767676), to(#444444));
+	background: -moz-linear-gradient(top,  #767676,  #444444);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#767676', endColorstr='#444444');
+	border:solid 1px #444444;
+	color:#ffffff;	
+	text-decoration: none;
+}

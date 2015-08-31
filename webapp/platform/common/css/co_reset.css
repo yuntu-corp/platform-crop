@@ -1,0 +1,145 @@
+﻿@charset "utf-8";
+/*
+Copyright (c) 2011, Unitever! Inc. All rights reserved.
+http://www.unitever.com
+version: 1.0
+*/
+/**
+ * hzth Reset
+ * @module reset
+ * @namespace
+ * @requires 
+ */
+html {
+	/* color: #000; font-size:12px; */
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+/*input,*/
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset,
+img {
+	border: 0;
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var,
+optgroup {
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+del,
+ins {
+	text-decoration: none;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+caption,
+th {
+	text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+}
+
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+abbr,
+acronym {
+	border: 0;
+	font-variant: normal;
+}
+
+sup, sub {
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+/*because legend doesn't inherit in IE */
+legend {
+	color: #000;
+}
+
+input,
+button,
+textarea,
+select,
+optgroup,
+option {
+	font-family: inherit;
+	font-size: inherit;
+	font-style: inherit;
+	font-weight: inherit;
+}
+
+/*@purpose To enable resizing for IE */
+/*@branch For IE6-Win, IE7-Win */
+input,
+button,
+textarea,
+select {
+	*font-size: 100%;
+}
+.clearfix:before,.clearfix:after {content:""; display:table;}
+.clearfix:after { clear:both; }/* For IE 6/7 (trigger hasLayout) */
+.clearfix{ zoom:1;}
+a{ color:#666666;text-decoration:none;}
+a:link{ color:#666666; text-decoration:none;}
+a:visited{ color:#6c6c6c; text-decoration:none;}
+a:hover { color:#1f3e94;text-decoration: none;}
+a:active{ color:#C52500; text-decoration:none;}

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>用户列表显示</title>
+		<#include "*/common/meta.html">
+		<script type="text/javascript">
+			Namespace.register('com.ue.platform.module.user');
+			com.ue.platform.module.user = {
+				doSave : function(){
+					if(!$("#theForm").valid()){
+						return false;
+					}
+					if(!$.hz.swfupload.validateAttachment("filePhoto")){
+						return false;
+					}
+					return false;
+					var formData=$("#theForm").serialize();
+					$.ajax({
+					 	type: "POST",
+					  	url: "${path}/dm/user/save",
+					  	data:formData,
+					  	success: function(data){
+					  		$.successTips();
+					  		refreshUserList();
+// 					   		art.dialog.list["dialog-addUser"].close();
+					  	}
+					});
+				}
+			}
+			
+			$(document).ready(function(){
+				$.hz.validate.init("theForm");
+				$.hz.swfupload.init("filePhoto",{configCode:"userPhoto",classFieldName:"com.unitever.demo.model.TBUser,id",idOwner:"${model.id!}",required:true});
+// 				$("#filePhoto").swfupload("setAttachmentsNames","attachmentIds[{0}]", "attachmentDelIds[{0}]");
+			});
+		</script>
+	</head>
+	<body>
+		<h1>这是UserController对应的user-input.html</h1>
+		<form method="post" id="theForm">
+			<#if model.id??>
+				<input type="hidden" name="model.id" value="${model.id!}"/>
+			</#if>
+			<div class="formLayout01">
+				<div class="formItem">
+				     <label class="tit">名称：<em class="red">*</em></label>
+				     <div class="bdmain">
+				     	<@uc.textfield name="model.name" value="${model.name!}" maxlength="50" cssClass="inputStyle w200 required"/>
+				     </div>
+				</div>
+				<div class="formItem">
+				     <label class="tit">部门：<em class="red">*</em></label>
+				     <div class="bdmain">
+				    		<@uc.select list=deptList name="model.deptId" listKey="id" listValue="name" value="${model.deptId!}"/>
+				     </div> 	
+				</div>
+				<div class="formItem">
+				     <label class="tit">email：</label>
+				     <div class="bdmain">
+				     	<@uc.textfield name="model.email" value="${model.email!}" maxlength="50" cssClass="inputStyle w200 email"/>
+				     </div>
+				</div>
+				<div class="formItem">
+				     <label class="tit">age：</label>
+				     <div class="bdmain">
+				     	<@uc.textfield name="model.age" value="${model.age!}" cssClass="inputStyle w200 digits"/>
+				     </div>
+				</div>
+				<div class="formItem">
+				     <label class="tit">photo</label>
+				     <div id="filePhoto">
+			     
+        			 </div>
+				</div>
+				<div class="formButton">
+					<a onclick="com.ue.platform.module.user.doSave();" class="button" href="javascript:void(0);">保存</a>
+				</div>
+			</div>
+		</form>
+		
+	</body>
+</html>

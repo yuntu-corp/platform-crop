@@ -1,0 +1,57 @@
+body{
+	margin:0;
+	padding:0;
+	background-color:#f2f2f2;
+	}
+*{
+	font-size:14px;
+	
+	text-decoration:none;
+	}
+	
+.checkmark{
+	width:100%;
+	}
+.checkmark_bg{
+	width:64px;
+	height:64px;
+	margin: 48px 41% 24px 41%;
+	}	
+.withdrawals_content1,.arrival_time{
+	text-align:center;
+	}
+.withdrawals_content1{
+	font-size:18px;
+	color:#4c4c4c;
+	}
+.arrival_time{
+	color:#B1B1B1;
+	}
+.basic_information1{
+	float:left;
+	color:#B1B1B1;
+	}
+.basic_information2{
+	float:right;
+	color:#4c4c4c;
+	}
+.withdrawal_information{
+	width:94%;
+	background-color:#fff;
+	border:1px solid #EBEBEB;
+	margin:20px 0;
+	padding:10px 3%;
+	line-height:24px;
+	overflow:hidden;
+	}
+.submit_completed{
+	width:94%;
+	line-height:30px;
+	margin:0 3%;
+	background-color:#2ab300;
+	border-radius:2px;
+	text-align:center;
+	}
+.submit_completed a{
+	color:#fff;
+	}

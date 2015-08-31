@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.withdrawCash.dao.manual.WithdrawCashDAO">
+	
+	<resultMap type="WithdrawCash" id="resultWithdrawCash">  
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="accountname" property="accountName" />
+        <result column="accountnum" property="accountNum" />
+        <result column="accountbank" property="accountBank" />
+        <result column="money" property="money" />
+        <result column="date" property="date" />
+        <result column="state" property="state" />
+        <association property="user" javaType="User">
+        	<id column="id_user" property="id" />  
+        </association>
+        <association property="customer" column="id_customer" select="com.unitever.module.customer.dao.manual.CustomerDAO.get"/>
+    </resultMap>
+    
+	<select id="getAll" resultMap="resultWithdrawCash" >
+   		select * from ds_withdrawals order by date desc
+	</select>
+    
+	<select id="get" resultMap="resultWithdrawCash" parameterType="String">
+   		select * From ds_withdrawals 
+   		<where> 
+			id =#{id}
+		</where> 
+	</select>
+	
+	<insert id="save" keyProperty="id" parameterType="WithdrawCash">
+		insert into ds_withdrawals(id,code,accountname,accountnum,accountbank,money,id_customer,date,state,id_user,ft,lt,fu,lu) values
+		(#{id},#{code},#{accountName},#{accountNum},#{accountBank},#{money},#{customer.id},#{date},#{state},#{user.id},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+	
+	<update id="update" parameterType="WithdrawCash">
+		update ds_withdrawals
+		<set>
+			<if test="code != null">code=#{code},</if>
+			<if test="accountName != null">accountname=#{accountName},</if>
+			<if test="accountNum != null">accountnum=#{accountNum},</if>
+			<if test="accountBank != null">accountbank=#{accountBank},</if>
+			<if test="money != null">money=#{money},</if>
+			<if test="customer!=null and customer.id != null">id_customer=#{customer.id},</if>
+			<if test="date != null">date=#{date},</if>
+			<if test="state != null">state=#{state},</if>
+			<if test="user !=null and user.id != null">id_user =#{user.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getWithdrawCashListWithWithdrawCash" resultMap="resultWithdrawCash" parameterType="WithdrawCash">
+   		select * From ds_withdrawals 
+   		<where> 
+			1=1
+			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="code != null and code!=''">
+			     and code =#{code}
+			</if>
+			<if test="accountName != null">
+			     and accountname =#{accountName}
+			</if>
+			<if test="accountNum != null">
+			     and accountnum =#{accountNum}
+			</if>
+			<if test="accountBank != null">
+			     and accountbank =#{accountBank}
+			</if>
+			<if test="money != null">
+			     and money =#{money}
+			</if>
+			<if test="customer!=null and customer.id != null">
+			     and id_customer =#{customer.id}
+			</if>
+			<if test="startDate != null and startDate != ''">
+				and date&gt;=#{startDate} 
+			</if>
+			<if test="endDate != null and endDate != ''">
+				and date&lt;=#{endDate}
+			</if>
+			<if test="state != null and state !=''">
+			     and state =#{state}
+			</if>
+			<if test="user !=null and user.id != null">
+			     and id_user =#{user.id}
+			</if>
+		</where> 
+		order by date desc
+	</select>
+</mapper>

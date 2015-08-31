@@ -1,0 +1,143 @@
+
+/*重置样式*/
+html{background: #fff;}
+body{margin: 0; line-height: 1.8em; font-size: 12px;font-family: "微软雅黑";}
+input,button,textarea{outline: none;}
+img{border: none;}
+dl,dd,dt{ margin: 0; padding: 0; list-style: none;}
+
+a{text-decoration:none;}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover {text-decoration:underline;}
+a:active{text-decoration:none;}
+
+/*清除浮动*/
+.clearfix:before,.clearfix:after {content:""; display:table;}
+.clearfix:after { clear:both; }
+.clearfix{ zoom:1;}
+
+/*固定的结构*/
+
+html,body{height: 100%; overflow:hidden;}
+.ovauto{overflow: auto;}
+#webContainer{
+	min-height:100%;
+	_height:100%;
+	 _overflow: visible;/*支持ie6最小高度*/
+	margin: 0 auto -91px;/*100px的值取自footer的高度，两者一致，一正一负即可*/
+	min-width: 1000px;
+}
+.webBody{
+	padding-bottom: 91px;/*避免此div内部的内容被footer所遮挡*/
+}
+
+/*此处请写你自己所写的css代码*/
+.logintop{
+	height: 57px;
+	border-top:5px solid #149f90;
+}
+.loginWrap{width: 885px; margin: 0 auto; position: relative;}
+.loginlogo{
+	float: left;
+	width: 344px;
+	height: 57px;
+	margin: 0;
+	background: url(images/loginlogo.png) no-repeat center;
+}
+.loginzhuce{
+	float: right;
+	font-family: "微软雅黑";
+	font-size: 18px;
+	color: #000;
+	line-height: 57px;
+	font-weight: bold;
+}
+.loginzhuce a{
+	text-decoration: underline;
+	color: #149f90;
+}
+.loginbanner{
+	height: 550px;
+	background: url(images/loginBanner.png) center no-repeat;
+}
+.loginform{
+	width: 340px;
+	height: 389px;
+	background: #fff;
+	box-shadow: 1px 2px 3px #ccc;
+	position: absolute;
+	right: 0px; 
+	top: 82px;
+}
+.loginform ul{
+	padding: 0;
+	margin: 0;
+}
+.loginform ul li{
+	height: 36px;
+	width: 260px;
+	margin: 23px auto 0;
+	list-style: none;
+}
+.loginform .input{
+	background: #f4f8fb;
+	border: 1px solid #149f90;
+	border-radius: 4px;
+	padding: 3px;
+	height: 26px;
+	line-height: 26px;
+	width: 250px;
+}
+.loginform ul li.strongtitle{
+	color: #149f90;
+	font-weight: bold;;
+	font-size: 24px;
+	text-align: center;
+}
+.loginform ul li img{
+	width: 75px;
+	height: 34px;
+	display: inline-block;
+	vertical-align: middle;
+	margin:0 10px;
+
+}
+.loginform ul li.yanzheng{
+	color:#959ea2;
+	font-size: 14px;
+}
+.loginform ul li.yanzheng input{
+	width: 130px;
+}
+.loginform ul li .loginbtn{
+	background: #149f90;
+	width: 257px;
+	height: 36px;
+	line-height: 36px;
+	display: block;
+	color: #fff;
+	font-size: 18px;
+	font-family: "微软雅黑";
+	text-align: center;
+	line-height: 36px;
+	border-radius: 4px;
+}
+
+.loginform ul li .loginbtn:hover{
+	text-decoration: none;
+	background: #18aa9a;
+}
+.loginform ul li.miandenglu {
+	color: #555;
+	height: 20px;
+}
+.loginform ul li.miandenglu a{
+	float: right;
+	color: #555;
+}
+.loginform ul li.miandenglu input{
+	position: relative;
+	top: 3px;
+}
+

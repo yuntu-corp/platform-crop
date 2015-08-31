@@ -1,0 +1,86 @@
+.container {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	overflow: hidden;
+}
+
+.abs {
+    position: absolute !important;
+}
+
+.navMain li.first {
+	border-top: none !important;
+}
+
+.navMain li.last {
+	border-bottom: none !important;
+}
+
+.navMain li a {
+	color: #606060;
+	font: 14px/30px "微软雅黑", "宋体";
+/* 	height: 30px; */
+	overflow: hidden;
+	font-weight: bold;
+	text-align: left;
+	text-decoration: none;
+	width: 120px;
+}
+
+.navMain li a:hover {
+	color: #009900;
+}
+
+.navMain li a.current {
+	color: #0099CC;
+}
+/* .navMain { */
+/* 	list-style: none outside none; */
+/* } */
+
+.green,.green a,.green a:hover{color:green!important;}
+.ml30{margin-left:30px!important;}  
+.fb{font-weight:bold!important;}
+
+.cssTableBody{
+	margin:0;
+	padding:0;
+	overflow:auto;
+	zoom:1;
+	text-align:left;	
+	border-collapse:collapse;
+	width:100%;
+}
+.cssTableBody th,.cssTableBody td{
+	font-size:14px;
+	font-weight:normal;
+	border:1px solid #CCCCCC;
+	overflow:hidden;
+	margin:0;
+	height:36px;
+	padding-left:5px;
+	padding-right:5px;
+    line-height: normal;
+}
+.cssTableBody th,.cssTableBody td.num{
+	background:#f2f2f2 url(../images/grid-th-bg.gif) repeat-x;
+	color:#333333;
+	white-space:nowrap!important;
+	word-break:keep-all!important;
+}
+
+.cssTableBody th a, .cssTableBody td a {
+    text-decoration: underline;
+}
+.cssTableBody tr.odd{
+    background:#FCFCFC;
+}
+.cssTableBody tr.over {
+    background:#F5F5F5;
+}
+.cssTableBody tr.selected {
+    background:#FFFFCC;
+}

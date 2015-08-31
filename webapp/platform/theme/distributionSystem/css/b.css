@@ -1,0 +1,159 @@
+/*css重置*/
+body{
+	margin:0;
+	}
+*{
+	color:#4c4c4c;
+	font-size:14px;
+	text-decoration:none;
+	}
+ul{
+	margin:0;
+	padding:0;
+	}
+li{
+	list-style:none;
+	}
+
+/*基本信息*/
+.msg_container{
+	background-color:#fff;
+	overflow:hidden;
+	}
+h4{
+	font-weight:700;
+	}
+.msg_bg{
+	width:96%;
+	margin:0 2%;
+	}
+.img-circle{
+	float:left;
+	margin:20px 0;
+	width:100px;
+	height:100px;
+	}
+.msg{
+	float:left;
+	margin:24px 0 0 14px;
+	}
+.moneycoin{
+	color:#ff4a5e;
+	}
+.money{
+	color:#ff4a5e;
+	font-weight:700;
+	font-size:20px;
+	}
+.number a{
+	border:1px solid #e6e6e6;
+	padding:4px 12px;
+	font-size:16px;
+	color:#6d6d6d;
+	text-decoration:none;
+	}
+.number{
+	padding-left:10px;}
+
+/*佣金模块*/
+.Commission_module{
+	text-align:center;
+	background-color:#fff;
+	font-size:16px;
+	margin:10px 0;
+	overflow:hidden;
+	}
+.Listings,.Commission,.Withdrawal_commission{
+	float:left;
+	padding-top:18px;
+	padding-bottom:18px;
+	border:1px solid #e6e6e6;
+	width:33.33%;
+	}
+.Listungs_Nub,.Commission_Amount,.Withdrawal_Amount{
+	font-weight:700;
+	font-size:18px;
+	}
+.Listungs_Nub{
+	color:#5bbfdd;
+	}
+.Commission_Amount{
+	color:#ff2e31;
+	}
+.Withdrawal_Amount{
+	color:#fdda33;
+	}
+/*提示信息*/
+.note{
+	width:96%;
+	margin:0 2%;
+	background-color:#fdf7e1;
+	border:1px solid #f3efd2;
+	color:#81693d;
+	}
+.note p{
+	color:#81693d;
+	margin:20px 12px;
+	}
+
+/*代理管理*/
+.myListings,.myPromotion,.myCommission{
+	background-color:#fff;
+	margin:10px 0;
+	}
+.glyphicon-user{
+	color:#5bc0de;
+	}
+.glyphicon-send{
+	color:#ffd800;
+	}
+.glyphicon-piggy-bank{
+	color:#f56257;
+	}
+.myListings_titl,.myPromotion_titl,.myCommission_titl{
+	line-height:40px;
+	padding:8px 4%;
+	background-color:#f5fbfd;
+	border:1px solid #c6e9f5;
+	margin:0;
+	}
+.myPromotion{
+	background-color:#fff;
+	overflow:hidden;
+	}
+.X,.money{
+	font-size:14px;
+	color:#bdbdbd;
+	}
+.Acting_level{
+	float:left;
+	margin:10px 0 10px 0;
+	line-height:22px;
+	padding:0 10px;
+	}
+.Agent_Listings{
+	float:right;
+	margin:14px 10px;
+	}
+.glyphicon glyphicon-star{
+	display:block;
+	float:left;
+	}
+.Agent_Listings{
+	min-width:34px;
+	background-color:#ff4a5e;
+	color:#fff;
+	font-size:14px;
+	text-align:center;
+	border-radius:2px;
+	padding-left: 6px;
+	padding-right: 6px;
+	}
+.myListings li,.myPromotion li,.myCommission li{
+	width:86%;
+	margin:8px 7%;
+	}
+.myListings ul,.myPromotion ul,.myCommission ul{
+	margin:16px 0 30px 0;
+	}
+

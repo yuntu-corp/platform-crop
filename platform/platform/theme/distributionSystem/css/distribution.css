@@ -1,0 +1,108 @@
+body{
+	margin:0;
+	padding:0;
+	background-color:#fff;
+	list-style:none;
+	text-decoration:none;
+	color:#4c4c4c;
+	font-size:18px;
+}
+/*header*/
+.product-head{
+	width:100%;
+	margin:0;
+	}
+.glyphicon-menu-left{
+	display:block;
+	float:left;
+	margin-top:2px;
+	line-height: 2;
+}
+.title{
+	color:#fff;
+	text-align:center;
+	display:block;
+	font-size:20px;
+		}
+	
+.product-container{
+	margin-bottom: 70px;
+}
+.product-info{
+	padding:0 2%;
+	margin-top:8px;
+}
+.product-message{
+	margin:6px 8px 0 8px;
+	line-height: 30px;
+}
+.product{
+	width:100%;
+	text-align:center;
+	overflow:hidden;
+}
+.price{
+	color:#ff2e31;
+	padding:0;
+	margin-left:6px;
+	}
+.original-price{
+	color: #BCBCBC;
+	font-size: 12px;
+	padding-left: 10px;
+	text-decoration: line-through;
+}
+.total-count{
+	float: right;
+	font-size: 12px;
+	padding-right: 5px;
+}
+.line{
+	border-bottom:1px solid #ccc;
+	margin:8px 0 8px 0;
+}
+
+/*µ¼º½*/
+.main-nav{
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	background-image:url(../images/nav_bg.png);
+	border-top:1px solid #E5E5E5;
+	border-bottom:1px solid #E5E5E5;
+}
+.nav-icon{
+	float:left;
+	text-align:center;
+	width:33%;
+	margin:10px 0 4px 0;
+}
+.nav-icon img{
+	width:26px;
+}
+.nav-icon span{
+	font-size: 12px;
+	color:#9F9F9F;
+	display: block;
+}
+
+
+
+
+
+
+.free{
+	background-color:#000;
+	color:#fff;
+	width:30px;
+	height:20px;
+	font-size:12px;
+	float:right;
+	text-align:center;
+	margin:6px 8px 0 0;
+	}
+.Specification{
+	font-size:12px;
+	color:#919191;
+	}	

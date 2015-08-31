@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.ordergoods.dao.manual.OrderGoodsDAO">
+
+	<resultMap type="OrderGoods" id="resultOrderGoods">  
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="price" property="price" />
+        <result column="count" property="count" />
+        <result column="state" property="state" />
+        <association property="order" column="id_order" select="com.unitever.module.order.dao.manual.OrderDAO.get"/>
+        <association property="goods" column="id_goods" select="com.unitever.module.goods.dao.manual.GoodsDAO.get"/>
+    </resultMap>
+    
+   	<insert id="save" parameterType="OrderGoods">
+		insert into ds_ordergoods(id,id_order,id_goods,price,count,state,ft,lt,fu,lu) value(#{id},#{order.id},#{goods.id},#{price},#{count},#{state},#{ft},#{lt},#{fu},#{lu})
+	</insert>
+    
+    <select id="get" resultMap="resultOrderGoods" parameterType="String">
+   		select * From ds_ordergoods 
+   		<where> 
+			id =#{id}
+		</where> 
+	</select>
+	<update id="update" parameterType="OrderGoods">
+		update ds_ordergoods
+		<set>
+			<if test="state != null">state=#{state},</if>
+		</set>
+		where id=#{id}
+	</update>
+    <select id="getOrderGoodsListWithOrderId" resultMap="resultOrderGoods" parameterType="String">
+   		select * from ds_ordergoods
+   		<where> 
+			and id_order=#{orderId}
+		</where>
+	</select>
+	<select id="getOrderGoodsListWithGoodsId" resultMap="resultOrderGoods" parameterType="String">
+   		select * from ds_ordergoods
+   		<where> 
+			and id_goods=#{goodsId}
+		</where>
+	</select>
+</mapper>

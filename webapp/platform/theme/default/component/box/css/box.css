@@ -1,0 +1,119 @@
+div.box1 {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #B4B4B4;
+    margin: 0 0 20px;
+    position: relative !important;
+}
+div.box1-header {
+    background: url("../images/bg-header.png") repeat-x scroll 0 0 #EEEEEE;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 35px;
+    padding-left: 10px;
+    padding-right:10px;
+}
+div.box1-header h2 {
+    color: #555555;
+    float: left;
+    font-family: 'UbuntuBold',Arial,sans-serif;
+    font-size: 18px;
+    margin: 6px 0 0 0;
+    text-shadow: 0 1px 1px #FFFFFF;
+}
+div.box1-header-ctrls {
+    float: right;
+    height: 20px;
+    margin: 8px 0 0;
+    position: relative;
+    width: 20px;
+}
+div.box1 span.spin {
+    background: url("../images/spinner.gif") no-repeat scroll 0 0 transparent;
+    display: none;
+    height: 16px;
+    left: -24px;
+    position: absolute;
+    top: 2px;
+    width: 16px;
+}
+div.box1 a.close {
+    background: url("../images/plus.png") no-repeat scroll 0 0 transparent;
+    float: left;
+    height: 20px;
+    width: 20px;
+}
+div.box1 a.close:hover {
+    background-position: 0 -20px;
+}
+div.box1 a.open {
+    background: url("../images/plus.png") no-repeat scroll 0 -40px transparent;
+    float: left;
+    height: 20px;
+    width: 20px;
+}
+div.box1 a.open:hover {
+    background-position: 0 -60px;
+}
+div.box1-content {
+    border-top: 1px solid #B4B4B4;
+    padding: 10px;
+    position: relative!important;
+    height: 101%;/*解决IE下slideToggle闪动的BUG*/
+    overflow: auto;
+}
+div.box1-content p {
+    /*float: left;*/
+    text-align: left;
+    /*width: 100%;*/
+}
+div.box1-content p.spacer {
+    float: left;
+    height: 10px;
+    line-height: 0;
+    width: 100%;
+}
+div.box1-content p a, div.box1-content p a:active, div.box1-content p a:visited {
+    color: #222222;
+    font-weight: bold;
+    text-decoration: none;
+}
+div.box1-content p a:hover {
+    color: #0066FF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+div.box2{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #B4B4B4;
+    position: relative !important;
+}
+div.box2-header {
+    background: url("../images/bg-header.png") repeat-x scroll 0 0 #EEEEEE;
+    height: 30px;
+    padding-left: 10px;
+    padding-right:10px;
+    border: 1px solid #B4B4B4;
+}
+div.box2 div.box2-header {
+    background: url("../images/bg-header.png") repeat-x scroll 0 0 #EEEEEE;
+    height: 30px;
+    padding-left: 10px;
+    padding-right:10px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+}
+div.box2-header h2 {
+    color: #555555;
+    float: left;
+    font-family: 'UbuntuBold',Arial,sans-serif;
+    font-size: 14px;
+    margin: 6px 0 0 0;
+    text-shadow: 0 1px 1px #FFFFFF;
+}
+div.box2-content {
+    position: relative!important;
+    overflow: auto;
+}

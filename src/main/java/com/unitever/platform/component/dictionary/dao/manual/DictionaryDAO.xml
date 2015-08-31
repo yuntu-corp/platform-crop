@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.platform.component.dictionary.dao.manual.DictionaryDAO">
+    <!-- sp namespace:映射StudentMapper的接口 -->
+    
+    <resultMap type="Dictionary" id="resultModelMap">  
+        <id column="id" property="id" />  
+        <result column="name" property="name"/>  
+        <result column="code" property="code"/>  
+        <result column="description" property="description"/>  
+        <result column="kind" property="kind"/>  
+        <result column="enableFlag" property="enableFlag"/>  
+        <result column="editableFlag" property="editableFlag"/>  
+        <result column="systemFlag" property="systemFlag"/>  
+        <result column="ft" property="ft"/>  
+        <result column="lt" property="lt"/>  
+        <result column="fu" property="fu"/>  
+        <result column="lu" property="lu"/>  
+    </resultMap>  
+    
+    
+    <!-- 添加一条数据 -->
+    <insert id="save" keyProperty="id" useGeneratedKeys="false" parameterType="Dictionary">
+        insert into sys_dictionary(id,name,code,description,kind,enableFlag,editableFlag,systemFlag,ft,fu) 
+        values(#{id},#{name},#{code},#{description},#{kind},#{enableFlag},#{editableFlag},#{systemFlag},#{ft},#{fu})
+    </insert>
+    
+    <update id="update" parameterType="Dictionary">
+        update sys_dictionary 
+        <set>
+         <if test="name != null and name != '' ">  
+            name=#{name},  
+         </if>  
+         <if test="code != null and code != '' ">  
+            code=#{code},  
+         </if>  
+         <if test="description != null and description != '' ">  
+            description=#{description},  
+         </if>  
+         <if test="kind != null and kind != '' ">  
+            kind=#{kind},  
+         </if>  
+         <if test="enableFlag != null and enableFlag != '' ">  
+            enableFlag=#{enableFlag}, 
+         </if>  
+         <if test="editableFlag != null and editableFlag != '' ">  
+            editableFlag=#{editableFlag}, 
+         </if>  
+         <if test="systemFlag != null and systemFlag != '' ">  
+            extension=#{extension}, 
+         </if>  
+         <if test="'lt' != null and 'lt' != ''">  
+            lt=#{lt}, 
+         </if>  
+         <if test="lu != null and lu != '' ">  
+            lu=#{lu} 
+         </if>  
+        </set>
+         WHERE id=#{id}  
+    </update> 
+    
+    <!-- 删除一条数据 -->
+    <delete id="delete">
+        delete from sys_dictionary where id=#{id}
+    </delete>
+    
+    <sql id="selectSql">
+		select * from sys_dictionary
+	</sql>
+    
+    <!-- 获取一条数据 -->
+    <select id="get"  resultMap="resultModelMap">
+        <include refid="selectSql" /> where id=#{id}
+    </select>
+    
+    <select id="getAll" resultMap="resultModelMap">  
+        <include refid="selectSql" />
+    </select> 
+    
+    <select id="getDictWithKind" resultMap="resultModelMap" parameterType="Map">  
+        <include refid="selectSql" /> where kind=#{kind} 
+        <if test="editableFlag != null ">  
+         and editableFlag=#{editableFlag}
+    	</if>
+    </select> 
+    <select id="getDictWithCode" resultMap="resultModelMap">  
+        <include refid="selectSql" /> where code=#{code}
+    </select> 
+    <select id="getDictWithCodeAndExclude" resultMap="resultModelMap" parameterType="Map">  
+        <include refid="selectSql" /> where code=#{code} 
+        <if test="excludeCode != null ">  
+         and code!=#{excludeCode}
+    	</if>
+    </select> 
+</mapper>

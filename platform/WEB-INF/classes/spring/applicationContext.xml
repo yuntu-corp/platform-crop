@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       "
+       default-lazy-init="false" 
+       >
+	<description>Spring公共配置</description>
+	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
+	<context:component-scan base-package="com.unitever">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<!-- 定义受环境影响易变的变量 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:conf/jdbc.properties</value>
+				<value>classpath:conf/mail.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 数据源配置,使用tomcat-jdbc-pool连接池 -->
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<!-- Connection Info -->
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}" />
+		<!-- Connection Pooling Info -->
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="30" />
+		<property name="maxWait" value="1000" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="validationQuery" value="selcet 1" />
+		<property name="validationInterval" value="30000" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+	    <property name="dataSource" ref="dataSource" />  
+<!-- 	    <qualifier value="isap"/> -->
+	</bean>
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+<!-- Mybatis-->
+	<!-- Session工厂 -->  
+    <bean id="sqlSessionFactory" class="com.unitever.platform.core.mybatis.MybatisSqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+        <!-- mybatis配置文件 -->  
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="mapperLocations"  value="classpath*:com/unitever/**/dao/manual/*DAO.xml"/>
+		<property name="typeAliasesPackage" value="com.unitever.**.model,com.unitever.platform.core.dao" />  
+    </bean>  
+      
+	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.unitever.**.dao.auto" />
+	</bean>
+      
+    <!-- 配置SqlSessionTemplate -->    
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">    
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean> 
+	
+	<bean id="springContextHolder" class="com.unitever.platform.core.spring.SpringContextHolder" lazy-init="false" />
+	
+	<bean id="jdbcHelper" class="com.unitever.platform.core.dao.JdbcHelper">
+		<property name="jdbcTemplate">
+			<bean class="org.springframework.jdbc.core.JdbcTemplate">
+				<constructor-arg index="0" ref="dataSource"/>
+				<property name="queryTimeout" value="#{T(com.unitever.platform.core.dao.JdbcConstants).QUERY_TIMEOUT}"/>
+			</bean>
+		</property>
+		<property name="namedParameterJdbcTemplate">
+			<bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+				<constructor-arg index="0" ref="dataSource"/>
+			</bean>
+		</property>
+	</bean>
+</beans>
