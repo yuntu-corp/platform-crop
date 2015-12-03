@@ -1,0 +1,56 @@
+/*个人中心---已处理*/
+.finish_container{
+height:203px;
+background-color:#ffffff;
+margin-top:41px;
+
+}
+/*状态---进行中*/
+.finish_status{
+padding-left:82%;
+padding-top:10px;
+font-size:15px;
+}
+.finish_title{
+padding-left:15px; 
+}
+
+.finish_public{
+	width:95%;
+	height:15px;
+	line-height: 15px;
+font-size:13px;
+text-align: right;
+padding-right: 5px;
+}
+.finish_clock{
+font-weight:bold;
+font-size:20px;
+color:red;
+}
+#finish_clock1{
+padding-left:15px;
+}
+#comment_icon{
+padding-left:290px;
+padding-top:5px;
+border-top:2px solid black;
+}
+
+/*个人中心----已处理---评论*/
+.tastnote_container{
+height:235px;
+background-color:#ffffff;
+margin-top:41px;
+
+}
+.tastnote_button{
+	width:100%;
+	text-align:right;
+border-top:2px solid black;
+padding-top:5px;
+}
+#tastnote_note
+{
+padding-left:10px;
+}

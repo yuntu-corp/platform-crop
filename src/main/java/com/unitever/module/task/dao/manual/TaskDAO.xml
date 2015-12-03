@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.task.dao.manual.TaskDAO">
+	<resultMap type="Task" id="resultTask">  
+        <id column="id" property="id" />
+        <result column="content" property="content" />
+        <result column="title" property="title" />
+        <result column="preBitcoin" property="preBitcoin" />
+        <result column="finalBitcoin" property="finalBitcoin" />
+        <result column="createTime" property="createTime" />
+        <result column="finishDate" property="finishDate" />
+        <result column="durTime" property="durTime" />
+        <result column="status" property="status" />
+        <result column="employees" property="employeesString" />
+        <association column="type" property="taskType" select="com.unitever.module.tasktype.dao.manual.TaskTypeDAO.get"/>
+        <association column="publisherId" property="publisher" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
+        <association column="receiverId" property="receiver" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
+        <association column="employees" property="employees" select="com.unitever.module.employee.dao.manual.EmployeeDAO.getAllReceivedEmployees" />
+	</resultMap>
+	
+	<select id="get" resultMap="resultTask" parameterType="String">
+		select * from cp_task 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultTask">
+		select * from cp_task order by createTime desc
+	</select>
+	
+	<insert id="save" parameterType="Task">
+		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type)
+		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id})
+	</insert>
+	
+	<update id="update" parameterType="Task">
+		update cp_task
+		<set>
+			<if test="content != null">content=#{content},</if>
+			<if test="title != null">title=#{title},</if>
+			<if test="preBitcoin !=null">preBitcoin=#{preBitcoin},</if>
+			<if test="finalBitcoin != null">finalBitcoin=#{finalBitcoin},</if>
+			<if test="createTime != null">createTime=#{createTime},</if>
+			<if test="finishDate != null">finishDate=#{finishDate},</if>
+			<if test="durTime != null">durTime=#{durTime},</if>
+			<if test="status != null">status=#{status},</if>
+			<if test="taskType != null and taskType.id != null">type=#{taskType.id},</if>
+			<if test="employeesString != null">employees=#{employeesString},</if>
+			<if test="publisher !=null and publisher.id != null">publisherId=#{publisher.id},</if>
+			<if test="receiver !=null and receiver.id != null">receiverId=#{receiver.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getTaskByPublisherId" resultMap="resultTask">
+    	select * from cp_task where publisherId=#{id}
+    </select>
+    
+    
+    <select id="getTaskByReceiverId" resultMap="resultTask">
+    	select * from cp_task where receiverId=#{id}
+    </select>
+    
+    <select id="getTaskByTask" resultMap="resultTask" parameterType="Task">
+    	select * From cp_task
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="content != null">
+			     and content=#{content}
+			</if>
+			<if test="title != null">
+			      and title like CONCAT('%','${title}','%' )  
+			</if>
+			<if test="preBitcoin !=null">
+				and preBitcoin=#{preBitcoin}
+			</if>
+			<if test="finalBitcoin !=null">
+				and finalBitcoin=#{finalBitcoin}
+			</if>
+			<if test="employeesString !=null">
+				and employees=#{employeesString}
+			</if>
+			<if test="createTime !=null">
+				and createTime=#{createTime}
+			</if>
+			<if test="finishDate !=null">
+				and finishDate=#{finishDate}
+			</if>
+			<if test="durTime !=null">
+				and durTime=#{durTime}
+			</if>
+			<if test="status !=null">
+				and status=#{status}
+			</if>
+			<if test="taskType != null and taskType.id != null">
+				and type=#{taskType.id}
+			</if>
+			<if test="receiver != null and receiver.id != null">
+				and receiverId=#{receiver.id}
+			</if>
+			<if test="publisher != null and publisher.id != null">
+				and publisherId=#{publisher.id}
+			</if>
+		</where> 
+    </select>
+    <delete id="deleteTaskByTaskId" parameterType="String">
+		delete from cp_task where id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.dicker.dao.manual.DickerDAO">
+	<resultMap type="Dicker" id="resultDicker">  
+        <id column="id" property="id" />
+        <result column="bitcoin" property="bitcoin" />
+        <result column="status" property="status" />
+        <association column="publisherId" property="publisher" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
+        <association column="receiverId" property="receiver" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
+        <association column="task_id" property="task" select="com.unitever.module.task.dao.manual.TaskDAO.get" />
+	</resultMap>
+	
+	<select id="get" resultMap="resultDicker" parameterType="String">
+		select * from cp_dicker 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultDicker">
+		select * from cp_dicker 
+	</select>
+	
+	<insert id="save" parameterType="Dicker">
+		insert into cp_dicker(id,bitcoin,status,task_id,receiverId,publisherId,createTime,endTime) 
+		value(#{id},#{bitcoin},#{status},#{task.id},#{receiver.id},#{publisher.id},#{createTime},#{endTime})
+	</insert>
+	
+	<update id="update" parameterType="Dicker">
+		update cp_dicker
+		<set>
+			<if test="bitcoin != null">bitcoin=#{bitcoin},</if>
+			<if test="status != null">status=#{status},</if>
+			<if test="createTime !=null">createTime=#{createTime},</if>
+			<if test="endTime != null">endTime=#{endTime},</if>
+			<if test="task !=null and task.id != null">task_id=#{task.id},</if>
+			<if test="receiver !=null and receiver.id != null">receiverId=#{receiver.id},</if>
+			<if test="publisher !=null and publisher.id != null">publisherId=#{publisher.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getDickerByDicker" resultMap="resultDicker" parameterType="Dicker">
+    	select * From cp_dicker
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="createTime != null">
+			     and createTime=#{createTime}
+			</if>
+			<if test="endTime != null">
+			     and endTime=#{endTime}
+			</if>
+			<if test="status !=null">
+				and status=#{status}
+			</if>
+			<if test="bitcoin !=null">
+				and bitcoin=#{bitcoin}
+			</if>
+			<if test="receiver != null and receiver.id != null">
+				and receiverId=#{receiver.id}
+			</if>
+			<if test="publisher != null and publisher.id != null">
+				and publisherId=#{publisher.id}
+			</if>
+			<if test="task != null and task.id != null">
+				and task_id=#{task.id}
+			</if>
+		</where> 
+    </select>
+    
+    <delete id="deleteDickerByTaskId" parameterType="String">
+    	delete from cp_dicker where task_id=#{id}
+    </delete>
+    
+</mapper>

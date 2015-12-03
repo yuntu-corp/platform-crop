@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.tasktype.dao.manual.TaskTypeDAO">
+	<resultMap type="TaskType" id="resultTaskType">  
+        <id column="id" property="id" />
+        <result column="typeKey" property="typeKey" />
+        <result column="typeName" property="typeName" />
+        <result column="state" property="state" />
+	</resultMap>
+	
+	<select id="get" resultMap="resultTaskType" parameterType="String">
+		select * from cp_tasktype 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultTaskType">
+		select * from cp_tasktype
+	</select>
+	
+	<insert id="save" parameterType="TaskType">
+		insert into cp_tasktype(id,typeKey,typeName,state)
+		value(#{id},#{typeKey},#{typeName},#{state})
+	</insert>
+	
+	<update id="update" parameterType="TaskType">
+		update cp_tasktype
+		<set>
+			<if test="typeKey != null">typeKey=#{typeKey},</if>
+			<if test="typeName != null">typeName=#{typeName},</if>
+			<if test="state != null">state=#{state},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getTaskTypeByTypeKey" resultMap="resultTaskType" parameterType="String">
+    	select * from cp_tasktype where typeKey=#{typeKey}
+    </select>
+    
+    <select id="getTaskTypeByTaskType" resultMap="resultTaskType" parameterType="TaskType">
+    	select * From cp_tasktype
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="typeKey != null">
+			     and typeKey=#{typeKey}
+			</if>
+			<if test="typeName != null">
+			     and typeName like CONCAT('%','${typeName}','%' )  
+			</if>
+<!-- 			<if test="state != null">
+			     and state=#{state}
+			</if> -->
+			and state=1
+		</where> 
+    </select>
+</mapper>

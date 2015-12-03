@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.evaluation.dao.manual.EvaluationDAO">
+	<resultMap type="Evaluation" id="resultEvaluation">  
+        <id column="id" property="id" />
+        <result column="content" property="content" />
+        <result column="level" property="level" />
+        <result column="createTime" property="createTime" />
+        <association column="publisherId" property="publisher" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
+        <association column="receiverId" property="receiver" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
+        <association column="task_id" property="task" select="com.unitever.module.task.dao.manual.TaskDAO.get" />
+	</resultMap>
+	
+	<select id="get" resultMap="resultEvaluation" parameterType="String">
+		select * from cp_evaluation 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultEvaluation">
+		select * from cp_evaluation 
+	</select>
+	
+	<insert id="save" parameterType="Evaluation">
+		insert into cp_evaluation(id,content,level,createTime,task_id,publisherId,receiverId) 
+		value(#{id},#{content},#{level},#{createTime},#{task.id},#{publisher.id},#{receiver.id})
+	</insert>
+	
+	<update id="update" parameterType="Evaluation">
+		update cp_evaluation
+		<set>
+			<if test="content != null">content=#{content},</if>
+			<if test="level != null">level=#{level},</if>
+			<if test="createTime !=null">createTime=#{createTime},</if>
+			<if test="publisher !=null and publisher.id != null">publisherId=#{publisher.id},</if>
+			<if test="receiver !=null and receiver.id != null">receiverId=#{receiver.id},</if>
+			<if test="task !=null and task.id != null">task_id=#{task.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getEvaluationByEvaluation" resultMap="resultEvaluation" parameterType="Evaluation">
+    	select * From cp_evaluation
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="content != null">
+			     and content=#{content}
+			</if>
+			<if test="level != null and level != ''">
+			     and level=#{level}
+			</if>
+			<if test="createTime !=null">
+				and createTime=#{createTime}
+			</if>
+			<if test="receiver != null and receiver.id != null">
+				and receiverId=#{receiver.id}
+			</if>
+			<if test="publisher != null and publisher.id != null">
+				and publisherId=#{publisher.id}
+			</if>
+			<if test="task != null and task.id != null">
+				and task_id=#{task.id}
+			</if>
+		</where> 
+    </select>
+    
+    <delete id="deleteEvaluationByTaskId" parameterType="String">
+    	delete from cp_evaluation where task_id=#{id}
+    </delete>
+    
+    <select id="getLevelAvgByReceiveId" resultType="Integer">
+		select round(avg(`level`)) from cp_evaluation where receiverId=#{receiverId}
+	</select>
+</mapper>

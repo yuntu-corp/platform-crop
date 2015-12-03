@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.employee.dao.manual.EmployeeDAO">
+	<resultMap type="Employee" id="resultEmployee">  
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="userId" property="userId" />
+        <result column="headimgurl" property="headimgurl" />
+        <result column="baseBitcoin" property="baseBitcoin" />
+        <result column="bitcoinSurplus" property="bitcoinSurplus" />
+        <result column="bitcoinIncome" property="bitcoinIncome" />
+        <result column="bitcoinConsume" property="bitcoinConsume" />
+        <result column="evaluationLevel" property="evaluationLevel" />
+        <result column="status" property="status" />
+        <association column="user_id" property="user" select="com.unitever.module.user.dao.manual.UserDAO.get" />
+	</resultMap>
+	
+	<select id="get" resultMap="resultEmployee" parameterType="String">
+		select * from cp_employee 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultEmployee">
+		select * from cp_employee 
+	</select>
+	
+	<insert id="save" parameterType="Employee">
+		insert into cp_employee(id,name,userId,headimgurl,baseBitcoin,bitcoinSurplus,bitcoinIncome,bitcoinConsume,status,user_id,evaluationLevel) 
+		value(#{id},#{name},#{userId},#{headimgurl},#{baseBitcoin},#{bitcoinSurplus},#{bitcoinIncome},#{bitcoinConsume},#{status},#{user.id},#{evaluationLevel})
+	</insert>
+	
+	<update id="update" parameterType="Employee">
+		update cp_employee
+		<set>
+			<if test="name != null">name=#{name},</if>
+			<if test="userId != null">userId=#{userId},</if>
+			<if test="headimgurl!=null">headimgurl=#{headimgurl},</if>
+			<if test="baseBitcoin != null">baseBitcoin=#{baseBitcoin},</if>
+			<if test="bitcoinSurplus != null">bitcoinSurplus=#{bitcoinSurplus},</if>
+			<if test="bitcoinIncome != null">bitcoinIncome=#{bitcoinIncome},</if>
+			<if test="bitcoinConsume != null">bitcoinConsume=#{bitcoinConsume},</if>
+			<if test="evaluationLevel != null">evaluationLevel=#{evaluationLevel},</if>
+			<if test="status != null">status=#{status},</if>
+			<if test="user !=null and user.id != null">user_id=#{user.id},</if>
+		</set>
+		where id=#{id}
+	</update>
+	
+	<select id="getEmployeeByUserId" resultMap="resultEmployee">
+    	select * from cp_employee where userId=#{userId} 
+    </select>
+    
+    
+    <select id="getEmployees" resultMap="resultEmployee">
+    	select * from cp_employee where user_id=#{id}
+    </select>
+    
+    <select id="getAllReceivedEmployees" resultMap="resultEmployee" parameterType="String">
+    	select * from cp_employee where userId in (#{employees})
+    </select>
+    
+    <update id="minusBitCoin">
+    		update  cp_employee set bitcoinSurplus=CAST(CAST(bitcoinSurplus AS DECIMAL)-(CAST(baseBitcoin AS DECIMAL)/DAYOFMONTH(last_day(curdate())))/2 as DECIMAL(15,2)),
+				bitcoinConsume=CAST(CAST(bitcoinConsume AS DECIMAL)-(CAST(baseBitcoin AS DECIMAL)/DAYOFMONTH(last_day(curdate())))/2 as DECIMAL(15,2))
+	</update>
+    <select id="getEmployeesByEmployees" resultMap="resultEmployee" parameterType="Employee">
+    	select * from cp_employee
+    	<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+   			<if test="name != null">
+			     and name like CONCAT('%','${name}','%' )  
+			</if>
+   			<if test="userId != null">
+			     and userId =#{userId}
+			</if>
+   			<if test="headimgurl != null">
+			     and headimgurl =#{headimgurl}
+			</if>
+   			<if test="baseBitcoin != null">
+			     and baseBitcoin =#{baseBitcoin}
+			</if>
+   			<if test="bitcoinSurplus != null">
+			     and bitcoinSurplus =#{bitcoinSurplus}
+			</if>
+   			<if test="bitcoinIncome != null">
+			     and bitcoinIncome =#{bitcoinIncome}
+			</if>
+   			<if test="bitcoinConsume != null">
+			     and bitcoinConsume =#{bitcoinConsume}
+			</if>
+   			<if test="evaluationLevel != null">
+			     and evaluationLevel =#{evaluationLevel}
+			</if>
+   			<if test="status != null">
+			     and status =#{status}
+			</if>
+   			<if test="user != null and user.id != null">
+			     and user_id =#{user.id}
+			</if>
+		</where>
+    </select>
+</mapper>
