@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -346,6 +347,16 @@ public class DateUtil {
 	 */
 	public static String getFormatDateTommorrow(String sourceDate) {
 		return getFormatDateAdd(getDate(sourceDate), 1);
+	}
+	
+	/**
+	 * 获取当前月总天数
+	 * 
+	 * */
+	public static int getDayOfMonth(){
+		Calendar aCalendar = Calendar.getInstance(Locale.CHINA);
+		int day=aCalendar.getActualMaximum(Calendar.DATE);
+		return day;
 	}
 
 	/***************************************** wbf补充 end ************************************************/

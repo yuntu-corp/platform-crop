@@ -8,5 +8,80 @@
             http://www.springframework.org/schema/security/spring-security-3.2.xsd" >
 
 
+	<beans:description>Spring安全配置</beans:description>
+	<!-- http安全配置 -->
+	<http pattern="/bd/welcome/welcome" security="none">
+			
+	</http>
 	
+	<http pattern="/weChat/*" security="none"></http>
+	
+    <http auto-config="false" entry-point-ref="customAuthenticationEntryPoint" access-denied-page="/platform/common/jsp/403.jsp">
+        <logout invalidate-session="true" logout-success-url="/bd/welcome/welcome" logout-url="/spring_logout" />
+		<remember-me key="rememberMeKey"/>
+        <custom-filter position="FORM_LOGIN_FILTER" ref="loginFilter"/>
+        <custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filterSecurityInterceptor"/>
+    </http>
+
+	<!-- 未登录时自定义跳转地址，可实现不同人看到不通的登录页 -->
+ 	<beans:bean id="customAuthenticationEntryPoint" class="com.unitever.platform.core.spring.security.CustomAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/bd/welcome/welcome" />
+    </beans:bean>
+
+    <beans:bean id="loginFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+    	<beans:property name="authenticationManager" ref="authenticationManager"/>
+        <beans:property name="authenticationFailureHandler" ref="failureHandler"/>
+        <beans:property name="authenticationSuccessHandler" ref="successHandler"/>
+    </beans:bean>
+
+
+    <beans:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <beans:property name="defaultFailureUrl" value="/bd/welcome/welcome" />
+    </beans:bean>
+    
+    <beans:bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="alwaysUseDefaultTargetUrl" value="true"/>
+        <beans:property name="targetUrlParameter" value="spring-security-redirect"/>
+        <beans:property name="defaultTargetUrl" value="/bd/welcome/login"/>
+    </beans:bean>
+
+	<!-- 认证配置 -->
+	<!-- 重新定义的FilterSecurityInterceptor,使用databaseDefinitionSource提供的url-授权关系定义 -->
+	<beans:bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<!--  这三个必须有，1认证用户，2、3是来控制角色有哪些权限，资源对应哪些权限  -->
+		<beans:property name="authenticationManager" ref="authenticationManager"/>
+		<beans:property name="accessDecisionManager" ref="accessDecisionManager"/>
+		<beans:property name="securityMetadataSource" ref="securityMetadataSource"/> 
+	</beans:bean>
+	
+	<!-- 认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsService">
+            <!--   如果用户的密码采用加密的话，可以加点“盐” -->
+        	<password-encoder hash="md5" ref="md5PasswordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+	
+	<beans:bean id="md5PasswordEncoder" class="com.unitever.platform.core.spring.security.CustomMd5PasswordEncoder"/>
+	<!-- 单数据源的安全元数据 -->
+	<beans:bean id="securityMetadataSource" class="com.unitever.platform.core.spring.service.MyInvocationSecurityMetadataSource">
+		<beans:property name="resourceDetailsService" ref="resourceDetailsService" />
+	</beans:bean>
+	
+	<!-- 授权判断配置, 将授权名称的默认前缀由ROLE_改为AUTH_. -->
+	<beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+		<beans:property name="decisionVoters">
+			<beans:list>
+				<beans:bean class="org.springframework.security.access.vote.RoleVoter">
+					<beans:property name="rolePrefix" value="AUTH_" />
+				</beans:bean>
+				<beans:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<!-- 项目实现的用户查询服务 -->
+	<beans:bean id="userDetailsService" class="com.unitever.platform.core.spring.service.UserDetailsServiceImpl"/>
+	<!-- DefinitionSource工厂,使用resourceDetailsService提供的URL-授权关系. -->
+	<beans:bean id="resourceDetailsService" class="com.unitever.platform.core.spring.service.ResourceDetailsService"/>
 </beans:beans>

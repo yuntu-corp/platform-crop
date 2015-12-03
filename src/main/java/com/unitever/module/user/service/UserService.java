@@ -13,8 +13,8 @@ import com.unitever.platform.core.dao.Page;
 @Transactional
 public class UserService {
 	
-	public Page<User> getPage(Page<User> page, User user) {
-		List<User> userList = userDAO.getUserWithUser(user);
+	public Page<User> getPage(Page<User> page) {
+		List<User> userList = userDAO.getUserWithStatus(User.USER_STATUS_NORMAL);
 		page.setTotalRecord(userList.size());
 		if (userList.size() >= (page.getStartOfPage() + page.getPageSize())) {
 			page.setResults(userList.subList(page.getStartOfPage(), page.getStartOfPage() + page.getPageSize()));
@@ -57,16 +57,17 @@ public class UserService {
 	}
 	
 	public List<User> getUserList() {
-		return userDAO.getAll();
+		return  userDAO.getUserWithStatus(User.USER_STATUS_NORMAL);
 	}
 	
 	public void update(User user) {
 		userDAO.update(user);
 	}
 	
-	public User getUserWithWeChatNum(String userWeChatNum) {
-		return userDAO.getUserWithWeChatNum(userWeChatNum);
+	public User getUserWithCorpId(String corpId) {
+		return userDAO.getUserWithCorpId(corpId);
 	}
+	
 	@Autowired
 	private UserDAO userDAO;
 }

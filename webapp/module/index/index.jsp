@@ -49,7 +49,7 @@
 				}
 			};
 			$(document).ready(function(){
-				com.yunt.index.loadContent('${path}/goods/index');
+				com.yunt.index.loadContent('${path}/task/index');
 				$(".mList li").each(function(){
 					$(this).click(function(){
 						$(".mList li").each(function(){
@@ -89,26 +89,17 @@
 	        <div class="menu">
 	            <div class="cont">
 	                <ul class="mList">
-	                    <li onclick="com.yunt.index.loadContent('${path}/goods/index');" class="left_list_selected">
-	                        <img src="${path}/platform/theme/distributionSystem/images/home.png">商品管理
+	                    <li onclick="com.yunt.index.loadContent('${path}/task/index');" class="left_list_selected">
+	                        <img src="${path}/platform/theme/distributionSystem/images/home.png">任务管理
 	                    </li>
-	                    <li onclick="com.yunt.index.loadContent('${path}/order/index');">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin3.png">订单管理  
+	                    <li onclick="com.yunt.index.loadContent('${path}/evaluation/index');">
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin3.png">评价管理  
 	                    </li>
-	                    <li onclick="com.yunt.index.loadContent('${path}/withdrawCash/index');">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin7.png">提现管理
+	                    <li onclick="com.yunt.index.loadContent('${path}/employee/index');">
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin7.png">人员管理
 	                    </li>
-	                    <li onclick="com.yunt.index.loadContent('${path}/customer/index')">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin4.png">客户管理
-	                    </li>
-	                    <li onclick="com.yunt.index.loadContent('${path}/propaganda/index')">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin5.png">销售话术
-	                    </li>
-	                    <li onclick="com.yunt.index.loadContent('${path}/level/index')">
-	                        <img src="${path}/platform/theme/distributionSystem/images/level.png">分销层级
-	                    </li>
-	                     <li onclick="com.yunt.index.loadContent('${path}/user/index')">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin4.png">用户管理
+	                    <li onclick="com.yunt.index.loadContent('${path}/taskType/index');">
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin7.png">任务类型管理
 	                    </li>
 	                </ul>
 	            </div>

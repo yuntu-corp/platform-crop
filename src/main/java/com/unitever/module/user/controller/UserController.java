@@ -33,7 +33,7 @@ public class UserController extends SpringController {
 	 */
 	@RequestMapping(value="/list")
 	public String list(@FormModel("page") Page<User> page, @FormModel("model") User user){
-		setAttribute("pageObj", userService.getPage(page, user));
+		//setAttribute("pageObj", userService.getPage(page, user));
 		setAttribute("model", user);
 		return "module/user/jsp/user-list";
 	}

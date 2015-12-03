@@ -12,11 +12,10 @@ public class UUID {
 	public static final String getUUID() {
 		StringBuffer idBuffer = new StringBuffer();
 		Random r = new Random();
-		idBuffer.append(new SimpleDateFormat("dHHmmssSSS")
-				.format(new Date()));
-		for (int i = 0; i < 1; i++) {
-			idBuffer.append(r.nextInt(100) % 10);
+		idBuffer.append(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
+		for (int i = 0; i < 15; i++) {
+			idBuffer.append(r.nextInt(10000) % 10);
 		}
-		return "1"+idBuffer.toString();
+		return idBuffer.toString();
 	}
 }

@@ -3,45 +3,44 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unitever.module.user.dao.manual.UserDAO">
     
-    <resultMap type="User" id="resultListUser">  
-        <id column="id" property="id" />
-        <result column="username" property="username"/>  
-        <result column="password" property="password"/>  
-        <result column="name" property="name" />
-        <result column="wechatnum" property="weChatNum" />
-        <result column="type" property="type" />
-        <result column="accesstoken" property="accessToken" />
-        <result column="jsapiticket" property="jsapiTicket" />
-        <result column="expirestime" property="expiresTime" />
-        <result column="appid" property="appId" />
-        <result column="appsecret" property="appSecret" />
-        <result column="mchid" property="mchId" />
-        <result column="apisecret" property="apiSecret" />
-        <result column="discount" property="discount" />
-        <result column="customerserviceurl" property="customerServiceUrl" />
-        <result column="wealthmodeurl" property="wealthModeUrl" />
-        <result column="businesscultureurl" property="businessCultureUrl" />
-    </resultMap>
     
     <!-- 获取一条数据 -->
-    <select id="get" resultMap="resultListUser">
-     	select * from ds_user where id=#{id} 
+    <select id="get" resultType="User">
+     	select * from cp_user where id=#{id}
     </select>
 	<!-- 获取一条数据 -->
-    <select id="getAll" resultMap="resultListUser">
-     	select * from ds_user
+    <select id="getAll" resultType="User">
+     	select * from cp_user
     </select>
     <!-- 删除一条数据 -->
     <delete id="delete">
-        delete from ds_user where id=#{id}
+        delete from cp_user where id=#{id}
     </delete>
     
     <!-- 更新一条数据 -->
     <update id="update" parameterType="User">
-        update ds_user 
+        update cp_user 
         <set>
-	         <if test="name != null and name != '' ">  
-	            name=#{name},  
+	         <if test="corpId != null and corpId != '' ">  
+	            corpId=#{corpId},  
+	         </if>
+	         <if test="corpSecret != null and corpSecret != '' ">  
+	            corpSecret=#{corpSecret},  
+	         </if>
+	         <if test="token != null and token != '' ">  
+	            token=#{token},  
+	         </if>
+	         <if test="encodingAesKey != null and encodingAesKey != '' ">  
+	            encodingAesKey=#{encodingAesKey},  
+	         </if>
+	         <if test="accessToken != null and accessToken != '' ">  
+	            accessToken=#{accessToken},  
+	         </if>
+	         <if test="expiresTime != null and expiresTime != '' ">  
+	            expirestime=#{expiresTime},  
+	         </if>
+	         <if test="agentId != null and agentId != '' ">  
+	            agentId=#{agentId},  
 	         </if>
 	         <if test="username != null and username != '' ">  
 	            username=#{username},  
@@ -49,63 +48,25 @@
 	         <if test="password != null and password != '' ">  
 	            password=#{password},  
 	         </if>
-	         <if test="accessToken != null and accessToken != '' ">  
-	            accesstoken=#{accessToken},  
+	         <if test="corpName != null and corpName != '' ">  
+	            corpName=#{corpName},  
 	         </if>
-	         <if test="jsapiTicket != null and jsapiTicket != '' ">  
-	            jsapiticket=#{jsapiTicket},  
-	         </if>
-	         <if test="expiresTime != null and expiresTime != '' ">  
-	            expirestime=#{expiresTime},  
-	         </if>
-	         <if test="appId != null and appId != '' ">  
-	            appid=#{appId},  
-	         </if>
-	         <if test="appSecret != null and appSecret != '' ">  
-	            appsecret=#{appSecret},  
-	         </if>
-	         <if test="mchId != null and mchId != '' ">  
-	            mchid=#{mchId},  
-	         </if>
-	         <if test="apiSecret != null and apiSecret != '' ">  
-	            apisecret=#{apiSecret},  
-	         </if>
-	         <if test="discount != null and discount != '' ">  
-	            discount=#{discount},  
-	         </if>
-	         <if test="customerServiceUrl != null and customerServiceUrl != '' ">  
-	            customerserviceurl=#{customerServiceUrl},  
-	         </if>
-	         <if test="wealthModeUrl != null and wealthModeUrl != '' ">  
-	            wealthmodeurl=#{wealthModeUrl},  
-	         </if>
-	         <if test="businessCultureUrl != null and businessCultureUrl != '' ">  
-	            businesscultureurl=#{businessCultureUrl},  
+	         <if test="status != null and status != '' ">  
+	            status=#{status},  
 	         </if>
         </set>
          WHERE id=#{id}  
     </update> 
     
-    <select id="getUserWithLoginName" resultMap="resultListUser">
-    	select * from ds_user where username=#{username} 
+    <select id="getUserWithLoginName" resultType="User">
+    	select * from cp_user where username=#{username} 
     </select>
-    <select id="getUserWithWeChatNum" resultMap="resultListUser">
-    	select * from ds_user where wechatnum=#{weChatNum} 
+    <select id="getUserWithCorpId" resultType="User">
+    	select * from cp_user where corpId=#{corpId} 
     </select>
     
-    <select id="getUserListWithUser" resultMap="resultListUser" parameterType="User">
-   		select * From ds_user 
-   		<where>
-   			1=1
-   			<if test="id != null">
-			     and id =#{id}
-			</if>
-			<if test="name != null and name!=''">
-			     and name like CONCAT('%','${name}','%' )  
-			</if>
-			<if test="type !=null and type !=''">
-				and type=#{type}
-			</if>
-		</where> 
-	</select>
+    <select id="getUserWithStatus" resultType="User">
+    	select * from cp_user where status=#{status}
+    </select>
+  
 </mapper>

@@ -46,7 +46,7 @@ public class ResourceDetailsService {
 		rs.add(buildUrlResourceWithAnonymously("/platform/theme/*/component/**"));
 		rs.add(buildUrlResourceWithAnonymously("/platform/component/**"));//组件的先全放开吧
 		rs.add(buildUrlResourceWithAnonymously("/platform/theme/distributionSystem/**"));
-		rs.add(buildUrlResourceWithAnonymously("/weChat/**"));
+		rs.add(buildUrlResourceWithAnonymously("/module/weChat/**"));
 		rs.add(buildUrlResourceWithAnonymously("/sys/attachment/**"));
 		rs.add(buildUrlResourceWithAnonymously("/platform/images/**"));
 		

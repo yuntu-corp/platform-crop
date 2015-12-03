@@ -22,14 +22,16 @@ public class UserDAO extends BaseDAO<User, String>{
 		return usrList.size() > 0 ? usrList.get(0) : null;
 	}
 
-	public User getUserWithWeChatNum(String userWeChatNum) {
+	public User getUserWithCorpId(String corpId) {
 		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("weChatNum", userWeChatNum);
-		List<User> usrList = this.getList("getUserWithWeChatNum", params);
+		params.put("corpId", corpId);
+		List<User> usrList = this.getList("getUserWithCorpId", params);
 		return usrList.size() > 0 ? usrList.get(0) : null;
 	}
-
-	public List<User> getUserWithUser(User user) {
-		return this.getList("getUserListWithUser", user);
+	
+	public List<User> getUserWithStatus(String status) {
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("status", status);
+		return this.getList("getUserWithStatus", params);
 	}
 }
