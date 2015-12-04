@@ -267,14 +267,34 @@ public class TaskService {
 	
 	/**
 	 *每分钟都去检查所有任务是否过期，如果过期需要更新任务状态
+	 * @throws WxErrorException 
 	 */
-	public void updateTaskStatus(){
-		List<Task> tasks=getTaskByStatus(Task.TASK_STATE_UNFINISH);
+	public void updateTaskStatus() throws WxErrorException{
+		List<Task> tasks=getAllTasks();
 		for(Task task:tasks){
-			if(new Date().compareTo(task.getFinishDate())>=0){
-				task.setStatus(Task.TASK_STATE_FINISH);
-				taskDAO.update(task);
+			//未完成任务到期后自动更新状态为已完成
+			if(task.getStatus().equals(Task.TASK_STATE_UNFINISH)){
+				if(new Date().compareTo(task.getFinishDate())>=0){
+					task.setStatus(Task.TASK_STATE_FINISH);
+					taskDAO.update(task);
+				}
 			}
+			//未处理任务到期后自动更新状态为超时
+			if(Task.TASK_STATE_UNRECEIVE.equals(task.getStatus())){
+				if(new Date().compareTo(task.getFinishDate())>=0){
+					task.setStatus(Task.TASK_STATE_OVER);
+					taskDAO.update(task);
+					//通知发布还价人
+					WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
+					WxCpMessage me=new WxCpMessage();
+					me.setMsgType(WxConsts.XML_MSG_TEXT);
+					me.setAgentId("15");
+					me.setToUser(task.getPublisher().getUserId());
+					me.setContent("您发布的任务："+task.getTitle()+"已经超时！");
+					service.messageSend(me);
+				}
+			}
+			
 		}
 	}
 	

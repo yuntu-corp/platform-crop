@@ -73,11 +73,11 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 						<hr />
 						
 						<label class="label-left" >发布日期</label>
-						<label class="label-right"><fmt:formatDate value="${task.createTime}" type="date" pattern="yyyy-MM-dd"/></label>
+						<label class="label-right"><fmt:formatDate value="${task.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></label>
 						<hr />
 						
 						<label class="label-left" >完工日期：</label>
-						<label class="label-right"><fmt:formatDate value="${task.finishDate}" type="date" pattern="yyyy-MM-dd"/></label>
+						<label class="label-right"><fmt:formatDate value="${task.finishDate}" type="date" pattern="yyyy-MM-dd HH:mm"/></label>
 						<hr />
 						
 						
@@ -86,7 +86,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 						<label class="label-right">${task.statusVal}</label>
 						<hr />
 						
-						<c:if test="${task.status!=0}">
+						<c:if test="${task.status!=0 and task.status!=3}">
 							<label class="label-left" >接受人：</label>
 							<label class="label-right">${task.receiver.name}</label>
 							<hr />

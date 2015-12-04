@@ -71,8 +71,8 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 					<div class="scroller">
 						<div class="tabbar" style="width: 100%;">
 							 <a class="tab active" data-role="tab"
-								href="#page2" data-toggle="page">任务请求</a>
-								<a class="tab " data-role="tab" href="#page1"
+								href="#page1" data-toggle="page">任务请求</a>
+								<a class="tab " data-role="tab" href="#page2"
 								data-toggle="page">任务还价</a>
 						</div>
 					</div>
@@ -83,46 +83,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 				style="top: 44px; bottom: 0; overflow: hidden;">
 				<div id="sliderPage" data-role="slider" class="full">
 				<div class="scroller">
-					<div id="page1" class="slide" data-role="page" data-scroll="pulldown">
-						<div id="slide" data-role="slider" class="full">
-							<c:if test="${dickerList.size()<=0 }">
-								<div class="jump-nothing">
-									<div class="nothing-icon"><img src="${path}/module/weChat/jump/images/aside/none.png" style="box-sizing:content-box;" class="nothing-img"></div>
-									<p class="nothing-text">
-										您还没有相关消息
-										
-									</p>
-									<a href="${path }/weChat/taskList?employeeId=${employee.id}" class="nothing-button">随便逛逛</a>
-								</div>
-							</c:if>
-							<c:if test="${dickerList.size()>0 }">
-								<c:forEach items="${dickerList }" var="dicker" varStatus="d">
-									<ul class="listitem">
-
-										<li>
-											<div class="img appimg">
-												<img alt="" src="${dicker.publisher.headimgurl}"
-													style="position: absolute; top: 0; left: 0; width: 64px; border-radius: 50%;" />
-											</div> <a
-											href="${path }/weChat/taskView?id=${dicker.task.id}&employeeId=${employee.id}">
-												<div class="text" style="color: black">
-													任务名称：${dicker.task.title } <small>还价人：${dicker.publisher.name
-														}</small> <small>发布时虚拟币：￥${dicker.task.preBitcoin }</small> <small>还价时虚拟币：￥${dicker.bitcoin
-														}</small> <small>工期：${dicker.task.durTime }天</small>
-												</div>
-										</a>
-											<hr style="margin: 4px 0;">
-											<button class="outline"
-												onclick="refuseDicker('${dicker.id}')">拒绝</button>
-											<button class="submit outline"
-												onclick="acceptDicker('${dicker.id}')">确定</button>
-										</li>
-									</ul>
-								</c:forEach>
-							</c:if>
-						</div>
-					</div>
-					<div id="page2" class="slide" data-role="page"
+				<div id="page1" class="slide" data-role="page"
 						data-scroll="verticle">
 						<c:if test="${unTreatedMsgListByOthers.size()<=0}">
 							<div class="jump-nothing">
@@ -165,6 +126,46 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 							</c:forEach>
 						</c:if>
 					</div>
+					<div id="page2" class="slide" data-role="page" data-scroll="pulldown">
+						<div id="slide" data-role="slider" class="full">
+							<c:if test="${dickerList.size()<=0 }">
+								<div class="jump-nothing">
+									<div class="nothing-icon"><img src="${path}/module/weChat/jump/images/aside/none.png" style="box-sizing:content-box;" class="nothing-img"></div>
+									<p class="nothing-text">
+										您还没有相关消息
+										
+									</p>
+									<a href="${path }/weChat/taskList?employeeId=${employee.id}" class="nothing-button">随便逛逛</a>
+								</div>
+							</c:if>
+							<c:if test="${dickerList.size()>0 }">
+								<c:forEach items="${dickerList }" var="dicker" varStatus="d">
+									<ul class="listitem">
+
+										<li>
+											<div class="img appimg">
+												<img alt="" src="${dicker.publisher.headimgurl}"
+													style="position: absolute; top: 0; left: 0; width: 64px; border-radius: 50%;" />
+											</div> <a
+											href="${path }/weChat/taskView?id=${dicker.task.id}&employeeId=${employee.id}">
+												<div class="text" style="color: black">
+													任务名称：${dicker.task.title } <small>还价人：${dicker.publisher.name
+														}</small> <small>发布时虚拟币：￥${dicker.task.preBitcoin }</small> <small>还价时虚拟币：￥${dicker.bitcoin
+														}</small> <small>工期：${dicker.task.durTime }天</small>
+												</div>
+										</a>
+											<hr style="margin: 4px 0;">
+											<button class="outline"
+												onclick="refuseDicker('${dicker.id}')">拒绝</button>
+											<button class="submit outline"
+												onclick="acceptDicker('${dicker.id}')">确定</button>
+										</li>
+									</ul>
+								</c:forEach>
+							</c:if>
+						</div>
+					</div>
+					
 					</div>
 				</div>
 			</article>
@@ -212,7 +213,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 		    	//A.showToast('您已关闭请求');
 		    });
 			//$("#refuseTaskButton").attr("disabled","disabled");
-			/* $.ajax({
+			 $.ajax({
 				url : "${path }/weChat/refuseTask?taskId=" + taskIdVal
 						+ "&employeeId=${employee.id}",//拒绝任务的地址
 				data : null,
@@ -224,9 +225,9 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 					A.alert('提示', '已成功拒绝任务！');
 					//禁止再次点击
 					$("#btn_submit").attr("disabled","disabled");
-					setTimeout(function(){window.location.reload();}, 1500);
+					setTimeout(function(){window.location.reload();}, 2000);
 				}
-			}); */
+			}); 
 		}
 		function acceptTask(taskIdVal) {
 			//显示加载中...
@@ -248,7 +249,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 					} else {
 						A.alert(data);
 					}
-					t = setTimeout("window.location.reload()", 1500);
+					t = setTimeout("window.location.reload()", 2000);
 				}
 			});
 		}
@@ -267,7 +268,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 					//关闭加载中...
 					A.hideMask();
 					A.alert("您已拒绝此项还价！");
-					t = setTimeout("window.location.reload()", 1500);
+					t = setTimeout("window.location.reload()", 2000);
 				}
 			});
 		}

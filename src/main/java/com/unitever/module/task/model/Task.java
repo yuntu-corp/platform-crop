@@ -41,6 +41,8 @@ public class Task {
 	public static final String TASK_STATE_UNFINISH="1";
 	/**任务状态：已完成的任务**/
 	public static final String TASK_STATE_FINISH="2";
+	/**任务状态：已超时的任务**/
+	public static final String TASK_STATE_OVER="3";
 	
 	/**任务类型：技术开发**/
 	public static final String TASK_TYPE_1="0";
@@ -167,6 +169,8 @@ public class Task {
 			return "正在进行";
 		} else if(TASK_STATE_FINISH.equals(status)){
 			return "已完成";
+		}else if(TASK_STATE_OVER.equals(status)){
+			return "已超时";
 		}
 		return statusVal;
 	}

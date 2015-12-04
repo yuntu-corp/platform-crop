@@ -1,5 +1,7 @@
 package com.unitever.module.wechat.task; 
 
+import me.chanjar.weixin.common.exception.WxErrorException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,7 +24,7 @@ public class MinuteTask {
 	
 	
 	@Scheduled(cron = "0 */1 * * * ?")   
-	public void show(){
+	public void show() throws WxErrorException{
 		taskService.updateTaskStatus();
 	}  
 	

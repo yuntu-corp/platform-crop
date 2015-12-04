@@ -68,7 +68,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 									</div>
 									<div class="text" style="padding-left: 10px; color: #000">
 										${task.title } <small> 发布时间：<fmt:formatDate
-												value="${task.createTime }" pattern="yyyy-MM-dd" /> <br />
+												value="${task.createTime }" pattern="yyyy-MM-dd HH:mm" /> <br />
 											发布人：${task.publisher.name }
 										</small>
 									</div>
@@ -92,7 +92,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 									</div>
 									<div class="text" style="padding-left: 10px; color: #000;">
 										${task.title } <small> 发布时间：<fmt:formatDate
-												value="${task.createTime }" pattern="yyyy-MM-dd" /> <br />
+												value="${task.createTime }" pattern="yyyy-MM-dd HH:mm" /> <br />
 											发布人：${task.publisher.name }<br>
 											
 										</small>

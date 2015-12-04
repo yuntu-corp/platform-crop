@@ -1,0 +1,77 @@
+/* rest css */
+html{ background-color:#f6f6f6;}
+body{ margin:0;}
+*{ font-size:14px; color:#303030;}
+li{ list-style:none;}
+ul{ margin:0; padding:0;}
+small{ color:#656565; font-size:80%; display:block;}
+img{ display:block;}
+.jump-container{ padding-bottom:60px;}
+a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
+a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
+a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
+a:visited{ text-decoration:none;}/*已被访问过链接*/
+
+
+
+
+/* header */
+
+
+
+/* nav */
+
+
+
+/* footer */
+
+
+
+/* banner */
+
+
+
+/* 个人信息 */
+.jump-main{ text-align:center; background-color:#b9e9ff; padding:46px 0 24px;}
+.jump-main img{ width:60px; height:60px; border-radius:50%; margin:0 auto 5px;}
+.jump-main .text{ font-size:18px; font-weight:bold;}
+.jump-main .text small{ display:block;}
+/*first*/
+.jump-column-frist{ text-align:center; background-color:#7bd6ff;}
+.jump-column-frist .listitem{ overflow:hidden; border-top:1px solid #fff;}
+.jump-column-frist .listitem li{ float:left; width:24.7%/*33.15%*/; font-weight:bold; font-size:16px; padding:10px 0;}
+/* second */
+.jump-column-second{ background-color:#fff; margin-top:10px;}
+.jump-column-second .listitem{ overflow:hidden; border-top:1px solid #f4f4f4;}
+.jump-column-second .listitem li{ float:left; width:49.8%; border-bottom:1px solid #f4f4f4; padding:12px 0;}
+.jump-column-second .listitem li .text{ float:left; padding-left:10px; font-weight:bold;}
+.jump-column-second .listitem li img{ float:right; width:34px; height:34px; margin-right:10px;}
+
+
+
+/* 单行、双行列表 */
+.jump-content ul{ margin-top:10px;}
+.jump-content .listitem li{ border-bottom:1px solid #f4f4f4; padding:16px 10px; overflow:hidden; background-color:#fff; position:relative;}
+.iconline-arrow-right{ position:absolute; top:38%; right:10px; width:14px; height:14px; display:inline-block;}
+.iconline-function{ position:absolute; top:34%; left:10px; width:20px; height:20px; display:inline-block;}
+.double-icon-text{ padding:0 18px 0 28px;}
+/* 按钮列表 */
+/* 新闻列表 */
+/* 功能列表 */
+/* 邮件列表 */
+/* 更多列表 */
+
+
+
+/* telephone */
+.jump-content .telephone{ text-align:center;}
+.jump-content .telephone li .text{ background-color:#fff; border-top:1px solid #f4f4f4; border-bottom:1px solid #f4f4f4; padding:16px 10px;}
+.jump-content .telephone li small{ line-height:28px; color:#aaa;}
+
+
+
+/* button */
+
+
+
+/* 分页标签 */

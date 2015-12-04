@@ -60,7 +60,8 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 									<div class="text" style="padding-left: 10px; color: #000">
 										${task.title } <small> 发布时间：<fmt:formatDate
 												value="${task.createTime }" pattern="yyyy-MM-dd" /> <br />
-											发布人：${task.publisher.name }
+											发布人：${task.publisher.name } <br />
+											任务状态：${task.statusVal }
 										</small>
 									</div>
 							</a></li>

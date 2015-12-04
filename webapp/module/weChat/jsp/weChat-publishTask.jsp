@@ -198,6 +198,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 		//自动加载
 		(function() {
 			//输入自动加载的内容
+			$("#content").val("");
 		})();
 		function check() {
 			//验证普通form标签
