@@ -28,8 +28,27 @@ public class Employee {
 	private String nowBitcoin;// 当前虚拟币
 	private String nowDate;// 当前系统日期，方便页面使用
 	//private Date minusDate;//为了解决执行两遍minus
+	private String taskCount;
+	private String publishTaskCount;
 	
 	
+	
+	
+	
+	
+
+	public String getPublishTaskCount() {
+		return publishTaskCount;
+	}
+	public void setPublishTaskCount(String publishTaskCount) {
+		this.publishTaskCount = publishTaskCount;
+	}
+	public String getTaskCount() {
+		return taskCount;
+	}
+	public void setTaskCount(String taskCount) {
+		this.taskCount = taskCount;
+	}
 
 	/* 员工状态：正常 * */
 	public final static String EMPLOYE_STATUS_NORMAL = "1";

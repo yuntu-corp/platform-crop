@@ -145,10 +145,18 @@ public class WeChatController extends SpringController {
 	@RequestMapping(value = "/taskList", method = RequestMethod.GET)
 	public String taskList(
 			@RequestParam(value = "code", required = false) String code,
-			@RequestParam(value = "state", required = false) String state) {
+			@RequestParam(value = "state", required = false) String state,
+			@RequestParam(value = "employeeId", required = false) String employeeId) {
 		try {
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager
 					.getSession("service");
+			if(StringUtils.isNotBlank(employeeId)){
+				Employee employee = employeeService.getEmployeeById(employeeId);
+				employee.setWxCpUser(service.userGet(employee.getUserId()));
+				setAttribute("taskVo", taskService.getTaskVo());
+				setAttribute("employee", employee);
+				return "module/weChat/jsp/weChat-taskList";
+			}
 			//当code不为空并且session中userID为空时，通过code获取userId（第一回点击）
 			if(StringUtils.isNotBlank(code)){
 				if(CookieUtil.getCookieByName(getRequest(), "userId")==null){

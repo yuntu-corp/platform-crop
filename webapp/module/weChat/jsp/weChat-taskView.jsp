@@ -21,6 +21,13 @@
 	href="${path}/module/weChat/agile-lite/assets/component/timepicker/timepicker.css">
 <link rel="stylesheet"
 	href="${path}/module/weChat/agile-lite/assets/app/css/app.css">
+	<style>
+	a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
+a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
+a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
+a:visited{ text-decoration:none;}/*已被访问过链接*/
+}
+</style>
 </head>
 <body>
 	<div id="section_container">
@@ -70,7 +77,7 @@
 						<hr />
 						
 						<label class="label-left" >完工日期：</label>
-						<label class="label-right"><fmt:formatDate value="${task.finishTime}" type="date" pattern="yyyy-MM-dd"/></label>
+						<label class="label-right"><fmt:formatDate value="${task.finishDate}" type="date" pattern="yyyy-MM-dd"/></label>
 						<hr />
 						
 						
@@ -89,6 +96,18 @@
 							<hr />
 						</c:if>
 						
+												<label class="label-left" >详情：</label>
+						<label class="label-right">
+							<c:forEach var="receiverState" items="${task.receiverStateList }">
+								${receiverState[0] }&nbsp;--&nbsp;${receiverState[1] }<br/>
+							</c:forEach>
+							<c:forEach var="employee" items="${task.employees }">
+								<c:if test="${fn:contains(task.receiverState,employee.userId) != true}">
+									${employee.name }&nbsp;--&nbsp;未处理<br/>
+								</c:if>
+							</c:forEach>
+						</label>
+						<hr />
 
 
 						

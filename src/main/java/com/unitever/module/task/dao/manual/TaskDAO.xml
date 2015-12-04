@@ -12,6 +12,7 @@
         <result column="finishDate" property="finishDate" />
         <result column="durTime" property="durTime" />
         <result column="status" property="status" />
+         <result column="receiverState" property="receiverState" />
         <result column="employees" property="employeesString" />
         <association column="type" property="taskType" select="com.unitever.module.tasktype.dao.manual.TaskTypeDAO.get"/>
         <association column="publisherId" property="publisher" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get" />
@@ -31,8 +32,8 @@
 	</select>
 	
 	<insert id="save" parameterType="Task">
-		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type)
-		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id})
+		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState)
+		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState})
 	</insert>
 	
 	<update id="update" parameterType="Task">
@@ -46,6 +47,7 @@
 			<if test="finishDate != null">finishDate=#{finishDate},</if>
 			<if test="durTime != null">durTime=#{durTime},</if>
 			<if test="status != null">status=#{status},</if>
+			<if test="receiverState !=null">receiverState=#{receiverState},</if>
 			<if test="taskType != null and taskType.id != null">type=#{taskType.id},</if>
 			<if test="employeesString != null">employees=#{employeesString},</if>
 			<if test="publisher !=null and publisher.id != null">publisherId=#{publisher.id},</if>
@@ -60,7 +62,7 @@
     
     
     <select id="getTaskByReceiverId" resultMap="resultTask">
-    	select * from cp_task where receiverId=#{id}
+    	select * from cp_task where receiverId=#{id} order by createTime desc
     </select>
     
     <select id="getTaskByTask" resultMap="resultTask" parameterType="Task">
@@ -106,9 +108,15 @@
 			<if test="publisher != null and publisher.id != null">
 				and publisherId=#{publisher.id}
 			</if>
+			<if test="receiverState != null">
+				and receiverState=#{receiverState}
+			</if>
 		</where> 
+		order by createTime desc
     </select>
     <delete id="deleteTaskByTaskId" parameterType="String">
 		delete from cp_task where id=#{id}
     </delete>
+    
+   
 </mapper>

@@ -39,4 +39,8 @@ public class EmployeeDAO extends BaseDAO<Employee, String>{
 	public List<Employee> getEmployeeList(Employee employee) {
 		return this.getList("getEmployeesByEmployees", employee);
 	}
+	
+	public void updateTaskCount(String id){
+		this.update("updateTaskCount", id);
+	}
 }

@@ -83,6 +83,16 @@ public class DickerService {
 			dicker.setStatus(Dicker.DICKER_STATE_UNTREATED);
 			dicker.setTask(new Task(taskId));
 			dickerDAO.save(dicker);
+			/* 
+			 * 设置接收消息人状态
+			 */
+			Employee publisherEmployee = employeeDAO.get(publisherId);
+			if(StringUtils.isBlank(task.getReceiverState())){
+				task.setReceiverState(publisherEmployee.getName() + ":还价:" + publisherEmployee.getUserId());
+			} else {
+				task.setReceiverState(task.getReceiverState() + "," + publisherEmployee.getName() + ":还价:" + publisherEmployee.getUserId());
+			}
+			taskDAO.update(task);
 			// 通知发布还价人
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 			WxCpMessage me = new WxCpMessage();
@@ -92,8 +102,9 @@ public class DickerService {
 			me.setContent(employeeDAO.get(publisherId).getName()+"已经对您发布的项目：" + task.getTitle()+ "进行了还价请求！请去个人中心查看！" );
 			service.messageSend(me);
 			return "success";
+		}else{
+			return  "很抱歉，"+task.getReceiver().getName()+"已经接受了任务："+task.getTitle();
 		}
-		return "error";
 	}
 	
 	public void refuseDicker(String dickerId) throws WxErrorException{
@@ -101,6 +112,14 @@ public class DickerService {
 		dicker.setStatus(Dicker.DICKER_STATE_REFUSED);
 		dicker.setEndTime(new Date());
 		dickerDAO.update(dicker);
+		/* 
+		 * 设置接收消息人状态
+		 */
+		Task task = taskDAO.get(dicker.getTask().getId());
+		Employee employee = employeeDAO.get(dicker.getPublisher().getId());
+		task.setReceiverState(task.getReceiverState().replaceAll(employee.getName() + ":还价:" + employee.getUserId(),
+				employee.getName() + ":拒绝还价:" + employee.getUserId()));
+		taskDAO.update(task);
 		//通知发布还价人
 		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 		WxCpMessage me=new WxCpMessage();
@@ -137,17 +156,26 @@ public class DickerService {
 			publisher.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())-Double.parseDouble(task.getFinalBitcoin()))+"");
 			receiver.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())+Double.parseDouble(task.getFinalBitcoin()))+"");
 			receiver.setBitcoinIncome((Double.parseDouble(publisher.getBitcoinIncome())+Double.parseDouble(task.getFinalBitcoin()))+"");
+			receiver.setTaskCount((Integer.parseInt(receiver.getTaskCount())+1)+"");
 			employeeDAO.update(publisher);
 			employeeDAO.update(receiver);
+			/* 
+			 * 设置接收消息人状态
+			 */
+			Employee employee = employeeDAO.get(dicker.getPublisher().getId());
+			task.setReceiverState(task.getReceiverState().replaceAll(employee.getName() + ":还价:" + employee.getUserId(),
+					employee.getName() +  ":接受还价:" + employee.getUserId()));
 			taskDAO.update(task);
 			dickerDAO.update(dicker);
 			me.setContent(task.getPublisher().getName()+"已经接受了您对项目"+task.getTitle()+"的还价请求！");
 			service.messageSend(me);
 			return "success";
+		}else{
+			me.setContent("抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！");
+			service.messageSend(me);
+			return "抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！";
 		}
-		me.setContent("抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！");
-		service.messageSend(me);
-		return "error";
+		
 	}
 	
 	@Autowired

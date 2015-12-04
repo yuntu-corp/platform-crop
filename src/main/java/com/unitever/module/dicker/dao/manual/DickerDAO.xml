@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="getAll" resultMap="resultDicker">
-		select * from cp_dicker 
+		select * from cp_dicker order by createTime desc
 	</select>
 	
 	<insert id="save" parameterType="Dicker">
@@ -70,6 +70,7 @@
 				and task_id=#{task.id}
 			</if>
 		</where> 
+		order by createTime desc
     </select>
     
     <delete id="deleteDickerByTaskId" parameterType="String">

@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<title>讨价</title>
+<title>还价</title>
 <link rel="stylesheet"
 	href="${path}/module/weChat/agile-lite/assets/agile/css/agile.layout.css">
 <link rel="stylesheet"
@@ -21,6 +21,13 @@
 	href="${path}/module/weChat/agile-lite/assets/component/timepicker/timepicker.css">
 <link rel="stylesheet"
 	href="${path}/module/weChat/agile-lite/assets/app/css/app.css">
+	<style>
+	a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
+a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
+a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
+a:visited{ text-decoration:none;}/*已被访问过链接*/
+}
+</style>
 </head>
 <body>
 	<div id="section_container">
@@ -142,10 +149,9 @@
 									A.alert('提示', '还价成功');
 									//禁止再次点击
 									$("#btn_submit").attr("disabled","disabled");
-									window.location.href = "${path }/weChat/msgList?employeeId=${publisherId}";
-
+									setTimeout(function(){window.location.href = "${path }/weChat/msgList?employeeId=${publisherId}";}, 1500);
 								} else {
-									A.alert('提示', '还价失败');
+									A.alert('提示', data);
 								}
 
 							},

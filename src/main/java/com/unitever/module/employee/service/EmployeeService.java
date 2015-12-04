@@ -80,6 +80,8 @@ public class EmployeeService {
 			employee.setUser(userDAO.getUserWithCorpId("wxef727939c7cd2d6c"));
 			employee.setUserId(user.getUserId());
 			employee.setWxCpUser(user);
+			employee.setTaskCount(0+"");
+			employee.setPublishTaskCount(0+"");
 			employee.setEvaluationLevel("0");
 			Employee emp=initBaseBitCoin(employee);
 			employeeDAO.save(emp);
@@ -159,6 +161,10 @@ public class EmployeeService {
 		a.roll(Calendar.DATE, -1);//日期回滚一天，也就是最后一天
 		int maxDate = a.get(Calendar.DATE);
 		return maxDate;
+	}
+	
+	public void updateTaskCount(String id){
+		employeeDAO.updateTaskCount(id);
 	}
 	
 	/**

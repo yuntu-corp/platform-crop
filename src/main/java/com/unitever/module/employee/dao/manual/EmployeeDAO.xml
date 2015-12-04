@@ -11,6 +11,8 @@
         <result column="bitcoinSurplus" property="bitcoinSurplus" />
         <result column="bitcoinIncome" property="bitcoinIncome" />
         <result column="bitcoinConsume" property="bitcoinConsume" />
+        <result column="taskCount" property="taskCount" />
+        <result column="publishTaskCount" property="publishTaskCount" />
         <result column="evaluationLevel" property="evaluationLevel" />
         <result column="status" property="status" />
         <association column="user_id" property="user" select="com.unitever.module.user.dao.manual.UserDAO.get" />
@@ -28,8 +30,8 @@
 	</select>
 	
 	<insert id="save" parameterType="Employee">
-		insert into cp_employee(id,name,userId,headimgurl,baseBitcoin,bitcoinSurplus,bitcoinIncome,bitcoinConsume,status,user_id,evaluationLevel) 
-		value(#{id},#{name},#{userId},#{headimgurl},#{baseBitcoin},#{bitcoinSurplus},#{bitcoinIncome},#{bitcoinConsume},#{status},#{user.id},#{evaluationLevel})
+		insert into cp_employee(id,name,userId,headimgurl,baseBitcoin,bitcoinSurplus,bitcoinIncome,bitcoinConsume,status,user_id,evaluationLevel,taskCount,publishTaskCount) 
+		value(#{id},#{name},#{userId},#{headimgurl},#{baseBitcoin},#{bitcoinSurplus},#{bitcoinIncome},#{bitcoinConsume},#{status},#{user.id},#{evaluationLevel},#{taskCount},#{publishTaskCount})
 	</insert>
 	
 	<update id="update" parameterType="Employee">
@@ -43,6 +45,8 @@
 			<if test="bitcoinIncome != null">bitcoinIncome=#{bitcoinIncome},</if>
 			<if test="bitcoinConsume != null">bitcoinConsume=#{bitcoinConsume},</if>
 			<if test="evaluationLevel != null">evaluationLevel=#{evaluationLevel},</if>
+			<if test="taskCount!= null">taskCount=#{taskCount},</if>
+			<if test="taskCount!= null">publishTaskCount=#{publishTaskCount},</if>
 			<if test="status != null">status=#{status},</if>
 			<if test="user !=null and user.id != null">user_id=#{user.id},</if>
 		</set>
@@ -59,7 +63,7 @@
     </select>
     
     <select id="getAllReceivedEmployees" resultMap="resultEmployee" parameterType="String">
-    	select * from cp_employee where userId in (#{employees})
+    	select distinct * from cp_employee where instr(#{employees},userId)>0;
     </select>
     
     <update id="minusBitCoin">
@@ -105,4 +109,8 @@
 			</if>
 		</where>
     </select>
+    
+     <update id="updateTaskCount" parameterType="String">
+    	update cp_employee set taskCount=taskCount+1 where id=#{id}
+    </update>
 </mapper>

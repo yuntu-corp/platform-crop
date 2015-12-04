@@ -114,6 +114,7 @@ small {
 
 <body>
 	<div id="section_container">
+		<div style=""><a href="${path }/weChat/publishTask?employeeId=${employee.id}" class="button-release" style="position:fixed; bottom:20px; right:15px; background-color:#3779d0; color:#fff; font-size:30px; border-radius:50%; padding:0 16px 6px 16px; line-height:43px;box-shadow: 0px 2px 5px #b7b7b7;  z-index:1000; float:right;">+</a></div>
 		<section id="list_more_section" data-role="section" class="active">
 			<article data-role="article" id="main_article" data-scroll="verticle"
 				class="active" style="bottom: 0px;">
@@ -126,14 +127,18 @@ small {
 							</div>
 							<div class="text">
 								${employee.name }<small style="float: right;">日期：${employee.nowDate
-									}</small> <small> 基础虚拟币：￥${employee.baseBitcoin } <br />
-									当前虚拟币：￥${employee.nowBitcoin}
+									}</small>
+								<small >
+									今 日 价 格 ：￥${employee.nowBitcoin} <br/>
+									本 月 收 入 ：￥${employee.bitcoinIncome} <br/>
+									已接受任务： ${employee.taskCount}<br/>
+									已发布任务： ${employee.publishTaskCount}
 								</small>
 								<div id="star">
 											<ul class="rev_pro clearfix">
 												<li
 													style="border-bottom: none; padding: 0; font-size: 12px; color: #aaa;">
-													<span class="revtit" style="margin-left: 1px;">综合评级：</span>
+													<span class="revtit" style="margin-left: 1px;">综合评价：</span>
 													<div class="revinp">
 														<span id="test" class="level"> <c:if
 																test="${employee.evaluationLevel==0}">
@@ -166,15 +171,18 @@ small {
 											style="position: absolute; top: 0; left: 0; width: 64px; border-radius: 50%;" />
 									</div>
 									<div class="text">
-										${emp.name }<small style="float: right;">日期：${emp.nowDate
-											}</small> <small> 基础虚拟币：￥${emp.baseBitcoin } <br />
-											当前虚拟币：￥${emp.nowBitcoin}
+										${emp.name }<small style="float: right;"></small>
+										<small>
+											今 日 价 格 ：￥${emp.nowBitcoin} <br/>
+											本 月 收 入 ：￥${emp.bitcoinIncome} <br/>
+											已接受任务： ${employee.taskCount}<br/>
+											已发布任务： ${employee.publishTaskCount}
 										</small>
 										<div id="star">
 											<ul class="rev_pro clearfix">
 												<li
 													style="border-bottom: none; padding: 0; font-size: 12px; color: #aaa;">
-													<span class="revtit" style="margin-left: 1px;">综合评级：</span>
+													<span class="revtit" style="margin-left: 1px;">综合评价：</span>
 													<div class="revinp">
 														<span id="test" class="level"> <c:if
 																test="${emp.evaluationLevel==0}">

@@ -21,6 +21,13 @@
 	href="${path}/module/weChat/agile-lite/assets/component/timepicker/timepicker.css">
 <link rel="stylesheet"
 	href="${path}/module/weChat/agile-lite/assets/app/css/app.css">
+	<style>
+	a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
+a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
+a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
+a:visited{ text-decoration:none;}/*已被访问过链接*/
+}
+</style>
 </head>
 
 
@@ -203,7 +210,10 @@
 			} else if (!$("#preBitcoin")[0].checkValidity()) {
 				A.alert("请输入1万以内的整数虚拟币数！");
 				return false;
-			} else if ($("#finishDate")[0].value == "") {
+			} else if($("#preBitcoin")[0].value.indexOf('0')==0){
+				A.alert("请输入首字符不为0的虚拟币数！");
+				return false;
+			}else if ($("#finishDate")[0].value == "") {
 				A.alert("请输入选择日期！");
 				return false;
 			} else if ($("#finishTime")[0].value == "") {
@@ -247,8 +257,9 @@
 			if (check()) {
 
 				//显示加载中...
-				A.showMask(function() {
-				});
+				 A.showMask(function(){
+			    	//A.showToast('您已关闭请求');
+			    });
 				$
 						.ajax({
 							url : "${path }/weChat/doPublishTask",//发布任务的地址
@@ -256,7 +267,6 @@
 							type : "post",
 							async : false,
 							success : function(data) {
-
 								//关闭加载中...
 								A.hideMask();
 								if (data == "success") {
@@ -264,9 +274,9 @@
 									//禁止再次点击
 									$("#btn_submit").attr("disabled",
 											"disabled");
-									setTimeout(function(){window.location.href = "${path }/weChat/personalCenter?employeeId=${employeeId}";}, 2000);
+									setTimeout(function(){window.location.href = "${path }/weChat/personalCenter?employeeId=${employeeId}";}, 1500);
 								} else {
-									A.alert('提示', '发布失败');
+									A.alert('提示', data);
 								}
 
 							},

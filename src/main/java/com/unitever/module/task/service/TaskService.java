@@ -106,7 +106,11 @@ public class TaskService {
 		Long intervalDays=DateUtil.getIntervalDays(DateUtil.getDateString(task.getCreateTime()), DateUtil.getDateString(task.getFinishDate()));
 		task.setDurTime(intervalDays+"");
 		task.setFinalBitcoin("0");
-		task.setPublisher(employeeDAO.get(employeeId));
+		Employee employee=employeeDAO.get(employeeId);
+		//更新员工发布任务数
+		employee.setPublishTaskCount((Integer.parseInt(employee.getPublishTaskCount())+1)+"");
+		employeeDAO.update(employee);
+		task.setPublisher(employee);
 		task.setStatus(Task.TASK_STATE_UNRECEIVE);
 		Employee publisher=task.getPublisher();
 		if(StringUtils.isBlank(task.getContent())){
@@ -163,7 +167,7 @@ public class TaskService {
 					 //查看dicker表是否已经讨价还价
 					 if(dickerList!=null&&!dickerList.isEmpty()){
 						 for(Dicker dicker:dickerList){
-							 if(!dicker.getTask().getId().equals(task_.getId())&&!dicker.getPublisher().getId().equals(receiveId)){
+							 if(!(dicker.getTask().getId().equals(task_.getId())&&dicker.getPublisher().getId().equals(receiveId))){
 								 tasks.add(task_);
 								 break;
 							 }
@@ -184,16 +188,28 @@ public class TaskService {
 		String userId=employee.getUserId();
 		Task task=taskDAO.get(taskId);
 		if(Task.TASK_STATE_UNRECEIVE.equals(task.getStatus())){
-
 			String employeesString=task.getEmployeesString();
 			if(StringUtils.isNotBlank(employeesString)){
-				if(employeesString.contains(userId)){
-					if(employeesString.startsWith(userId)){
-						employeesString=employeesString.replace(userId+",", "");
-					}else{
-						employeesString=employeesString.replace(","+userId, "");
+				if(userId.equals(employeesString)){
+					employeesString="";
+				}else{
+					if(employeesString.contains(userId)){
+						if(employeesString.startsWith(userId)){
+							employeesString=employeesString.replace(userId+",", "");
+						}else{
+							employeesString=employeesString.replace(","+userId, "");
+						}
 					}
 				}
+				
+			}
+			/* 
+			 * 设置接收消息人拒绝任务状态
+			 */
+			if(StringUtils.isBlank(task.getReceiverState())){
+				task.setReceiverState(employee.getName() + ":拒绝任务:" + employee.getUserId());
+			} else {
+				task.setReceiverState(task.getReceiverState() + "," + employee.getName() + ":拒绝任务:" + employee.getUserId());
 			}
 			task.setEmployeesString(employeesString);
 			taskDAO.update(task);
@@ -215,7 +231,7 @@ public class TaskService {
 			task.setFinalBitcoin(task.getPreBitcoin());
 			task.setStatus(Task.TASK_STATE_UNFINISH);
 			Employee publisher=task.getPublisher();
-			Employee receiver=task.getReceiver();
+			Employee receiver=employeeDAO.get(employeeId);
 			if((Double.parseDouble(publisher.getBitcoinSurplus())-Double.parseDouble(task.getFinalBitcoin()))<0){
 				return "error！";
 			}
@@ -223,8 +239,17 @@ public class TaskService {
 			publisher.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())-Double.parseDouble(task.getPreBitcoin()))+"");
 			receiver.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())+Double.parseDouble(task.getPreBitcoin()))+"");
 			receiver.setBitcoinIncome((Double.parseDouble(publisher.getBitcoinIncome())+Double.parseDouble(task.getPreBitcoin()))+"");
+			receiver.setTaskCount((Integer.parseInt(receiver.getTaskCount())+1)+"");
 			employeeDAO.update(publisher);
 			employeeDAO.update(receiver);
+			/* 
+			 * 设置接收消息人状态
+			 */
+			if(StringUtils.isBlank(task.getReceiverState())){
+				task.setReceiverState(receiver.getName() + ":接受任务:" + receiver.getUserId());
+			} else {
+				task.setReceiverState(task.getReceiverState() + "," + receiver.getName() + ":接受任务:" + receiver.getUserId());
+			}
 			taskDAO.update(task);
 			//通知发布还价人
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
@@ -235,8 +260,9 @@ public class TaskService {
 			me.setContent(employeeDAO.get(employeeId).getName()+"已经接受了您发布的任务："+task.getTitle());
 			service.messageSend(me);
 			return "success";
+		}else{
+			return  "很抱歉，"+task.getReceiver().getName()+"已经接受了任务："+task.getTitle();
 		}
-		return "error";
 	}
 	
 	/**

@@ -20,7 +20,7 @@
 	</select>
 	
 	<select id="getAll" resultMap="resultEvaluation">
-		select * from cp_evaluation 
+		select * from cp_evaluation order by createTime desc
 	</select>
 	
 	<insert id="save" parameterType="Evaluation">
@@ -67,6 +67,7 @@
 				and task_id=#{task.id}
 			</if>
 		</where> 
+		order by createTime desc
     </select>
     
     <delete id="deleteEvaluationByTaskId" parameterType="String">

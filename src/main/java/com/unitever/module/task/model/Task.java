@@ -1,7 +1,10 @@
 package com.unitever.module.task.model; 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.unitever.module.employee.model.Employee;
 import com.unitever.module.tasktype.model.TaskType;
@@ -28,6 +31,9 @@ public class Task {
 	private String employeesString;
 	private TaskType taskType;
 	private String finishTime;
+	private String receiverState;
+	private List<String[]> receiverStateList;//接受消息的人的处理情况List，用于前端页面显示，对receiverState做了   切割成List<String[]>格式的   处理
+	
 	
 	/**任务状态：未接受的任务**/
 	public static final String TASK_STATE_UNRECEIVE="0";
@@ -50,6 +56,7 @@ public class Task {
 
 	
 
+	
 	
 	public Date getFinishDate() {
 		return finishDate;
@@ -180,6 +187,31 @@ public class Task {
 	}
 	public void setTimeVal(String timeVal) {
 		this.timeVal = timeVal;
+	}
+	
+	public String getReceiverState() {
+		return receiverState;
+	}
+	public void setReceiverState(String receiverState) {
+		this.receiverState = receiverState;
+	}
+	
+	/**
+	 * 接收到任务的人的详情List
+	 * */
+	public List<String[]> getReceiverStateList() {
+		if(StringUtils.isNotBlank(receiverState)){
+			List<String[]> strings = new ArrayList<String[]>();
+			String[] receiverStateArray = receiverState.split(",");
+			for (String receiver : receiverStateArray){
+				strings.add(receiver.split(":"));
+			}
+			return strings;
+		}
+		return receiverStateList;
+	}
+	public void setReceiverStateList(List<String[]> receiverStateList) {
+		this.receiverStateList = receiverStateList;
 	}
 	
 	
