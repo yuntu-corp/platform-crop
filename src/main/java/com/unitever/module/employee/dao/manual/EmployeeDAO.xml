@@ -15,6 +15,7 @@
         <result column="publishTaskCount" property="publishTaskCount" />
         <result column="evaluationLevel" property="evaluationLevel" />
         <result column="status" property="status" />
+         <result column="currentBitcoin" property="currentBitcoin" />
         <association column="user_id" property="user" select="com.unitever.module.user.dao.manual.UserDAO.get" />
 	</resultMap>
 	
@@ -30,8 +31,8 @@
 	</select>
 	
 	<insert id="save" parameterType="Employee">
-		insert into cp_employee(id,name,userId,headimgurl,baseBitcoin,bitcoinSurplus,bitcoinIncome,bitcoinConsume,status,user_id,evaluationLevel,taskCount,publishTaskCount) 
-		value(#{id},#{name},#{userId},#{headimgurl},#{baseBitcoin},#{bitcoinSurplus},#{bitcoinIncome},#{bitcoinConsume},#{status},#{user.id},#{evaluationLevel},#{taskCount},#{publishTaskCount})
+		insert into cp_employee(id,name,userId,headimgurl,baseBitcoin,bitcoinSurplus,bitcoinIncome,bitcoinConsume,status,user_id,evaluationLevel,taskCount,publishTaskCount,currentBitcoin) 
+		value(#{id},#{name},#{userId},#{headimgurl},#{baseBitcoin},#{bitcoinSurplus},#{bitcoinIncome},#{bitcoinConsume},#{status},#{user.id},#{evaluationLevel},#{taskCount},#{publishTaskCount},#{currentBitcoin})
 	</insert>
 	
 	<update id="update" parameterType="Employee">
@@ -46,7 +47,8 @@
 			<if test="bitcoinConsume != null">bitcoinConsume=#{bitcoinConsume},</if>
 			<if test="evaluationLevel != null">evaluationLevel=#{evaluationLevel},</if>
 			<if test="taskCount!= null">taskCount=#{taskCount},</if>
-			<if test="taskCount!= null">publishTaskCount=#{publishTaskCount},</if>
+			<if test="publishTaskCount!= null">publishTaskCount=#{publishTaskCount},</if>
+			<if test="currentBitcoin!= null">currentBitcoin=#{currentBitcoin},</if>
 			<if test="status != null">status=#{status},</if>
 			<if test="user !=null and user.id != null">user_id=#{user.id},</if>
 		</set>

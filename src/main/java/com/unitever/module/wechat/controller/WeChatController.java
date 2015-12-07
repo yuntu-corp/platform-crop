@@ -404,10 +404,49 @@ public class WeChatController extends SpringController {
 	 * @return
 	 */
 	@RequestMapping(value="/msgList",method=RequestMethod.GET)
-	public String msgList(@RequestParam(value="employeeId") String employeeId){
-		setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employeeId, Dicker.DICKER_STATE_UNTREATED));
-		setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employeeId));
-		setAttribute("employee", employeeService.getEmployeeById(employeeId));
+	public String msgList(
+			@RequestParam(value = "code", required = false) String code,
+			@RequestParam(value = "state", required = false) String state,
+			@RequestParam(value="employeeId",required = false) String employeeId){
+		try {
+			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager
+					.getSession("service");
+			if(StringUtils.isNotBlank(employeeId)){
+				setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employeeId, Dicker.DICKER_STATE_UNTREATED));
+				setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employeeId));
+				setAttribute("employee", employeeService.getEmployeeById(employeeId));
+				return "module/weChat/jsp/weChat-msgList";
+			}
+			//当code不为空并且session中userID为空时，通过code获取userId（第一回点击）
+			if(StringUtils.isNotBlank(code)){
+				Employee employee=null;
+				if(CookieUtil.getCookieByName(getRequest(), "userId")==null){
+					// 通过code获取userid
+					String userId = service.oauth2getUserInfo(code)[0];
+					//第一次访问得到的userId保存起来
+					//SessionManager.addSession("userId", userId);
+					CookieUtil.addCookie(getResponse(), "userId", userId, 1000*60);
+					//自己的信息
+					employee = employeeService.getEmployeeByUserId(userId);
+					employee=weChatService.reGetHeadImgUrl(employee);
+					//employee.setWxCpUser(service.userGet(userId));
+					
+				}else{//用户第二回点击直接，直接使用session中的userId
+					String userId=CookieUtil.getCookieByName(getRequest(), "userId").getValue();
+					employee = employeeService.getEmployeeByUserId(userId);
+					employee=weChatService.reGetHeadImgUrl(employee);
+					//employee.setWxCpUser(service.userGet(userId));
+				}
+				setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employee.getId(), Dicker.DICKER_STATE_UNTREATED));
+				setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employee.getId()));
+				setAttribute("employee", employee);
+			}
+		} catch (WxErrorException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		return "module/weChat/jsp/weChat-msgList";
 	}
 	
@@ -492,6 +531,26 @@ public class WeChatController extends SpringController {
 		System.out.println("test");
 	}
 	
+	
+	/**
+	 * 更新今日价格
+	 * @throws WxErrorException 
+	 */
+	@RequestMapping(value="/updateCurrentBitcoin",method=RequestMethod.POST)
+	@ResponseBody
+	public void updateCurrentBitcoin(Employee employee) {
+		employeeService.update(employee);
+	}
+	
+	/**
+	 * go更新今日价格
+	 * @throws WxErrorException 
+	 */
+	@RequestMapping(value="/goUpdateCurrentBitcoin",method=RequestMethod.GET)
+	public String geUpdateCurrentBitcoin(String employeeId) {
+		setAttribute("employee", employeeDAO.get(employeeId));
+		return "module/weChat/jsp/weChat-goUpdateCurrentBitcoin";
+	}
 	
 
 	@Autowired

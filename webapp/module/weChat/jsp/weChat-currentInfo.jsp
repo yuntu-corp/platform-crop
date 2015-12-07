@@ -129,7 +129,7 @@ small {
 								${employee.name }<small style="float: right;">日期：${employee.nowDate
 									}</small>
 								<small >
-									今 日 价 格 ：￥${employee.nowBitcoin} <br/>
+									今 日 价 格 ：￥${employee.currentBitcoin} <br/>
 									本 月 收 入 ：￥${employee.bitcoinIncome} <br/>
 									已接受任务： ${employee.taskCount}<br/>
 									已发布任务： ${employee.publishTaskCount}
@@ -173,7 +173,7 @@ small {
 									<div class="text">
 										${emp.name }<small style="float: right;"></small>
 										<small>
-											今 日 价 格 ：￥${emp.nowBitcoin} <br/>
+											今 日 价 格 ：￥${employee.currentBitcoin} <br/>
 											本 月 收 入 ：￥${emp.bitcoinIncome} <br/>
 											已接受任务： ${employee.taskCount}<br/>
 											已发布任务： ${employee.publishTaskCount}

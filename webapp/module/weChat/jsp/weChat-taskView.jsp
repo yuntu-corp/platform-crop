@@ -80,8 +80,11 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 						<label class="label-right"><fmt:formatDate value="${task.finishDate}" type="date" pattern="yyyy-MM-dd HH:mm"/></label>
 						<hr />
 						
+						<label class="label-left" >工期：</label>
+						<label class="label-right">${task.durTime}</label>
+						<hr />
 						
-						
+					
 						<label class="label-left" >任务状态：</label>
 						<label class="label-right">${task.statusVal}</label>
 						<hr />

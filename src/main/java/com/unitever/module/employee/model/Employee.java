@@ -30,13 +30,16 @@ public class Employee {
 	//private Date minusDate;//为了解决执行两遍minus
 	private String taskCount;
 	private String publishTaskCount;
-	
-	
-	
-	
+	private String currentBitcoin;
 	
 	
 
+	public String getCurrentBitcoin() {
+		return currentBitcoin;
+	}
+	public void setCurrentBitcoin(String currentBitcoin) {
+		this.currentBitcoin = currentBitcoin;
+	}
 	public String getPublishTaskCount() {
 		return publishTaskCount;
 	}

@@ -60,6 +60,12 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 .nothing-img{ width:50px; height:50px; padding:25px;}
 .nothing-text{ margin-bottom:40px;}
 .nothing-button{ border:1px solid #3190e8; border-radius:2px; padding:6px 30px; color:#3190e8; background-color:#fff;}
+
+a:link{ text-decoration:none;color: #000;}/*未被访问过的链接不显示下划线*/
+a:active{ text-decoration:none;color: #000;}/*正在点击的链接文本闪烁*/
+a:hover{ text-decoration:none;color: #000;}/*鼠标移入的链接文字有下划线*/
+a:visited{ text-decoration:none;color: #000;}/*已被访问过链接*/
+
 </style>
 </head>
 <body>

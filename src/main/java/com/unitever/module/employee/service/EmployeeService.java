@@ -42,6 +42,15 @@ public class EmployeeService {
 	}
 	
 	
+	public void updateCurrentBitcoin(Employee employee){
+		if(employee!=null){
+			if(StringUtils.isNotBlank(employee.getId())&&StringUtils.isNotBlank(employee.getCurrentBitcoin())){
+				employeeDAO.update(employee);	
+			}
+		}
+	}
+	
+	
 	public Employee getEmployeeByUserId(String userId){
 		if(StringUtils.isBlank(userId)){
 			return null;
@@ -83,8 +92,9 @@ public class EmployeeService {
 			employee.setTaskCount(0+"");
 			employee.setPublishTaskCount(0+"");
 			employee.setEvaluationLevel("0");
-			Employee emp=initBaseBitCoin(employee);
-			employeeDAO.save(emp);
+			//Employee emp=initBaseBitCoin(employee);
+			employee.setCurrentBitcoin(0+"");
+			employeeDAO.save(employee);
 		}
 	}
 	

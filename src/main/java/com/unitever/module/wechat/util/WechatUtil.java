@@ -56,9 +56,16 @@ public class WechatUtil {
 			button22.setName("发布任务");
 			button22.setUrl(menuService.oauth2buildAuthorizationUrl("http://"
 					+ domin + "/platform/weChat/publishTask", corpId));
+			
+			WxMenuButton button23 = new WxMenuButton();
+			button23.setType(WxConsts.BUTTON_VIEW);
+			button23.setName("待处理任务");
+			button23.setUrl(menuService.oauth2buildAuthorizationUrl("http://"
+					+ domin + "/platform/weChat/msgList", corpId));
 
 			button2.getSubButtons().add(button21);
 			button2.getSubButtons().add(button22);
+			button2.getSubButtons().add(button23);
 
 			WxMenuButton button3 = new WxMenuButton();
 			button3.setType(WxConsts.BUTTON_VIEW);
