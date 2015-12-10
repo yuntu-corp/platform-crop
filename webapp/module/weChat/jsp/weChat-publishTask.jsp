@@ -26,7 +26,12 @@
 a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
 a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
 a:visited{ text-decoration:none;}/*已被访问过链接*/
-}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}/*chrome*/
+input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 </style>
 </head>
 

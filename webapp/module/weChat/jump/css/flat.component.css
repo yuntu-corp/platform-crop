@@ -1,0 +1,127 @@
+﻿/*******************按钮button-start*******************/
+/*按钮-普通按钮*/
+button,input[type="button"],a.button{
+	border: 0;
+	font-size: 14px;
+	border-radius:4px;
+	padding: 0px 8px;
+	height:40px;
+	min-width:40px;
+	line-height:40px;
+	overflow:hidden;
+	display:inline-block;
+	
+	/*清除文本选择与外框*/
+	outline:none;
+	-moz-user-select: none; /*火狐*/
+	-webkit-user-select: none;  /*webkit浏览器*/
+	-ms-user-select: none;   /*IE10*/
+	-khtml-user-select: none; /*早期浏览器*/
+	user-select: none;
+	
+	/*动画*/
+	-webkit-transition: all;
+	   -moz-transition: all;
+	        transition: all;
+	-webkit-transition-timing-function: linear;
+	   -moz-transition-timing-function: linear;
+	        transition-timing-function: linear;
+	-webkit-transition-duration: .2s;
+	   -moz-transition-duration: .2s;
+	        transition-duration: .2s;
+}
+button.outline,input[type="button"].outline,a.button.outline{
+	background-color:transparent;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+button:active,input[type="button"]:active,a.button:active{
+}
+/*图标按钮*/
+button .iconfont,a.button .iconfont{
+	display:inline-block;
+	-webkit-transform:translateY(4px);
+		-ms-transform:translateY(4px);
+		    transform:translateY(4px);
+	font-size:20px;
+}
+
+/*按钮-禁用按钮*/
+button.disable,input[type="button"].disable,a.button.disable{
+}
+
+button.disable.outline,input[type="button"].disable.outline,a.button.disable.outline{
+	background-color:transparent;
+}
+
+/*按钮-取消按钮*/
+button.cancel,input[type="button"].cancel,a.button.cancel{
+}
+
+button.cancel.outline,input[type="button"].cancel.outline,a.button.cancel.outline{
+	background-color:transparent;
+}
+
+button.cancel:active,input[type="button"].cancel:active,a.button.cancel:active{
+}
+
+
+/*按钮-提交按钮*/
+button.submit,input[type="submit"],a.button.submit{
+}
+
+button.submit.outline,input[type="submit"].outline,a.button.submit.outline{
+	background-color:transparent;
+}
+
+button.submit:active,input[type="submit"]:active,a.button.submit:active{
+}
+/*按钮-链接*/
+button.link,input[type="button"].link,a.button.link{
+	background-color:transparent;
+}
+button.link.outline,input[type="button"].link.outline,a.button.link.outline{
+}
+button.link:active,input[type="button"].link:active,a.button.link:active{
+	background-color:transparent;
+}
+/*按钮-气泡*/
+button .tip,input[type="button"] .tip,a.button .tip{
+	display: inline-block;
+	padding: 2px 9px 3px;
+	font-size: 12px;
+	line-height: 1;
+	border-radius: 100px;
+}
+button.outline .tip,input[type="button"].outline .tip,a.button.outline .tip{
+}
+
+/*按钮-大按钮*/
+button.block,input[type="button"].block,a.button.block{
+	display: block;
+	width: 100%;
+	margin-bottom:10px;
+}
+/*按钮-仅图标按钮*/
+button.onlyicon{
+	width:48px;
+	height:48px;
+}
+button.onlyicon .iconfont{
+	font-size:24px;
+}
+/*按钮-投影图标*/
+.btn-3dshadow {
+	-webkit-box-shadow:0 2px 3px 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 2px 3px 0 rgba(0, 0, 0, 0.2);
+	box-shadow:0 2px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-3dshadow:active {
+	-webkit-box-shadow:0 0 0 0 rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 0 0 0 rgba(0, 0, 0, 0.2);
+	box-shadow:0 0 0 0 rgba(0, 0, 0, 0.2);
+	margin:2px 0 -2px 0;
+}
+/*******************按钮button-end*******************/

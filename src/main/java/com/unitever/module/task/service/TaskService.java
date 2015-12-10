@@ -110,16 +110,16 @@ public class TaskService {
 		Period period = new Period(start, end);
 		String result = null;
 		if (period.getDays() == 0) {
-			if(period.getHours()==0){
-				result=period.getMinutes() + "分";
-			}else{
-				result = period.getHours() + "小时"+ period.getMinutes() + "分";
+			if (period.getHours() == 0) {
+				result = period.getMinutes() + "分";
+			} else {
+				result = period.getHours() + "小时" + period.getMinutes() + "分";
 			}
-		}else{
+		} else {
 			result = period.getDays() + "天" + period.getHours() + "小时"
 					+ period.getMinutes() + "分";
 		}
-		
+
 		// Long
 		// intervalDays=DateUtil.getIntervalDays(DateUtil.getDateString(task.getCreateTime()),
 		// DateUtil.getDateString(task.getFinishDate()));
@@ -162,14 +162,20 @@ public class TaskService {
 		WxCpMessage me = new WxCpMessage();
 		me.setMsgType(WxConsts.XML_MSG_TEXT);
 		me.setAgentId("15");
-		me.setContent(task.getPublisher().getName() + "给您发布了任务，请去个人中心查看！");
 		for (String employeeId_ : task.getEmployeesString().split(",")) {
+			Employee employeeToHref = employeeDAO
+					.getEmployeeByUserId(employeeId_);
 			System.out.println(employeeId_);
+			me.setContent(task.getPublisher().getName()
+					+ "给您发布了任务，请去个人中心查看！\n <a href=\"http://"
+					+ employeeToHref.getUser().getDomainName()
+					+ "/platform/weChat/msgList?employeeId="
+					+ employeeToHref.getId() + "\">查看详情>>></a>");
+			System.out.println(me.getContent());
 			me.setToUser(employeeId_);
 			try {
 				service.messageSend(me);
 			} catch (WxErrorException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -188,13 +194,20 @@ public class TaskService {
 				if (task_.getEmployeesString().contains(employee.getUserId())) {
 					// 查看dicker表是否已经讨价还价
 					if (dickerList != null && !dickerList.isEmpty()) {
+						boolean isDicker=false;
 						for (Dicker dicker : dickerList) {
-							if (!(dicker.getTask().getId()
-									.equals(task_.getId()) && dicker
-									.getPublisher().getId().equals(receiveId))) {
+							if(dicker.getTask().getId().equals(task_.getId())){
+								if(dicker.getPublisher().getId().equals(receiveId)){
+									isDicker=true;
+								}
+							}
+							/*if (!(dicker.getTask().getId().equals(task_.getId()) && dicker.getPublisher().getId().equals(receiveId))) {
 								tasks.add(task_);
 								break;
-							}
+							}*/
+						}
+						if(!isDicker){
+							tasks.add(task_);
 						}
 					} else {
 						tasks.add(task_);
@@ -206,7 +219,7 @@ public class TaskService {
 		return tasks;
 	}
 
-	public void refuseTask(String taskId, String employeeId)
+	public void refuseTask(String taskId, String employeeId, String refuseReason)
 			throws WxErrorException {
 		Employee employee = employeeDAO.get(employeeId);
 		String userId = employee.getUserId();
@@ -248,8 +261,14 @@ public class TaskService {
 			me.setMsgType(WxConsts.XML_MSG_TEXT);
 			me.setAgentId("15");
 			me.setToUser(task.getPublisher().getUserId());
-			me.setContent(employeeDAO.get(employeeId).getName()
-					+ "已经拒绝了您发布的任务：" + task.getTitle());
+			Employee employeeToHref = employeeDAO.get(employeeId);
+			me.setContent(employeeToHref.getName() + "已经拒绝了您发布的任务："
+					+ task.getTitle() + "\n拒绝理由为：" + refuseReason
+					+ "\n <a href=\"http://"
+					+ employeeToHref.getUser().getDomainName()
+					+ "/platform/weChat/taskView?id=" + task.getId()
+					+ "&employeeId=" + task.getPublisher().getId()
+					+ "\">查看详情>>></a>");
 			service.messageSend(me);
 		}
 	}
@@ -275,7 +294,8 @@ public class TaskService {
 					.getBitcoinSurplus()) - Double.parseDouble(task
 					.getPreBitcoin()))
 					+ "");
-			receiver.setBitcoinSurplus((Double.parseDouble(publisher
+			//publisher.setPublishTaskCount((Integer.parseInt(publisher.getPublishTaskCount()) + 1)+ "");
+			receiver.setBitcoinSurplus((Double.parseDouble(receiver
 					.getBitcoinSurplus()) + Double.parseDouble(task
 					.getPreBitcoin()))
 					+ "");
@@ -305,8 +325,13 @@ public class TaskService {
 			me.setMsgType(WxConsts.XML_MSG_TEXT);
 			me.setAgentId("15");
 			me.setToUser(task.getPublisher().getUserId());
-			me.setContent(employeeDAO.get(employeeId).getName()
-					+ "已经接受了您发布的任务：" + task.getTitle());
+			Employee employeeToHref = employeeDAO.get(employeeId);
+			me.setContent(employeeToHref.getName() + "已经接受了您发布的任务："
+					+ task.getTitle() + "\n <a href=\"http://"
+					+ employeeToHref.getUser().getDomainName()
+					+ "/platform/weChat/taskView?id=" + task.getId()
+					+ "&employeeId=" + task.getPublisher().getId()
+					+ "\">查看详情>>></a>");
 			service.messageSend(me);
 			return "success";
 		} else {

@@ -1,0 +1,80 @@
+﻿/*******************按钮button-start*******************/
+/*按钮-普通按钮*/
+button,input[type="button"],a.button{
+	color: #fff;
+	background-color:#3779d0;
+}
+button.outline,input[type="button"].outline,a.button.outline{
+	color:#3779d0;
+	border:1px solid #3779d0;
+}
+button:active,input[type="button"]:active,a.button:active{
+	color:#fff;
+	border-color:#295b9d;
+	background-color:#295b9d;
+}
+
+/*按钮-禁用按钮*/
+button.disable,input[type="button"].disable,a.button.disable{
+	background-color:#d9d9d9;
+}
+
+button.disable.outline,input[type="button"].disable.outline,a.button.disable.outline{
+	color:#d9d9d9;
+	border-color:#d9d9d9;
+}
+
+/*按钮-取消按钮*/
+button.cancel,input[type="button"].cancel,a.button.cancel{
+	background-color:#dd524d;
+}
+
+button.cancel.outline,input[type="button"].cancel.outline,a.button.cancel.outline{
+	color:#dd524d;
+	border-color:#dd524d;
+}
+
+button.cancel:active,input[type="button"].cancel:active,a.button.cancel:active{
+	color:#fff;
+	border-color:#a63e3a;
+	background-color:#a63e3a;
+}
+
+
+/*按钮-提交按钮*/
+button.submit,input[type="submit"],a.button.submit{
+	background-color:#88d038;
+}
+
+button.submit.outline,input[type="submit"].outline,a.button.submit.outline{
+	color:#88d038;
+	border-color:#88d038;
+}
+
+button.submit:active,input[type="submit"]:active,a.button.submit:active{
+	color:#fff;
+	border-color:#669d2a;
+	background-color:#669d2a;
+}
+/*按钮-链接*/
+button.link,input[type="button"].link,a.button.link{
+	color:#3779d0;
+}
+button.link.outline,input[type="button"].link.outline,a.button.link.outline{
+	border:1px solid #3779d0;
+	color:#3779d0;
+}
+button.link:active,input[type="button"].link:active,a.button.link:active{
+	color:#295b9d;
+	border-color:#295b9d;
+}
+/*按钮-气泡*/
+button .tip,input[type="button"] .tip,a.button .tip{
+	color:#fff;
+	background-color: rgba(0, 0, 0, .15);
+}
+button.outline .tip,input[type="button"].outline .tip,a.button.outline .tip{
+	background-color:#e73920;
+}
+
+/*******************按钮button-end*******************/

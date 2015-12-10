@@ -16,7 +16,7 @@ public class User {
 	private String expiresTime;
 	private String agentId;
 	private String status;
-	
+	private String domainName;
 	
 	/** 用户状态常量 */
 	public static final String USER_STATUS_NORMAL= "1";
@@ -123,5 +123,11 @@ public class User {
 		this.status = status;
 	}
 	
-	
+	public String getDomainName() {
+		return domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
 }

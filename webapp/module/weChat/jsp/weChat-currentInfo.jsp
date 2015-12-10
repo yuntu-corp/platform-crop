@@ -173,10 +173,10 @@ small {
 									<div class="text">
 										${emp.name }<small style="float: right;"></small>
 										<small>
-											今 日 价 格 ：￥${employee.currentBitcoin} <br/>
+											今 日 价 格 ：￥${emp.currentBitcoin} <br/>
 											本 月 收 入 ：￥${emp.bitcoinIncome} <br/>
-											已接受任务： ${employee.taskCount}<br/>
-											已发布任务： ${employee.publishTaskCount}
+											已接受任务： ${emp.taskCount}<br/>
+											已发布任务： ${emp.publishTaskCount}
 										</small>
 										<div id="star">
 											<ul class="rev_pro clearfix">

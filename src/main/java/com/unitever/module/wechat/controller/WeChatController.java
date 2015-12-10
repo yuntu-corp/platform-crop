@@ -509,9 +509,10 @@ public class WeChatController extends SpringController {
 	 */
 	@RequestMapping(value="/refuseTask",method=RequestMethod.POST)
 	@ResponseBody
-	public void refuseTask(
-			@RequestParam(value="taskId") String taskId,@RequestParam(value="employeeId") String employeeId) throws WxErrorException{
-		taskService.refuseTask(taskId, employeeId);
+	public void refuseTask(@RequestParam(value = "taskId") String taskId,
+			@RequestParam(value = "employeeId") String employeeId,
+			@RequestParam(value = "refuseReason") String refuseReason) throws WxErrorException {
+		taskService.refuseTask(taskId, employeeId,refuseReason);
 	}
 	
 	/**

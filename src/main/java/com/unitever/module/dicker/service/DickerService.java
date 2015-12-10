@@ -98,8 +98,11 @@ public class DickerService {
 			WxCpMessage me = new WxCpMessage();
 			me.setMsgType(WxConsts.XML_MSG_TEXT);
 			me.setAgentId("15");
-			me.setToUser(employeeDAO.get(receiverId).getUserId());
-			me.setContent(employeeDAO.get(publisherId).getName()+"已经对您发布的项目：" + task.getTitle()+ "进行了还价请求！请去个人中心查看！" );
+			Employee employeeToHref = employeeDAO.get(receiverId);
+			me.setToUser(employeeToHref.getUserId());
+			me.setContent(employeeDAO.get(publisherId).getName() + "已经对您发布的项目：" + task.getTitle()
+					+ "进行了还价请求！请去个人中心查看！ \n <a href=\"http://" + employeeToHref.getUser().getDomainName()
+					+ "/platform/weChat/msgList?employeeId=" + task.getPublisher().getId() + "\">查看详情>>></a>");
 			service.messageSend(me);
 			return "success";
 		}else{
@@ -118,7 +121,7 @@ public class DickerService {
 		Task task = taskDAO.get(dicker.getTask().getId());
 		Employee employee = employeeDAO.get(dicker.getPublisher().getId());
 		task.setReceiverState(task.getReceiverState().replaceAll(employee.getName() + ":还价:" + employee.getUserId(),
-				employee.getName() + ":拒绝还价:" + employee.getUserId()));
+				employee.getName() + ":被拒绝还价:" + employee.getUserId()));
 		taskDAO.update(task);
 		//通知发布还价人
 		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
@@ -126,7 +129,9 @@ public class DickerService {
 		me.setMsgType(WxConsts.XML_MSG_TEXT);
 		me.setAgentId("15");
 		me.setToUser(dicker.getPublisher().getUserId());
-		me.setContent("抱歉！"+dicker.getTask().getPublisher().getName()+"已经拒绝了您对项目"+dicker.getTask().getTitle()+"的还价请求！");
+		me.setContent("抱歉！"+task.getPublisher().getName()+"已经拒绝了您对项目"+task.getTitle()+"的还价请求！"
+				+ "\n <a href=\"http://" + employee.getUser().getDomainName()
+				+ "/platform/weChat/taskView?id="+task.getId()+"&employeeId="+employee.getId()+"\">查看详情>>></a>");
 		service.messageSend(me);
 	}
 	
@@ -154,8 +159,9 @@ public class DickerService {
 			}
 			publisher.setBitcoinConsume((Double.parseDouble(publisher.getBitcoinConsume())+Double.parseDouble(task.getFinalBitcoin()))+"");
 			publisher.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())-Double.parseDouble(task.getFinalBitcoin()))+"");
-			receiver.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())+Double.parseDouble(task.getFinalBitcoin()))+"");
-			receiver.setBitcoinIncome((Double.parseDouble(publisher.getBitcoinIncome())+Double.parseDouble(task.getFinalBitcoin()))+"");
+			
+			receiver.setBitcoinSurplus((Double.parseDouble(receiver.getBitcoinSurplus())+Double.parseDouble(task.getFinalBitcoin()))+"");
+			receiver.setBitcoinIncome((Double.parseDouble(receiver.getBitcoinIncome())+Double.parseDouble(task.getFinalBitcoin()))+"");
 			receiver.setTaskCount((Integer.parseInt(receiver.getTaskCount())+1)+"");
 			employeeDAO.update(publisher);
 			employeeDAO.update(receiver);
@@ -164,14 +170,18 @@ public class DickerService {
 			 */
 			Employee employee = employeeDAO.get(dicker.getPublisher().getId());
 			task.setReceiverState(task.getReceiverState().replaceAll(employee.getName() + ":还价:" + employee.getUserId(),
-					employee.getName() +  ":接受还价:" + employee.getUserId()));
+					employee.getName() +  ":还价通过:" + employee.getUserId()));
 			taskDAO.update(task);
 			dickerDAO.update(dicker);
-			me.setContent(task.getPublisher().getName()+"已经接受了您对项目"+task.getTitle()+"的还价请求！");
+			me.setContent(task.getPublisher().getName()+"已经接受了您对项目"+task.getTitle()+"的还价请求！"
+					+ "\n <a href=\"http://" + employee.getUser().getDomainName()
+					+ "/platform/weChat/taskView?id="+task.getId()+"&employeeId="+employee.getId()+"\">查看详情>>></a>");
 			service.messageSend(me);
 			return "success";
 		}else{
-			me.setContent("抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！");
+			me.setContent("抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！"
+					+ "\n <a href=\"http://" + dicker.getPublisher().getUser().getDomainName()
+					+ "/platform/weChat/taskView?id="+task.getId()+"&employeeId="+dicker.getPublisher().getId()+"\">查看详情>>></a>");
 			service.messageSend(me);
 			return "抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！";
 		}

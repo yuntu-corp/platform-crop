@@ -54,6 +54,9 @@
 	         <if test="status != null and status != '' ">  
 	            status=#{status},  
 	         </if>
+	         <if test="domainName != null and domainName != '' ">  
+	            domainName=#{domainName},  
+	         </if>
         </set>
          WHERE id=#{id}  
     </update> 

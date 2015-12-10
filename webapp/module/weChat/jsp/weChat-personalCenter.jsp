@@ -6,9 +6,9 @@
 
 <head>
 <!--[if lte IE 7]>
-    <meta http-equiv="refresh" content="0;url=http://www.oneplus.cn/upgrade/browser">
-    <script>location.href="http://www.oneplus.cn/upgrade/browser";</script>
-    <![endif]-->
+	<meta http-equiv="refresh" content="0;url=http://www.oneplus.cn/upgrade/browser">
+	<script>location.href="http://www.oneplus.cn/upgrade/browser";</script>
+	<![endif]-->
 <meta charset="utf-8">
 
 <title>个人中心</title>
@@ -33,7 +33,7 @@
 <link href="${path}/module/weChat/jump/css/jump-demo.css" rel="stylesheet" type="text/css">
 <link href="${path}/module/weChat/jump/css/modify.css" rel="stylesheet" type="text/css">
 <style>
-	a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
+a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
 a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
 a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
 a:visited{ text-decoration:none;}/*已被访问过链接*/
@@ -42,11 +42,15 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 </head>
 <body>
 	<div class="jump-container">
-		<div class="jump-main">
+		<div class="jump-main" style="background-color:#3779d0;">
+		<a href="${path}/weChat/goUpdateCurrentBitcoin?employeeId=${employee.id}">
 			<img src="${employee.headimgurl }">
-			<div class="text">
-				${employee.name } <small>${employee.wxCpUser.position}</small>
-			</div>
+			<div class="text" style="color:#fff;">
+				${employee.name } 
+					<small style="display:inline; padding-left:4px; font-size:16px;  color:#dbeeff;">${employee.wxCpUser.position}</small>
+					<small style=" padding-left:4px; font-size:14px;  color:#afd9ff;">￥：${employee.currentBitcoin}</small>
+				</div>
+			</a>
 		</div>
 		<!-- first -->
 		<div class="jump-column-frist">
@@ -70,24 +74,28 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 				<li>
 					<a href="${path }/weChat/myPublishedTask?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<!-- <div class="iconline-icon-right">5</div> -->
 						<div class="text">已发布任务</div>
 					</a>
 				</li>
 				<li>
 					<a href="${path }/weChat/myReceivedTask?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<!-- <div class="iconline-icon-right">5</div> -->
 						<div class="text">已接受任务</div>
 					</a>
 				</li>
 				<li>
 					<a href="${path }/weChat/myFinishedTask?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<!-- <div class="iconline-icon-right">5</div> -->
 						<div class="text">已完成任务</div>
 					</a>
 				</li>
 				<li>
 					<a href="${path }/weChat/msgList?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<!-- <div class="iconline-icon-right" style="background-color:#ff0000;">5</div> -->
 						<div class="text">待处理任务</div>
 					</a>
 				</li>
@@ -96,8 +104,17 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 				<li>
 					<a href="${path }/weChat/evaluationList?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<!-- <div class="iconline-icon-right" style="background-color:#ff0000;">5</div> -->
 						<div class="text">我的评价</div>
 					</a>
+				</li>
+			</ul>
+			<ul class="listitem">
+				<li>
+					<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+				 	<div class="text">
+						帮助
+					</div>
 				</li>
 			</ul>
 			<ul class="telephone">
