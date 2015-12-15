@@ -49,6 +49,7 @@ public class ResourceDetailsService {
 		rs.add(buildUrlResourceWithAnonymously("/module/weChat/**"));
 		rs.add(buildUrlResourceWithAnonymously("/sys/attachment/**"));
 		rs.add(buildUrlResourceWithAnonymously("/platform/images/**"));
+		rs.add(buildUrlResourceWithAnonymously("/platform/ui/semantic/**"));
 		
 		//所有实现IAnonymousAccessResources接口的子类
 		Map<String, IAnonymousAccessResources> anonymousResourcesServiceMap = SpringContextHolder.getBeansOfType(IAnonymousAccessResources.class);

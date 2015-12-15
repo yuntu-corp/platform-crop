@@ -51,7 +51,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
        				    <input type="hidden" name="publisherId" value="${publisherId }"/>
         				<input type="hidden" name="receiverId" value="${receiverId }"/>
         				
-						<label class="label-left" >任务名称</label>
+						<label class="label-left" >任务名称：</label>
 						<label class="label-right">${task.title}</label>
 						<hr />
 						
@@ -59,20 +59,20 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 						<label class="label-right">${task.taskType.typeName}</label>
 						<hr />
 						
-						<label class="label-left" >发布人</label>
+						<label class="label-left" >发布人：</label>
 						<label class="label-right">${task.publisher.name}</label>
 						<hr />
 						
-						<label class="label-left" >任务详情</label>
+						<label class="label-left" >任务详情：</label>
 						<label class="label-right">${task.content}</label>
 						<hr />
         				
         				
-						<label class="label-left" >任务报价</label>
+						<label class="label-left" >任务报价：</label>
 						<label class="label-right">￥${task.preBitcoin}</label>
 						<hr />
 						
-						<label class="label-left" >发布日期</label>
+						<label class="label-left" >发布日期：</label>
 						<label class="label-right"><fmt:formatDate value="${task.createTime}" type="date" pattern="yyyy-MM-dd HH:mm"/></label>
 						<hr />
 						
@@ -99,7 +99,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 							<hr />
 						</c:if>
 						
-												<label class="label-left" >详情：</label>
+						<label class="label-left" >详情：</label>
 						<label class="label-right">
 							<c:forEach var="receiverState" items="${task.receiverStateList }">
 								${receiverState[0] }&nbsp;--&nbsp;${receiverState[1] }<br/>
