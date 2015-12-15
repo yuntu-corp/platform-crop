@@ -334,7 +334,7 @@ public class WeChatController extends SpringController {
 	 */
 	@RequestMapping(value="/myFinishedTask",method=RequestMethod.GET)
 	public String myFinishedTask(@RequestParam(value="employeeId") String employeeId){
-		setAttribute("taskList",taskService.getTaskByReceiverId(employeeId));
+		setAttribute("taskList",taskService.getMyFinishedTask(employeeId));
 		setAttribute("employeeId", employeeId);
 		return "module/weChat/jsp/weChat-myFinishedTask";
 	}

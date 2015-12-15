@@ -64,7 +64,7 @@
 												任务名称：${taskFromOthers.title }
 												<small>发布人：${taskFromOthers.publisher.name}</small>
 												<small>虚拟币：￥${taskFromOthers.preBitcoin }</small>
-												<small>工期：${taskFromOthers.durTime}天</small>
+												<small>工期：${taskFromOthers.durTime}</small>
 											</div>
 										</div>
 									</a>
@@ -106,7 +106,7 @@
 												<small>还价人：${dicker.publisher.name}</small>
 												<small>发布时虚拟币：￥${dicker.task.preBitcoin }</small>
 												<small>还价时虚拟币：￥${dicker.bitcoin}</small>
-												<small>工期：${dicker.task.durTime }天</small>
+												<small>工期：${dicker.task.durTime }</small>
 											</div>
 										</div>
 									</a>

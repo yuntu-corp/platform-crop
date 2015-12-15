@@ -374,6 +374,13 @@ public class TaskService {
 
 		}
 	}
+	
+	public List<Task> getMyFinishedTask(String employeeId){
+		Task task=new Task();
+		task.setPublisher(new Employee(employeeId));
+		task.setStatus(Task.TASK_STATE_FINISH);
+		return taskDAO.getTaskByTask(task);
+	}
 
 	/**
 	 * 获取任务分页对象
