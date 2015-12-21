@@ -3,24 +3,28 @@
 <%@ include file="/platform/common/jsp/taglibs.jsp" %>
 <html>
 	<head>  
+		<style type="text/css">
+			a:link{ text-decoration:none;}/*未被访问过的链接不显示下划线*/
+			a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
+			a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
+			a:visited{ text-decoration:none;}/*已被访问过链接*/
+		</style>
 		<script type="text/javascript">
-			Namespace.register("com.yunt.task.view");
-			com.yunt.task.taskInput = {
-				doInput : function(dialogId) {
+			Namespace.register("com.yunt.taskCheck.check");
+			com.yunt.taskCheck.check = {
+				doCheck : function(dialogId) {
 					if(!$("#${pageId}theForm").valid()){
 						return false;
 					}
-					/* if(!$.hz.swfupload.validateAttachment("fileDiv")){
-						return false;
-					} */
 					var formData = $("#${pageId}theForm").serialize();
 					$.ajax({
 					 	type: "POST",
-					  	url: "${path}/task/saveOrUpdate",
+					  	url: "${path}/task/doCheck",
 					  	data: formData,
 					  	success: function(){
 					  		$.successTips();
 					   		art.dialog.list[dialogId].close();
+					   		com.yunt.taskCheck.index.refresh();
 					  	}
 					});
 				}
@@ -31,6 +35,12 @@
 		</script>
 	</head>
 	<body>
+		<form id="${pageId}theForm" method="post" class="BB">
+		<input type="hidden" name="model.id" value="${model.id }"/>
+		<input type="hidden" name="model.isSuccess" value="${model.isSuccess }"/>
+		<input type="hidden" name="model.publisher.id" value="${model.publisher.id }"/>
+		<input type="hidden" name="model.title" value="${model.title }"/>
+		<input type="hidden" name="model.finalBitcoin" value="${model.finalBitcoin }"/>
 		<div style="padding: 20px;">
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>标题：</label>
@@ -85,6 +95,18 @@
 			     	<div class="view_detail2">${model.isSuccessVal}</div>
 				</div>
 			</c:if>
+			<div class="pl100 lh50">
+		     	<label class="labelTitle"><em style="color: red;">*</em>审核结果:</label>
+		     	<div class="view_detail2">
+			     	<label style="min-height: 20px; line-height: 20px; width: 100px;">
+						<input type="radio" name="model.status"  value="5"  style="width: 13px; height:13px;margin:4px 4px 0px 0px;  line-height: normal;cursor: pointer;">通过
+					</label>
+			     	<label style="min-height: 20px;line-height: 20px; width: 100px;">
+						<input type="radio" name="model.status"  value="6" style="width: 13px;height:13px;margin: 4px 4px 0px 0px; line-height: normal;cursor: pointer;" checked>未通过
+					</label>
+		     	</div>
+			</div>
 		</div>
+		</form>
 	</body>
 </html>

@@ -48,7 +48,6 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 			<div class="text" style="color:#fff;">
 				${employee.name } 
 					<small style="display:inline; padding-left:4px; font-size:16px;  color:#dbeeff;">${employee.wxCpUser.position}</small>
-					<small style=" padding-left:4px; font-size:14px;  color:#afd9ff;">￥：${employee.currentBitcoin}</small>
 				</div>
 			</a>
 		</div>
@@ -71,6 +70,13 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 		<!---->
 		<div class="jump-content">
 			<ul class="listitem">
+				<li>
+					<a href="${path}/weChat/goUpdateCurrentBitcoin?employeeId=${employee.id}">
+						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<!-- <div class="iconline-icon-right">5</div> -->
+						<div class="text">修改今日价格</div>
+					</a>
+				</li>
 				<li>
 					<a href="${path }/weChat/myPublishedTask?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">

@@ -14,6 +14,7 @@ import com.unitever.platform.core.dao.Page;
 import com.unitever.platform.core.web.argument.annotation.FormModel;
 import com.unitever.platform.core.web.controller.SpringController;
 import com.unitever.platform.util.DateUtil;
+import com.unitever.platform.util.DoubleUtil;
 
 @Controller
 @RequestMapping(value = "/employee")
@@ -74,8 +75,9 @@ public class EmployeeController extends SpringController {
 	public void update(@FormModel("model") Employee employee){
 		if(employee!=null){
 			if(StringUtils.isNotBlank(employee.getBaseBitcoin())){
-				double returnstr = (double)Math.ceil((Double.parseDouble(employee.getBaseBitcoin()) / DateUtil.getDayOfMonth()));
-				employee.setCurrentBitcoin(String.format("%.2f", returnstr));
+				/*double returnstr = (double)Math.ceil((Double.parseDouble(employee.getBaseBitcoin()) / DateUtil.getDayOfMonth()));
+				DoubleUtil.div(employee.getBaseBitcoin(), DateUtil.getDayOfMonth()+"", 2);*/
+				employee.setCurrentBitcoin(DoubleUtil.div(employee.getBaseBitcoin(), DateUtil.getDayOfMonth()+"", 2)+"");
 			}
 		}
 		employeeService.update(employee);

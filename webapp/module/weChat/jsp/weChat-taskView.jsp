@@ -89,6 +89,12 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 						<label class="label-right">${task.statusVal}</label>
 						<hr />
 						
+						<c:if test="${task.isSuccessVal ne ''}">
+							<label class="label-left" >谈单结果:</label>
+							<label class="label-right">${task.isSuccessVal}</label>
+							<hr />
+						</c:if>
+						
 						<c:if test="${task.status!=0 and task.status!=3}">
 							<label class="label-left" >接受人：</label>
 							<label class="label-right">${task.receiver.name}</label>

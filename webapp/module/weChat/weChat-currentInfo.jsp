@@ -129,44 +129,43 @@ small {
 								${employee.name }<small style="float: right;">日期：${employee.nowDate
 									}</small>
 								<small >
-									<span style="text-align: right; width: 75px;">今 日 价 格 ：</span><span > ￥${employee.currentBitcoin}</span> <br>
+									<span style="text-align: right; width: 75px;">今 日 价 格 ：</span><span > ${employee.currentBitcoin}</span> <br>
 									<span style="text-align: right; width: 75px;">本 月 收 入 ：</span><span > ￥${employee.bitcoinIncome}</span> <br>
 									<span style="text-align: right; width: 75px;">已接受任务：</span><span >  ${employee.taskCount}</span> <br>
 									<span style="text-align: right; width: 75px;">已发布任务：</span><span >  ${employee.publishTaskCount}</span> <br>
 								</small>
 								<div id="star">
-											<ul class="rev_pro clearfix">
-												<li
-													style="border-bottom: none; padding: 0; font-size: 12px; color: #aaa;">
-													<span class="revtit" >综 合 评 价：</span>
-													<div class="revinp">
-														<span id="test" class="level"> <c:if
-																test="${employee.evaluationLevel==0}">
-																<c:forEach var="x" begin="1" end="5" step="1">
-																	<i class="level_hollow" cjmark=""></i>
-																</c:forEach>
-															</c:if> <c:if test="${employee.evaluationLevel!=0}">
-																<c:forEach var="x" begin="1"
-																	end="${employee.evaluationLevel}" step="1">
-																	<i class="level_solid" cjmark=""></i>
-																</c:forEach>
-																 <c:forEach var="x" begin="${employee.evaluationLevel+1}"
-																	end="5" step="1">
-																	<i class="level_hollow" cjmark=""></i>
-																</c:forEach> 
-															</c:if>
+									<ul class="rev_pro clearfix">
+										<li style="border-bottom: none; padding: 0; font-size: 12px; color: #aaa;">
+											<span class="revtit" >综 合 评 价：</span>
+											<div class="revinp">
+												<span id="test" class="level"> <c:if
+														test="${employee.evaluationLevel==0}">
+														<c:forEach var="x" begin="1" end="5" step="1">
+															<i class="level_hollow" cjmark=""></i>
+														</c:forEach>
+													</c:if> <c:if test="${employee.evaluationLevel!=0}">
+														<c:forEach var="x" begin="1"
+															end="${employee.evaluationLevel}" step="1">
+															<i class="level_solid" cjmark=""></i>
+														</c:forEach>
+														 <c:forEach var="x" begin="${employee.evaluationLevel+1}"
+															end="5" step="1">
+															<i class="level_hollow" cjmark=""></i>
+														</c:forEach> 
+													</c:if>
 
-														</span>
-													</div>
-												</li>
-											</ul>
-										</div>
+												</span>
+											</div>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</li>
 						<c:forEach var="emp" items="${employeeList }">
 							<c:if test="${emp.id ne employee.id}">
 								<li>
-									<div class="img appimg">
+									<div class="img appimg" >
 										<img alt="" src="${emp.headimgurl }"
 											style="position: absolute; top: 12px; left: 0; width: 64px; border-radius: 50%;" />
 									</div>
@@ -198,7 +197,6 @@ small {
 																	<i class="level_hollow" cjmark=""></i>
 																</c:forEach> 
 															</c:if>
-
 														</span>
 													</div>
 												</li>

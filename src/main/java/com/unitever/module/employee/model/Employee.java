@@ -6,6 +6,7 @@ import me.chanjar.weixin.cp.bean.WxCpUser;
 
 import com.unitever.module.user.model.User;
 import com.unitever.platform.util.DateUtil;
+import com.unitever.platform.util.DoubleUtil;
 
 /**
  * @author 作者 : 邓文杰
@@ -164,9 +165,10 @@ public class Employee {
 	 * 获取当前虚拟币
 	 * */
 	public String getNowBitcoin() {
-		double returnstr = (double)Math.ceil((Double.parseDouble(baseBitcoin) / DateUtil.getDayOfMonth())
-				* Double.parseDouble(DateUtil.getCurrDateString("dd")));
-		return  String.format("%.2f", returnstr);
+		/*double returnstr = (double)Math.ceil((Double.parseDouble(baseBitcoin) / DateUtil.getDayOfMonth())
+				* Double.parseDouble(DateUtil.getCurrDateString("dd")));*/
+		return DoubleUtil.mul(DoubleUtil.div(baseBitcoin, DateUtil.getDayOfMonth()+"", 2)+"", DateUtil.getCurrDateString("dd")+"", 2)+"";
+		//return  String.format("%.2f", returnstr);
 	}
 
 

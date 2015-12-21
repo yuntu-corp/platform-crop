@@ -405,9 +405,15 @@ public class WeChatController extends SpringController {
 	 */
 	@RequestMapping(value="/msgList",method=RequestMethod.GET)
 	public String msgList(
+			@RequestParam(value="type",required = false) String type,
 			@RequestParam(value = "code", required = false) String code,
 			@RequestParam(value = "state", required = false) String state,
 			@RequestParam(value="employeeId",required = false) String employeeId){
+		if(type!=null){
+			System.out.println("<<<<<<<<<<<<<<<type:"+type);
+		}else{
+			System.out.println("<<<<<<<<<<<<<<<type:null");
+		}
 		try {
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager
 					.getSession("service");
@@ -415,6 +421,7 @@ public class WeChatController extends SpringController {
 				setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employeeId, Dicker.DICKER_STATE_UNTREATED));
 				setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employeeId));
 				setAttribute("employee", employeeService.getEmployeeById(employeeId));
+				setAttribute("type", type);
 				return "module/weChat/jsp/weChat-msgList";
 			}
 			//当code不为空并且session中userID为空时，通过code获取userId（第一回点击）
@@ -440,6 +447,7 @@ public class WeChatController extends SpringController {
 				setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employee.getId(), Dicker.DICKER_STATE_UNTREATED));
 				setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employee.getId()));
 				setAttribute("employee", employee);
+				setAttribute("type", type);
 			}
 		} catch (WxErrorException e) {
 			e.printStackTrace();
@@ -553,6 +561,30 @@ public class WeChatController extends SpringController {
 		return "module/weChat/jsp/weChat-goUpdateCurrentBitcoin";
 	}
 	
+	/**
+	 * 获取任务状态
+	 */
+	@RequestMapping(value = "/getTaskState", method = RequestMethod.POST)
+	@ResponseBody
+	public String getTaskState(@RequestParam(value = "taskId") String taskId) {
+		Task task = taskService.getTaskById(taskId);
+		return task.getStatus();
+	}
+	
+	
+	/**
+	 * 提交审核
+	 * @throws WxErrorException 
+	 */
+	@RequestMapping(value="/commitVerify",method=RequestMethod.POST)
+	@ResponseBody
+	public String commitVerify(
+			@RequestParam(value="taskId") String taskId,
+			@RequestParam(value="employeeId") String employeeId,
+			@RequestParam(value="isSuccess") String isSuccess
+			) throws WxErrorException{
+		return taskService.commitVerify(taskId, employeeId,isSuccess);
+	}
 
 	@Autowired
 	private EmployeeService employeeService;

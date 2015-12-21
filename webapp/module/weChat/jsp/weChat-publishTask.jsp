@@ -93,26 +93,37 @@ input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 						<hr />
 
 						<label class="label-left">技术类型</label> <label class="label-right">
-							<c:forEach items="${taskTypes }" var="taskType">
-								<a href="#" data-role="radio"> <input
-									name="task.taskType.id" id="type" type="radio"
-									value=${taskType.id } style="left: 0; right: auto;" checked />
-									<label for="male" class="black">${taskType.typeName }</label>
+							<a href="#" data-role="radio">
+									<input name="task.taskType.id" id="type" type="radio" value=${taskTypes[0].id } style="left: 0; right: auto;" checked />
+									<label for="male" class="black">${taskTypes[0].typeName }</label>
 								</a>
+							<c:forEach items="${taskTypes }" var="taskType" varStatus="i">
+								<c:if test="${i.count ne 1}">
+									<a href="#" data-role="radio">
+										<input name="task.taskType.id" id="type" type="radio" value=${taskType.id } style="left: 0; right: auto;"  />
+										<label for="male" class="black">${taskType.typeName }</label>
+									</a>
+								</c:if>
 							</c:forEach>
 						</label>
 						<hr />
 
-						<label class="label-left">人员</label> <label class="label-right">
-							<c:forEach items="${allEmployes }" var="emp">
-								<c:if test="${userId!=emp.userId}">
-									<a href="#" data-role="checkbox"> <input type="checkbox"
-										id="employeesString" value="${emp.userId }"
-										name="task.employeesString" /> <label for="baskball"
-										class="black">${emp.name }</label>
-									</a>
-								</c:if>
-							</c:forEach>
+						<label class="label-left">人员</label>
+						<label class="label-right">
+							
+								<ul>
+									<c:forEach items="${allEmployes }" var="emp">
+										<c:if test="${userId!=emp.userId}">
+											<li>
+												<a href="#" data-role="checkbox" onclick="getCheckedNumber()">
+													<input type="checkbox" id="employeesString" value="${emp.userId }" name="task.employeesString" />
+													<label for="baskball"class="black">${emp.name }</label>
+												</a>
+											</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+						
 						</label>
 						<hr />
 
@@ -257,6 +268,17 @@ input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 				return false;
 			}
 			return true;
+		}
+		function getCheckedNumber(){
+			var checkedNumber = 0;
+			//alert(111);
+			//alert($("input[type='checkbox']:checked").length);
+			checkedNumber = $("input[type='checkbox']:checked").length;
+			if(checkedNumber > 0){
+				$("#checkedNumberValue").html("共有${allEmployes.size()-1 }人,已选择" + checkedNumber + "人");
+			} else{
+				$("#checkedNumberValue").html("共有${allEmployes.size()-1 }人,未选择任何人员");
+			}
 		}
 
 		function taskSave() {

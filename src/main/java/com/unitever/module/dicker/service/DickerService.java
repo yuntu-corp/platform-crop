@@ -22,6 +22,8 @@ import com.unitever.module.task.model.Task;
 import com.unitever.module.task.service.TaskService;
 import com.unitever.module.wechat.manager.SessionManager;
 import com.unitever.platform.core.web.argument.annotation.FormModel;
+import com.unitever.platform.util.DateUtil;
+import com.unitever.platform.util.DoubleUtil;
 
 @Service
 @Transactional
@@ -102,7 +104,7 @@ public class DickerService {
 			me.setToUser(employeeToHref.getUserId());
 			me.setContent(employeeDAO.get(publisherId).getName() + "已经对您发布的项目：" + task.getTitle()
 					+ "进行了还价请求！请去个人中心查看！ \n <a href=\"http://" + employeeToHref.getUser().getDomainName()
-					+ "/platform/weChat/msgList?employeeId=" + task.getPublisher().getId() + "\">查看详情>>></a>");
+					+ "/platform/weChat/msgList?employeeId=" + task.getPublisher().getId()+ "&type=dicker" + "\">查看详情>>></a>");
 			service.messageSend(me);
 			return "success";
 		}else{
@@ -147,6 +149,8 @@ public class DickerService {
 		me.setMsgType(WxConsts.XML_MSG_TEXT);
 		me.setAgentId("15");
 		me.setToUser(dicker.getPublisher().getUserId());
+		
+		
 		//判断任务状态是否已经被接受
 		if(Task.TASK_STATE_UNRECEIVE.equals(task.getStatus())){
 			task.setStatus(Task.TASK_STATE_UNFINISH);
@@ -154,14 +158,17 @@ public class DickerService {
 			task.setReceiver(dicker.getPublisher());
 			Employee publisher=task.getPublisher();
 			Employee receiver=task.getReceiver();
-			if((Double.parseDouble(publisher.getBitcoinSurplus())-Double.parseDouble(task.getFinalBitcoin()))<0){
+			
+			if(DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getFinalBitcoin(), 2)<0){
 				return "error";
 			}
-			publisher.setBitcoinConsume((Double.parseDouble(publisher.getBitcoinConsume())+Double.parseDouble(task.getFinalBitcoin()))+"");
-			publisher.setBitcoinSurplus((Double.parseDouble(publisher.getBitcoinSurplus())-Double.parseDouble(task.getFinalBitcoin()))+"");
 			
-			receiver.setBitcoinSurplus((Double.parseDouble(receiver.getBitcoinSurplus())+Double.parseDouble(task.getFinalBitcoin()))+"");
-			receiver.setBitcoinIncome((Double.parseDouble(receiver.getBitcoinIncome())+Double.parseDouble(task.getFinalBitcoin()))+"");
+			//DoubleUtil.add(receiver.getBitcoinIncome(),task.getFinalBitcoin(), 2)
+			publisher.setBitcoinConsume(DoubleUtil.add(publisher.getBitcoinConsume(), task.getFinalBitcoin(), 2)+"");
+			publisher.setBitcoinSurplus(DoubleUtil.sub(publisher.getBitcoinSurplus(),task.getFinalBitcoin(), 2)+"");
+			
+			receiver.setBitcoinSurplus(DoubleUtil.add(receiver.getBitcoinSurplus(),task.getFinalBitcoin(), 2)+"");
+			receiver.setBitcoinIncome(DoubleUtil.add(receiver.getBitcoinIncome(),task.getFinalBitcoin(), 2)+"");
 			receiver.setTaskCount((Integer.parseInt(receiver.getTaskCount())+1)+"");
 			employeeDAO.update(publisher);
 			employeeDAO.update(receiver);
@@ -177,6 +184,23 @@ public class DickerService {
 					+ "\n <a href=\"http://" + employee.getUser().getDomainName()
 					+ "/platform/weChat/taskView?id="+task.getId()+"&employeeId="+employee.getId()+"\">查看详情>>></a>");
 			service.messageSend(me);
+			
+			//通知除发布人和接收人之外的所有人此任务已经被接受
+			for (String employeeId_ : task.getEmployeesString().split(",")) {
+				if(!task.getPublisher().getUserId().equals(employeeId_)&&!task.getReceiver().getUserId().equals(employeeId_)){
+					System.out.println(employeeId_);
+					me.setContent(task.getPublisher().getName()
+							+ "发布的任务：'"+task.getTitle()+"'，已经被"+task.getReceiver().getName()+"接受"
+							+"\r\n 任务内容："+task.getContent()+";"
+							+"\r\n 任务工期："+task.getDurTime()+";"
+							+"\r\n 结束时间："+DateUtil.getDateMinString(task.getFinishDate())+";"
+							+"\r\n 虚拟币："+task.getFinalBitcoin()+";"
+							);
+					System.out.println(me.getContent());
+					me.setToUser(employeeId_);
+					service.messageSend(me);
+				}
+			}
 			return "success";
 		}else{
 			me.setContent("抱歉！您所还价的项目:"+task.getTitle()+"已经被"+task.getReceiver().getName()+"接受！"

@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="getAll" resultMap="resultEmployee">
-		select * from cp_employee 
+		select * from cp_employee order by name asc
 	</select>
 	
 	<insert id="save" parameterType="Employee">
@@ -61,11 +61,11 @@
     
     
     <select id="getEmployees" resultMap="resultEmployee">
-    	select * from cp_employee where user_id=#{id}
+    	select * from cp_employee where user_id=#{id} order by name asc
     </select>
     
     <select id="getAllReceivedEmployees" resultMap="resultEmployee" parameterType="String">
-    	select distinct * from cp_employee where instr(#{employees},userId)>0;
+    	select distinct * from cp_employee where instr(#{employees},userId)>0 order by name asc;
     </select>
     
     <update id="minusBitCoin">
@@ -110,6 +110,7 @@
 			     and user_id =#{user.id}
 			</if>
 		</where>
+		order by name asc
     </select>
     
      <update id="updateTaskCount" parameterType="String">

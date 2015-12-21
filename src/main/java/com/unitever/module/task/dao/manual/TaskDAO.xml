@@ -12,6 +12,7 @@
         <result column="finishDate" property="finishDate" />
         <result column="durTime" property="durTime" />
         <result column="status" property="status" />
+        <result column="isSuccess" property="isSuccess" />
          <result column="receiverState" property="receiverState" />
         <result column="employees" property="employeesString" />
         <association column="type" property="taskType" select="com.unitever.module.tasktype.dao.manual.TaskTypeDAO.get"/>
@@ -32,8 +33,8 @@
 	</select>
 	
 	<insert id="save" parameterType="Task">
-		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState)
-		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState})
+		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState,isSuccess)
+		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState},#{isSuccess})
 	</insert>
 	
 	<update id="update" parameterType="Task">
@@ -47,6 +48,7 @@
 			<if test="finishDate != null">finishDate=#{finishDate},</if>
 			<if test="durTime != null">durTime=#{durTime},</if>
 			<if test="status != null">status=#{status},</if>
+			<if test="isSuccess != null">isSuccess=#{isSuccess},</if>
 			<if test="receiverState !=null">receiverState=#{receiverState},</if>
 			<if test="taskType != null and taskType.id != null">type=#{taskType.id},</if>
 			<if test="employeesString != null">employees=#{employeesString},</if>
@@ -57,7 +59,7 @@
 	</update>
 	
 	<select id="getTaskByPublisherId" resultMap="resultTask">
-    	select * from cp_task where publisherId=#{id}
+    	select * from cp_task where publisherId=#{id} order by createTime desc
     </select>
     
     
@@ -98,6 +100,9 @@
 			</if>
 			<if test="status !=null">
 				and status=#{status}
+			</if>
+			<if test="isSuccess !=null">
+				and isSuccess=#{isSuccess}
 			</if>
 			<if test="taskType != null and taskType.id != null">
 				and type=#{taskType.id}

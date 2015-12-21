@@ -58,7 +58,7 @@
 					//} else {
 					//	alert(data);
 					//}
-					setTimeout(function(){window.location.href = "${path }/weChat/personalCenter?employeeId="+'${employee.id}';}, 2000);
+					setTimeout(function(){window.location.href = "${path }/weChat/personalCenter?employeeId="+'${employee.id}';}, 500);
 				}
 			});
 		}

@@ -32,7 +32,7 @@
 	.center .flatbtn-blu:active{ background-color:#217cd1;}
 	.loginmodal{display:none;padding: 24px 20px;background: #f3f6fa;border-radius: 4px;box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5); width:80%; margin:auto;}
 	.txtfield{ width: 98%; color: #7988a3; border:none; border-radius:2px; height:100px; padding:6px 2px;}
-
+input,textarea{-webkit-appearance:none;}/*隐藏文本框阴影*/
 	#section_container{position: static;top:0; right:0; bottom :0; left:0; height: 100%; width: 100%; overflow: hidden; z-index: 3;}
 </style>
 </head>
@@ -146,7 +146,7 @@
 				return false;
 			});
 			<c:forEach items="${unTreatedMsgListByOthers}" var="taskFromOthers" varStatus="v">
-				$('#modaltrigger_${v.count}').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
+				$('#modaltrigger_${v.count}').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" },'${taskFromOthers.id}');
 			</c:forEach>
 		});
 	</script>
@@ -154,7 +154,7 @@
 	<script>
 		(function($) {
 			$.fn.extend({
-				leanModal: function(options) {
+				leanModal: function(options,taskIdValue) {
 					var defaults = {
 						top: 100,
 						overlay: 0.5,
@@ -166,6 +166,12 @@
 					return this.each(function() {
 						var o = options;
 						$(this).click(function(e) {
+							var taskState = getTaskStates(taskIdValue);
+							if(taskState){
+								alert(taskState);
+								A.alert('提示', '任务已经被其他人接受！');
+								return false;
+							}
 							var modal_id = $(this).attr("href");
 							$("#lean_overlay").click(function() {
 								close_modal(modal_id)
@@ -198,6 +204,21 @@
 						$(modal_id).css({
 							"display": "none"
 						})
+					}
+					function getTaskStates(taskId){
+						var bool = false;
+						A.ajax({
+							url : "${path }/weChat/getTaskState?taskId=" + taskId,//获取任务状态的地址 
+							data : null,
+							type : "post",
+							async : false,
+							success : function(data) {
+								if(data != '0'){
+									bool = true;
+								}
+							}
+						}); 
+						return bool;
 					}
 				}
 			})

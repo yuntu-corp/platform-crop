@@ -32,6 +32,7 @@ public class Task {
 	private TaskType taskType;
 	private String finishTime;
 	private String receiverState;
+	private String isSuccess;//此字段专为销售任务定制（是否谈单成功）
 	private List<String[]> receiverStateList;//接受消息的人的处理情况List，用于前端页面显示，对receiverState做了   切割成List<String[]>格式的   处理
 	
 	
@@ -44,6 +45,19 @@ public class Task {
 	/**任务状态：已超时的任务**/
 	public static final String TASK_STATE_OVER="3";
 	
+	/**任务状态：待审核任务**/
+	public static final String TASK_STATE_UNVERIFY="4";
+	/**任务状态：审核通过**/
+	public static final String TASK_STATE_SUCCESS="5";
+	/**任务状态：审核失败**/
+	public static final String TASK_STATE_FAIL="6";
+	/**任务状态：未提交审核**/
+	public static final String TASK_STATE_UNCOMMIT="7";
+	
+	
+	
+	
+	
 	/**任务类型：技术开发**/
 	public static final String TASK_TYPE_1="0";
 	/**任务类型：售后**/
@@ -51,15 +65,28 @@ public class Task {
 	/**任务类型：销售**/
 	public static final String TASK_TYPE_3="2";
 	
+	
+	/**销售任务是否成功：成功**/
+	public static final String SUCCESS="1";
+	/**任务类型：失败**/
+	public static final String FAIL="0";
+	
+	
 	private String statusVal;//任务状态字符串
 	private String timeVal;//任务距离完成日期剩余秒数
-	
-	
-
+	private String isSuccessVal;// 是否谈单成功字符串
 	
 
 	
+
 	
+	
+	public String getIsSuccess() {
+		return isSuccess;
+	}
+	public void setIsSuccess(String isSuccess) {
+		this.isSuccess = isSuccess;
+	}
 	public Date getFinishDate() {
 		return finishDate;
 	}
@@ -171,6 +198,14 @@ public class Task {
 			return "已完成";
 		}else if(TASK_STATE_OVER.equals(status)){
 			return "已超时";
+		}else if(TASK_STATE_UNVERIFY.equals(status)){
+			return "待审核";
+		}else if(TASK_STATE_SUCCESS.equals(status)){
+			return "审核通过";
+		}else if(TASK_STATE_FAIL.equals(status)){
+			return "审核失败";
+		}else if(TASK_STATE_UNCOMMIT.equals(status)){
+			return "未提交审核";
 		}
 		return statusVal;
 	}
@@ -218,6 +253,21 @@ public class Task {
 		this.receiverStateList = receiverStateList;
 	}
 	
-	
+	public String getIsSuccessVal() {
+		isSuccessVal = "";
+		if (StringUtils.isNotBlank(isSuccess)) {
+			if (SUCCESS.equals(isSuccess)) {
+				isSuccessVal = "谈单成功";
+			} else if (FAIL.equals(isSuccess)) {
+				isSuccessVal = "谈单失败";
+			}
+		}
+		return isSuccessVal;
+	}
+
+	public void setIsSuccessVal(String isSuccessVal) {
+		this.isSuccessVal = isSuccessVal;
+	}
+
 
 }
