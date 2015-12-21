@@ -364,7 +364,7 @@ public class TaskService {
 						me.setMsgType(WxConsts.XML_MSG_TEXT);
 						me.setAgentId("15");
 						me.setToUser(task.getPublisher().getUserId());
-						me.setContent("您发布的任务：" + task.getTitle() + "在任务结束后3天内未提交审核！否则系统将不会给您任何补偿！");
+						me.setContent("您发布的任务：" + task.getTitle() + "在任务结束后3天内未提交审核！");
 						service.messageSend(me);
 					}
 				}

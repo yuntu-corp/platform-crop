@@ -3,6 +3,7 @@ package com.unitever.module.task.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,6 @@ import com.unitever.module.wechat.manager.SessionManager;
 import com.unitever.platform.core.dao.Page;
 import com.unitever.platform.core.web.argument.annotation.FormModel;
 import com.unitever.platform.core.web.controller.SpringController;
-import com.unitever.platform.util.DoubleUtil;
 
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.exception.WxErrorException;
@@ -137,15 +137,15 @@ public class TaskController extends SpringController {
 	 */
 	@RequestMapping(value = "/doCheck")
 	@ResponseBody
-	public void doCheck(@FormModel("model") Task task) throws WxErrorException {
+	public void doCheck(@FormModel("model") Task task,
+			@RequestParam(value = "refuseReason", required = false) String refuseReason) throws WxErrorException {
 		taskService.update(task);
 		// 满足一定条件的情况下 进行 任务返利
 		Employee employee = employeeDAO.get(task.getPublisher().getId());
 		if (Task.FAIL.equals(task.getIsSuccess())) {
 			if (Task.TASK_STATE_SUCCESS.equals(task.getStatus())) {
-				
-				employee.setBitcoinSurplus(DoubleUtil.add(employee.getBitcoinSurplus(), task.getFinalBitcoin(), 2) + "");
-				employee.setBitcoinIncome(DoubleUtil.add(employee.getBitcoinIncome(), task.getFinalBitcoin(), 2) + "");
+				employee.setBitcoinSurplus((Double.parseDouble(employee.getBitcoinSurplus())
+						+ Double.parseDouble(task.getFinalBitcoin()) / 2) + "");
 				employeeDAO.update(employee);
 			}
 		}
@@ -155,8 +155,13 @@ public class TaskController extends SpringController {
 		me.setMsgType(WxConsts.XML_MSG_TEXT);
 		me.setAgentId("15");
 		me.setToUser(employee.getUserId());
-		me.setContent("管理员已经对您提交的资料审核完毕\r\n任务为：" + task.getTitle() + "\r\n审核结果为:" + task.getStatusVal() + "\r\n <a href=\"http://" + employee.getUser().getDomainName()
-				+ "/platform/weChat/taskView?id=" + task.getId() + "&employeeId=" + employee.getId() + "\">查看详情>>></a>");
+		String massageStr = "管理员已经对您提交的资料审核完毕\r\n任务为：" + task.getTitle() + "\r\n审核结果为：" + task.getStatusVal();
+		if (StringUtils.isNotBlank(refuseReason) && task.getStatus().equals("6")) {
+			massageStr += "\r\n拒绝理由为：" + refuseReason;
+		}
+		massageStr += "\r\n <a href=\"http://" + employee.getUser().getDomainName() + "/platform/weChat/taskView?id="
+				+ task.getId() + "&employeeId=" + employee.getId() + "\">查看详情>>></a>";
+		me.setContent(massageStr);
 		service.messageSend(me);
 	}
 

@@ -8,12 +8,17 @@
 			a:active{ text-decoration:none;}/*正在点击的链接文本闪烁*/
 			a:hover{ text-decoration:none;}/*鼠标移入的链接文字有下划线*/
 			a:visited{ text-decoration:none;}/*已被访问过链接*/
+			.txtfield{ width: 98%; color: #7988a3; border:none; border-radius:2px; height:100px; padding:6px 2px;}
 		</style>
 		<script type="text/javascript">
 			Namespace.register("com.yunt.taskCheck.check");
 			com.yunt.taskCheck.check = {
 				doCheck : function(dialogId) {
 					if(!$("#${pageId}theForm").valid()){
+						return false;
+					}
+					if( $("input[type='radio']:checked").val() == "6" && $("#refuseReason").val().trim().length <= 0){
+						alert("请输入未通过审核的理由！");
 						return false;
 					}
 					var formData = $("#${pageId}theForm").serialize();
@@ -32,6 +37,12 @@
 			$(document).ready(function() {
 				$.hz.validate.init("${pageId}theForm");
 			});
+			function closeReason(){
+				$("#refuseReason").attr("disabled",true);
+			}
+			function openReason(){
+				$("#refuseReason").attr("disabled",false);
+			}
 		</script>
 	</head>
 	<body>
@@ -98,13 +109,17 @@
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>审核结果:</label>
 		     	<div class="view_detail2">
-			     	<label style="min-height: 20px; line-height: 20px; width: 100px;">
-						<input type="radio" name="model.status"  value="5"  style="width: 13px; height:13px;margin:4px 4px 0px 0px;  line-height: normal;cursor: pointer;">通过
+			     	<label style="min-height: 20px; line-height: 20px; width: 100px;" onclick="closeReason()">
+						<input type="radio" name="model.status"  value="5"  style="width: 13px; height:13px;margin:4px 4px 0px 0px;  line-height: normal;cursor: pointer;" >通过
 					</label>
-			     	<label style="min-height: 20px;line-height: 20px; width: 100px;">
-						<input type="radio" name="model.status"  value="6" style="width: 13px;height:13px;margin: 4px 4px 0px 0px; line-height: normal;cursor: pointer;" checked>未通过
+			     	<label style="min-height: 20px;line-height: 20px; width: 100px;" onclick="openReason()">
+						<input type="radio" name="model.status"  value="6" style="width: 13px;height:13px;margin: 4px 4px 0px 0px; line-height: normal;cursor: pointer;" checked >未通过
 					</label>
 		     	</div>
+			</div>
+			<div class="pl100 lh50">
+		     	<label class="labelTitle"><em style="color: red;">*</em>未通过原因：</label>
+		     	<div class="view_detail2"><textarea id="refuseReason"  class="txtfield" name="refuseReason" style="width: 98%; margin-left: -10px;" placeholder="请输入未通过原因" maxlength="100" /></div>
 			</div>
 		</div>
 		</form>
