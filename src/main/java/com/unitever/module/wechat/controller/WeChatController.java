@@ -16,6 +16,7 @@ import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -562,13 +563,16 @@ public class WeChatController extends SpringController {
 	}
 	
 	/**
-	 * 获取任务状态
+	 * 获取任务状态 未接受任务返回false 已接受以及其他状态任务返回true
 	 */
 	@RequestMapping(value = "/getTaskState", method = RequestMethod.POST)
 	@ResponseBody
-	public String getTaskState(@RequestParam(value = "taskId") String taskId) {
+	public boolean getTaskState(@RequestParam(value = "taskId") String taskId) {
 		Task task = taskService.getTaskById(taskId);
-		return task.getStatus();
+		if (task.getStatus().trim().equals(Task.TASK_STATE_UNRECEIVE)) {
+			return false;
+		}
+		return true;
 	}
 	
 	

@@ -343,17 +343,23 @@ public class TaskService {
 					}
 				} else {// 如果是销售任务
 					DateTime dateTime = new DateTime(task.getFinishDate().getTime());
-					// 销售任务已经到期，不过不更新状态，而是提醒用户赶快提交
-					if (dateTime.isBeforeNow()) {
-						// 通知发布还价人
-						WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
-						WxCpMessage me = new WxCpMessage();
-						me.setMsgType(WxConsts.XML_MSG_TEXT);
-						me.setAgentId("15");
-						me.setToUser(task.getPublisher().getUserId());
-						me.setContent("您发布的任务：" + task.getTitle() + "已经到期，请在3日内提交审核！否则系统将不会给您任何补偿！");
-						service.messageSend(me);
+					//检查此任务是否已经提醒过用户
+					if(Task.UNNOTICE.equals(task.getIsNotice())){
+						// 销售任务已经到期，不过不更新状态，而是提醒用户赶快提交
+						if (dateTime.isBeforeNow()) {
+							task.setIsNotice(Task.NOTICE);
+							taskDAO.update(task);
+							// 通知发布还价人
+							WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
+							WxCpMessage me = new WxCpMessage();
+							me.setMsgType(WxConsts.XML_MSG_TEXT);
+							me.setAgentId("15");
+							me.setToUser(task.getPublisher().getUserId());
+							me.setContent("您发布的任务：" + task.getTitle() + "已经到期，请在3日内提交审核！否则系统将不会给您任何补偿！");
+							service.messageSend(me);
+						}
 					}
+					
 					dateTime.plusDays(3);
 					if (dateTime.isBeforeNow()) {
 						task.setStatus(Task.TASK_STATE_UNCOMMIT);

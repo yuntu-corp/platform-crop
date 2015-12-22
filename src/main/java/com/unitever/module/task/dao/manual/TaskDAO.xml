@@ -13,6 +13,7 @@
         <result column="durTime" property="durTime" />
         <result column="status" property="status" />
         <result column="isSuccess" property="isSuccess" />
+        <result column="isNotice" property="isNotice" />
          <result column="receiverState" property="receiverState" />
         <result column="employees" property="employeesString" />
         <association column="type" property="taskType" select="com.unitever.module.tasktype.dao.manual.TaskTypeDAO.get"/>
@@ -33,8 +34,8 @@
 	</select>
 	
 	<insert id="save" parameterType="Task">
-		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState,isSuccess)
-		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState},#{isSuccess})
+		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState,isSuccess,isNotice)
+		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState},#{isSuccess},#{isNotice})
 	</insert>
 	
 	<update id="update" parameterType="Task">
@@ -49,6 +50,7 @@
 			<if test="durTime != null">durTime=#{durTime},</if>
 			<if test="status != null">status=#{status},</if>
 			<if test="isSuccess != null">isSuccess=#{isSuccess},</if>
+			<if test="isNotice != null">isNotice=#{isNotice},</if>
 			<if test="receiverState !=null">receiverState=#{receiverState},</if>
 			<if test="taskType != null and taskType.id != null">type=#{taskType.id},</if>
 			<if test="employeesString != null">employees=#{employeesString},</if>
@@ -103,6 +105,9 @@
 			</if>
 			<if test="isSuccess !=null">
 				and isSuccess=#{isSuccess}
+			</if>
+			<if test="isNotice !=null">
+				and isNotice=#{isNotice}
 			</if>
 			<if test="taskType != null and taskType.id != null">
 				and type=#{taskType.id}

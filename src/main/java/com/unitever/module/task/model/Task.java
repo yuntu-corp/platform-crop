@@ -32,6 +32,7 @@ public class Task {
 	private TaskType taskType;
 	private String finishTime;
 	private String receiverState;
+	private String isNotice;//是否已经提醒用户（过期还未提交审核）
 	private String isSuccess;//此字段专为销售任务定制（是否谈单成功）
 	private List<String[]> receiverStateList;//接受消息的人的处理情况List，用于前端页面显示，对receiverState做了   切割成List<String[]>格式的   处理
 	
@@ -71,6 +72,11 @@ public class Task {
 	/**任务类型：失败**/
 	public static final String FAIL="0";
 	
+	/**是否提醒：提醒**/
+	public static final String NOTICE="1";
+	/**是否提醒：未提醒**/
+	public static final String UNNOTICE="0";
+	
 	
 	private String statusVal;//任务状态字符串
 	private String timeVal;//任务距离完成日期剩余秒数
@@ -81,6 +87,12 @@ public class Task {
 
 	
 	
+	public String getIsNotice() {
+		return isNotice;
+	}
+	public void setIsNotice(String isNotice) {
+		this.isNotice = isNotice;
+	}
 	public String getIsSuccess() {
 		return isSuccess;
 	}

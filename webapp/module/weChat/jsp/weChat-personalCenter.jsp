@@ -40,10 +40,22 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 }
 </style>
 </head>
+<script type="text/javascript" src="${path}/platform/ui/semantic/stringUtil.js"></script>
+<script type="text/javascript">
+function a(){
+	/* if("ABC".equalIgnoreCase('abc')){
+		alert("ok");
+	}else{
+		alert("erroe");
+	} */
+	alert("123".deleteCharAt(3));
+}
+</script>
 <body>
 	<div class="jump-container">
 		<div class="jump-main" style="background-color:#3779d0;">
-		<a href="${path}/weChat/goUpdateCurrentBitcoin?employeeId=${employee.id}">
+		<!-- ${path}/weChat/goUpdateCurrentBitcoin?employeeId=${employee.id} -->
+		<a href="JavaScript:void(0)" onclick="a()">
 			<img src="${employee.headimgurl }">
 			<div class="text" style="color:#fff;">
 				${employee.name } 
@@ -73,6 +85,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 				<li>
 					<a href="${path}/weChat/goUpdateCurrentBitcoin?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
+						<div class="iconline-icon-right" style="color:#444; background-color:#fff; border-radius:0;">￥${employee.currentBitcoin }</div> 
 						<!-- <div class="iconline-icon-right">5</div> -->
 						<div class="text">修改今日价格</div>
 					</a>

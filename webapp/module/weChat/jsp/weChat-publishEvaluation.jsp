@@ -13,6 +13,8 @@
     <link href="${path }/module/weChat/jump/css/flat.component.css" rel="stylesheet" type="text/css">
     <link href="${path }/module/weChat/jump/css/iconline.css" rel="stylesheet" type="text/css">
 	<link href="${path }/module/weChat/jump/css/modify.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="${path}/module/weChat/agile-lite/assets/agile/css/agile.layout.css">
+	<link rel="stylesheet" href="${path}/module/weChat/agile-lite/assets/app/css/app.css">
 	<style>
 		/* starbox */
 		#star{ background-color:#fff; border-bottom:1px solid #ddd; border-top:1px solid #ddd; padding:12px 10px 8px; margin-bottom:10px;}
@@ -26,6 +28,7 @@
 		.level .level_hollow{background-position:-21px 0px;}
 		.revgrade{margin-left:20px;}
 		/* starbox */
+		#section_container{position: static;top:0; right:0; bottom :0; left:0; height: 100%; width: 100%; overflow: hidden; z-index: 3;}
 	</style>
 </head>
 
@@ -60,6 +63,8 @@
     </div>
     <script src="${path }/module/weChat/jump/js/jquery-2.1.3.min.js"></script>
     <script src="${path }/module/weChat/jump/js/zepto.min.js"></script>
+    <script type="text/javascript" src="${path}/module/weChat/agile-lite/assets/agile/js/agile.js"></script>
+	<script src="${path}/module/weChat/agile-lite/assets/third/jquery/jquery.mobile.custom.min.js"></script>
         <!--星星-->
 	<script type="text/javascript">
         var degree = [ '', '很差', '差', '中', '良', '优', '未评分' ];
@@ -124,9 +129,9 @@
 		})
 		function publishEvaluation() {
 			if ($("#comment").val() == "") {
-				alert("请输入评价");
+				A.alert("提示","请输入评价");
 			} else if ($("#comment").val().length > 100) {
-				alert("请输100字以内的评价！");
+				A.alert("提示","请输100字以内的评价！");
 			} else {
 				$.ajax({
 					type : "POST",
@@ -141,7 +146,7 @@
 					async : false,
 					success : function(data) {
 						if(data=="success"){
-							A.alert("发布评价成功！");
+							A.alert("提示","发布评价成功！");
 							setTimeout(function(){history.back(-1);}, 2000);
 						}
 						

@@ -168,7 +168,6 @@ input,textarea{-webkit-appearance:none;}/*隐藏文本框阴影*/
 						$(this).click(function(e) {
 							var taskState = getTaskStates(taskIdValue);
 							if(taskState){
-								alert(taskState);
 								A.alert('提示', '任务已经被其他人接受！');
 								return false;
 							}
@@ -213,7 +212,7 @@ input,textarea{-webkit-appearance:none;}/*隐藏文本框阴影*/
 							type : "post",
 							async : false,
 							success : function(data) {
-								if(data != '0'){
+								if(data=="true"){
 									bool = true;
 								}
 							}
