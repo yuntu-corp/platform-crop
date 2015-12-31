@@ -14,6 +14,8 @@
         <result column="status" property="status" />
         <result column="isSuccess" property="isSuccess" />
         <result column="isNotice" property="isNotice" />
+        <result column="isPublisherEvaluate" property="isPublisherEvaluate" />
+        <result column="isReceiverEvaluate" property="isReceiverEvaluate" />
          <result column="receiverState" property="receiverState" />
         <result column="employees" property="employeesString" />
         <association column="type" property="taskType" select="com.unitever.module.tasktype.dao.manual.TaskTypeDAO.get"/>
@@ -34,8 +36,8 @@
 	</select>
 	
 	<insert id="save" parameterType="Task">
-		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState,isSuccess,isNotice)
-		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState},#{isSuccess},#{isNotice})
+		insert into cp_task(id,content,title,preBitcoin,finalBitcoin,createTime,finishDate,durTime,status,publisherId,receiverId,employees,type,receiverState,isSuccess,isNotice,isPublisherEvaluate,isReceiverEvaluate)
+		value(#{id},#{content},#{title},#{preBitcoin},#{finalBitcoin},#{createTime},#{finishDate},#{durTime},#{status},#{publisher.id},#{receiver.id},#{employeesString},#{taskType.id},#{receiverState},#{isSuccess},#{isNotice},#{isPublisherEvaluate},#{isReceiverEvaluate})
 	</insert>
 	
 	<update id="update" parameterType="Task">
@@ -51,6 +53,8 @@
 			<if test="status != null">status=#{status},</if>
 			<if test="isSuccess != null">isSuccess=#{isSuccess},</if>
 			<if test="isNotice != null">isNotice=#{isNotice},</if>
+			<if test="isPublisherEvaluate != null">isPublisherEvaluate=#{isPublisherEvaluate},</if>
+			<if test="isReceiverEvaluate != null">isReceiverEvaluate=#{isReceiverEvaluate},</if>
 			<if test="receiverState !=null">receiverState=#{receiverState},</if>
 			<if test="taskType != null and taskType.id != null">type=#{taskType.id},</if>
 			<if test="employeesString != null">employees=#{employeesString},</if>
@@ -105,6 +109,12 @@
 			</if>
 			<if test="isSuccess !=null">
 				and isSuccess=#{isSuccess}
+			</if>
+			<if test="isPublisherEvaluate !=null">
+				and isPublisherEvaluate=#{isPublisherEvaluate}
+			</if>
+			<if test="isReceiverEvaluate !=null">
+				and isReceiverEvaluate=#{isReceiverEvaluate}
 			</if>
 			<if test="isNotice !=null">
 				and isNotice=#{isNotice}

@@ -6,7 +6,7 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-<title>我发布的任务</title>
+<title>已发布任务</title>
  <link href="${path}/module/weChat/jump/css/jump-demo.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="${path}/module/weChat/agile-lite/assets/agile/css/agile.layout.css">
  <link rel="stylesheet" href="${path}/module/weChat/agile-lite/assets/app/css/app.css">

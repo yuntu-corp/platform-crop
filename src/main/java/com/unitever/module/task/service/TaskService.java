@@ -112,6 +112,8 @@ public class TaskService {
 		task.getFinishDate().setHours(date.getHours());
 		task.getFinishDate().setMinutes(date.getMinutes());
 		task.setCreateTime(new Date());
+		task.setIsPublisherEvaluate(Task.UNEVALUATE);
+		task.setIsReceiverEvaluate(Task.UNEVALUATE);
 		if (null == task.getFinishTime()) {
 			return "请选择任务结束时间";
 		}
@@ -331,6 +333,7 @@ public class TaskService {
 	 * @throws WxErrorException
 	 */
 	public void updateTaskStatus() throws WxErrorException {
+		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<更新状态");
 		List<Task> tasks = getAllTasks();
 		for (Task task : tasks) {
 			// 未完成任务到期后自动更新状态为已完成
@@ -377,7 +380,9 @@ public class TaskService {
 			}
 			// 未处理任务到期后自动更新状态为超时
 			if (Task.TASK_STATE_UNRECEIVE.equals(task.getStatus())) {
-				if (new Date().compareTo(task.getFinishDate()) >= 0) {
+				DateTime dateTime = new DateTime(task.getFinishDate().getTime());
+				if (dateTime.isBeforeNow()) {
+					System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<超时："+task.getTitle());
 					task.setStatus(Task.TASK_STATE_OVER);
 					taskDAO.update(task);
 					// 通知发布还价人

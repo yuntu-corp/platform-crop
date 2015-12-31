@@ -40,7 +40,7 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 }
 </style>
 </head>
-<script type="text/javascript" src="${path}/platform/ui/semantic/stringUtil.js"></script>
+<script type="text/javascript" src="${path}/platform/ui/semantic/xdate.js"></script>
 <script type="text/javascript">
 function a(){
 	/* if("ABC".equalIgnoreCase('abc')){
@@ -48,7 +48,8 @@ function a(){
 	}else{
 		alert("erroe");
 	} */
-	alert("123".deleteCharAt(3));
+	var date=new XDate();
+	alert(date.toString());
 }
 </script>
 <body>

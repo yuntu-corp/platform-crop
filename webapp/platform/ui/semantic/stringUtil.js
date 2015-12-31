@@ -172,3 +172,57 @@ String.prototype.left = function (n) {
 String.prototype.right = function (n) {
     return this.slice(this.length - n);
 }
+/**
+ * <code>isValidateCols</code>方法用于检查字符串是否是有效位数
+ * <p>
+ * 
+ * @return boolean false → 不是制定位数 true → 是指定位数
+ */
+function isValidateMinCols(str, cols) {
+	if (str.length >= cols) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function isValidateMaxCols(str, cols) {
+	if (str.length <= cols) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function isValidateRangeCols(str, min, max) {
+	if (str.length >= min && str.length <= max) {
+		return true;
+	} else {
+		return false;
+	}
+}
+/**
+ * <code>isEmptyString</code>方法用于检查字符串是否为空字符串
+ * <p>
+ * 
+ * @return boolean false → 不是空串 true → 是空串
+ */
+
+function isEmptyStr(str) {
+	if (trim(str).length == 0 || str == null) {
+		return true;
+	} else {
+		return false;
+	}
+}
+//获取文件全名 
+String.prototype.GetFileName = function() { 
+  var regEx = /^.*\/([^\/\?]*).*$/; 
+  return this.replace(regEx, '$1'); 
+};
+  
+// 获取文件扩展名 
+String.prototype.GetExtensionName = function() { 
+  var regEx = /^.*\/[^\/]*(\.[^\.\?]*).*$/; 
+  return this.replace(regEx, '$1'); 
+}; 

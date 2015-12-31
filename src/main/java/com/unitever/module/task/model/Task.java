@@ -36,6 +36,14 @@ public class Task {
 	private String isSuccess;//此字段专为销售任务定制（是否谈单成功）
 	private List<String[]> receiverStateList;//接受消息的人的处理情况List，用于前端页面显示，对receiverState做了   切割成List<String[]>格式的   处理
 	
+	private String isPublisherEvaluate;//是否发布人已经评价
+	private String isReceiverEvaluate;//是否接受人已经评价
+	
+	/**是否已经评价：未评价**/
+	public static final String UNEVALUATE="0";
+	/**是否已经评价：已评价**/
+	public static final String EVALUATE="1";
+	
 	
 	/**任务状态：未接受的任务**/
 	public static final String TASK_STATE_UNRECEIVE="0";
@@ -82,11 +90,18 @@ public class Task {
 	private String timeVal;//任务距离完成日期剩余秒数
 	private String isSuccessVal;// 是否谈单成功字符串
 	
-
-	
-
-	
-	
+	public String getIsPublisherEvaluate() {
+		return isPublisherEvaluate;
+	}
+	public void setIsPublisherEvaluate(String isPublisherEvaluate) {
+		this.isPublisherEvaluate = isPublisherEvaluate;
+	}
+	public String getIsReceiverEvaluate() {
+		return isReceiverEvaluate;
+	}
+	public void setIsReceiverEvaluate(String isReceiverEvaluate) {
+		this.isReceiverEvaluate = isReceiverEvaluate;
+	}
 	public String getIsNotice() {
 		return isNotice;
 	}

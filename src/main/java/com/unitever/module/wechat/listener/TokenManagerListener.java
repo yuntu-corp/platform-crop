@@ -1,6 +1,8 @@
 package com.unitever.module.wechat.listener;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
 import me.chanjar.weixin.cp.api.WxCpServiceImpl;
@@ -52,6 +54,21 @@ public class TokenManagerListener  implements InitializingBean{
 				SessionManager.addSession("service"+user.getCorpId(), service);
 				SessionManager.addSession("storage"+user.getCorpId(), storage);
 	    		System.out.println("<<<<<<<<<<初始化");
+	    	}*/
+	    	//Map<String, User> map=new HashMap<String, User>();
+	    	//初始化所有user
+	    	/*List<User> users=userService.getUserList();
+	    	for(User user:users){
+	    		WxCpServiceImpl service = new WxCpServiceImpl();
+		    	WxCpInMemoryConfigStorage storage=new WxCpInMemoryConfigStorage();
+				storage.setCorpId(user.getCorpId());
+				storage.setCorpSecret(user.getCorpSecret());
+				storage.setAgentId(user.getAgentId());
+				storage.setAesKey(user.getEncodingAesKey());
+				storage.setToken(user.getToken());
+				service.setWxCpConfigStorage(storage);
+		    	SessionManager.addSession("storage"+user.getCorpId(), storage);
+		    	SessionManager.addSession("service"+user.getCorpId(), service);
 	    	}*/
 	    	User user=userService.getUserList().get(0);
 	    	WxCpServiceImpl service = new WxCpServiceImpl();

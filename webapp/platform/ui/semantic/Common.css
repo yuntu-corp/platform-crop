@@ -1,0 +1,70 @@
+/*元素垂直居中 */
+.ele {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+/*按钮背景渐变动画*/
+button {
+	background-image: linear-gradient(#5187c4, #1c2f45);
+	background-size: auto 200%;
+	background-position: 0 100%;
+	transition: background-position 0.5s;
+}
+
+button:hover {
+	background-position: 0 0;
+}
+/*为超链接添加个性样式*/
+a[href^="http://"] {
+	padding-right: 20px;
+	background: url(external.gif) no-repeat center right;
+}
+/*自定义文本选择*/
+::selection {
+	background: #e2eae2;
+}
+
+::-moz-selection {
+	background: #e2eae2;
+}
+
+::-webkit-selection {
+	background: #e2eae2;
+}
+/*图片边框效果*/
+img.polaroid {
+	background: #000; /*Change this to a background image or remove*/
+	border: solid #fff;
+	border-width: 6px 6px 20px 6px;
+	box-shadow: 1px 1px 5px #333;
+	/* Standard blur at 5px. Increase for more depth */
+	-webkit-box-shadow: 1px 1px 5px #333;
+	-moz-box-shadow: 1px 1px 5px #333;
+	height: 200px; /*Set to height of your image or desired div*/
+	width: 200px; /*Set to width of your image or desired div*/
+}
+/*CSS全屏背景图片*/
+html { 
+    background: url('images/bg.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+/*FOOTER固定在页面的顶部*/
+#footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    background: #444;
+}
+/* IE 6 */
+* html #footer {
+    position: absolute;
+    top: expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+}  

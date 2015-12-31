@@ -147,7 +147,7 @@
 					success : function(data) {
 						if(data=="success"){
 							A.alert("提示","发布评价成功！");
-							setTimeout(function(){history.back(-1);}, 2000);
+							setTimeout(function(){window.location.href = "${path }/weChat/taskList?employeeId=${publisherId}";}, 2000);
 						}
 						
 					},

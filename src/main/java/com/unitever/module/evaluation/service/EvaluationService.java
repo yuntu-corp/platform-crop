@@ -11,6 +11,7 @@ import com.unitever.module.employee.dao.manual.EmployeeDAO;
 import com.unitever.module.employee.model.Employee;
 import com.unitever.module.evaluation.dao.manual.EvaluationDAO;
 import com.unitever.module.evaluation.model.Evaluation;
+import com.unitever.module.task.dao.manual.TaskDAO;
 import com.unitever.module.task.model.Task;
 import com.unitever.platform.core.dao.Page;
 
@@ -80,27 +81,55 @@ public class EvaluationService {
 	}
 	
 	public void evaluate(String taskId, String publisherId,String receiverId, String content, String level){
-		
-		Evaluation evaluation=new Evaluation();
-		//1、保存评价
-		evaluation.setCreateTime(new Date());
-		evaluation.setPublisher(new Employee(publisherId));
-		evaluation.setReceiver(new Employee(receiverId));
-		evaluation.setTask(new Task(taskId));
-		evaluation.setLevel(level);
-		evaluation.setContent(content);
-		evaluationDAO.save(evaluation);
-		//2、修改被评价人星级
-		Employee employee=new Employee(receiverId);
-		employee.setEvaluationLevel(evaluationDAO.getLevelAvgByReceiveId(receiverId)+"");
-		employeeDAO.update(employee);
-		//int avgLevel=
-		//Employee receiver=new Employee();
-		//receiver.
+		Task task=taskDAO.get(taskId);
+		//检查任务发布人是否已经评价
+		if(task.getPublisher().getId().equals(publisherId)){
+			if(Task.UNEVALUATE.equals(task.getIsPublisherEvaluate())){
+				Evaluation evaluation=new Evaluation();
+				//1、保存评价
+				evaluation.setCreateTime(new Date());
+				evaluation.setPublisher(new Employee(publisherId));
+				evaluation.setReceiver(new Employee(receiverId));
+				evaluation.setTask(new Task(taskId));
+				evaluation.setLevel(level);
+				evaluation.setContent(content);
+				evaluationDAO.save(evaluation);
+				//2、修改被评价人星级
+				Employee employee=new Employee(receiverId);
+				employee.setEvaluationLevel(evaluationDAO.getLevelAvgByReceiveId(receiverId)+"");
+				employeeDAO.update(employee);
+				//3、更新任务
+				task.setIsPublisherEvaluate(Task.EVALUATE);
+				taskDAO.update(task);
+			}
+		}
+		//检查接收人是否评价
+		if(task.getReceiver().getId().equals(publisherId)){
+			if(Task.UNEVALUATE.equals(task.getIsReceiverEvaluate())){
+				Evaluation evaluation=new Evaluation();
+				//1、保存评价
+				evaluation.setCreateTime(new Date());
+				evaluation.setPublisher(new Employee(publisherId));
+				evaluation.setReceiver(new Employee(receiverId));
+				evaluation.setTask(new Task(taskId));
+				evaluation.setLevel(level);
+				evaluation.setContent(content);
+				evaluationDAO.save(evaluation);
+				//2、修改被评价人星级
+				Employee employee=new Employee(receiverId);
+				employee.setEvaluationLevel(evaluationDAO.getLevelAvgByReceiveId(receiverId)+"");
+				employeeDAO.update(employee);
+				//3、更新任务
+				task.setIsReceiverEvaluate(Task.EVALUATE);
+				taskDAO.update(task);
+			}
+		}
 	}
 	
 	@Autowired
 	private EvaluationDAO evaluationDAO;
+	@Autowired
+	private TaskDAO taskDAO;
 	@Autowired
 	private EmployeeDAO employeeDAO;
 }

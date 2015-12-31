@@ -149,20 +149,25 @@ a:visited{ text-decoration:none;}/*已被访问过链接*/
 					<c:if test="${taskVo.finishTaskList.size()>0}">
 						<ul class="listitem">
 							<c:forEach items="${taskVo.finishTaskList }" var="task">
-								<c:if test="${employee.id eq task.publisher.id or employee.id eq task.receiver.id}">
+								
 								<li onclick="load('${path }/weChat/taskView?id=${task.id}&employeeId=${employee.id}')">
 									<%-- <a href="${path }/weChat/taskView?id=${task.id}&employeeId=${employee.id}"> --%>
 										<div class="img appimg" style="padding-left: 5px;">
 											<img alt="" src="${task.publisher.headimgurl}" style="position: absolute; top: 0; left: 0; width: 64px; border-radius: 50%;" />
 										</div> 
-										<a href="${path }/weChat/publishEvaluation?publisherId=${employee.id}&receiverId=${task.publisher.id}&taskId=${task.id}" class="button ricon ">去评价</a>
+										<c:if test="${employee.id eq task.publisher.id and task.isPublisherEvaluate eq '0'}">
+											<a href="${path }/weChat/publishEvaluation?publisherId=${employee.id}&receiverId=${task.receiver.id}&taskId=${task.id}" class="button ricon ">去评价</a>
+										</c:if>
+										<c:if test="${employee.id eq task.receiver.id and task.isReceiverEvaluate eq '0'}">
+											<a href="${path }/weChat/publishEvaluation?publisherId=${employee.id}&receiverId=${task.publisher.id}&taskId=${task.id}" class="button ricon ">去评价</a>
+										</c:if>
 										<div class="text" style="padding-left: 10px; color: #000;">
 											${task.title } <small> 发布人：${task.publisher.name }<br>  任务类型：${task.taskType.typeName}<br /> 工期：${task.durTime}<br />发布时间：<fmt:formatDate value="${task.createTime }" pattern="yyyy-MM-dd HH:mm" /> <br />
 											</small>
 										</div>
 									<!-- </a> -->
 								</li>
-								</c:if>
+								
 							</c:forEach>
 						</ul>
 					</c:if>

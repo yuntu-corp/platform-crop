@@ -1,4 +1,5 @@
 package com.unitever.module.dicker.service;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import me.chanjar.weixin.cp.api.WxCpServiceImpl;
 import me.chanjar.weixin.cp.bean.WxCpMessage;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +77,26 @@ public class DickerService {
 		dicker.setStatus(status);
 		return dickerDAO.getDickerByDicker(dicker);
 	}
+	
+	public List<Dicker> getUnTreatedDickers(String receiverId,String status){
+		if(StringUtils.isBlank(receiverId)||StringUtils.isBlank(status)){
+			return null;
+		}
+		Dicker dicker=new Dicker();
+		Employee receiver=new Employee();
+		receiver.setId(receiverId);
+		dicker.setReceiver(receiver);
+		dicker.setStatus(status);
+		List<Dicker> unTreatedDickers=new ArrayList<Dicker>();
+		List<Dicker> dickers=dickerDAO.getDickerByDicker(dicker);
+		for(Dicker dicker_:dickers){
+			DateTime dateTime = new DateTime(dicker_.getTask().getFinishDate().getTime());
+			if (dateTime.isAfterNow()) {
+				unTreatedDickers.add(dicker_);
+			}
+		}
+		return unTreatedDickers;
+	} 
 	
 	public String doDicker(String taskId,String publisherId,Dicker dicker,String receiverId) throws WxErrorException{
 		Task task=taskDAO.get(taskId);

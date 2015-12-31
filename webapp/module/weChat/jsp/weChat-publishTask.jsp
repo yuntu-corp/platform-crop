@@ -56,7 +56,7 @@ input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 						oninput="range_output.value=parseInt(range.value)"
 						class="form-common">
 						<input name="employeeId" type="hidden" value="${employeeId }">
-						<label class="label-left" for="user">标题</label> <label
+						<label class="label-left" for="user">任务标题</label> <label
 							class="label-right"> <input name="task.title" id="title"
 							type="text" placeholder="请输入标题"
 							pattern="^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,20}$" title="中文英文数字"
@@ -64,7 +64,7 @@ input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 						</label>
 						<hr />
 
-						<label class="label-left" for="email">简介</label> <label
+						<label class="label-left" for="email">任务简介</label> <label
 							class="label-right"> <input name="task.content"
 							id="content" type="textarea" placeholder="请输入项目简介"
 							autocomplete="on" required />
@@ -92,7 +92,7 @@ input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 						</div>
 						<hr />
 
-						<label class="label-left">技术类型</label> <label class="label-right">
+						<label class="label-left">任务类型</label> <label class="label-right">
 							<a href="#" data-role="radio">
 									<input name="task.taskType.id" id="type" type="radio" value=${taskTypes[0].id } style="left: 0; right: auto;" checked />
 									<label for="male" class="black">${taskTypes[0].typeName }</label>
@@ -108,7 +108,7 @@ input[type="number"]{-moz-appearance:textfield;}/*FireFox*/
 						</label>
 						<hr />
 
-						<label class="label-left">人员</label>
+						<label class="label-left">参与人员</label>
 						<label class="label-right">
 							
 								<ul>

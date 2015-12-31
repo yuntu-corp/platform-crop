@@ -1,11 +1,12 @@
 package com.unitever.module.wechat.controller;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpInMemoryConfigStorage;
@@ -15,28 +16,34 @@ import me.chanjar.weixin.cp.bean.WxCpXmlMessage;
 import me.chanjar.weixin.cp.bean.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.unitever.module.dicker.model.Dicker;
 import com.unitever.module.dicker.service.DickerService;
 import com.unitever.module.employee.dao.manual.EmployeeDAO;
 import com.unitever.module.employee.model.Employee;
 import com.unitever.module.employee.service.EmployeeService;
-import com.unitever.module.evaluation.model.Evaluation;
 import com.unitever.module.evaluation.service.EvaluationService;
 import com.unitever.module.task.model.Task;
 import com.unitever.module.task.service.TaskService;
 import com.unitever.module.tasktype.service.TaskTypeService;
+import com.unitever.module.wechat.aes.AesException;
+import com.unitever.module.wechat.aes.WXBizMsgCrypt;
 import com.unitever.module.wechat.manager.SessionManager;
 import com.unitever.module.wechat.service.WeChatService;
 import com.unitever.module.wechat.util.CookieUtil;
+import com.unitever.module.wechat.util.WechatUtil;
 import com.unitever.platform.core.web.argument.annotation.FormModel;
 import com.unitever.platform.core.web.controller.SpringController;
 
@@ -56,6 +63,7 @@ public class WeChatController extends SpringController {
 	 * @param echostr
 	 * @return
 	 * @throws IOException
+	 * @throws AesException 
 	 */
 	@RequestMapping(value = "/weChatHandler")
 	@ResponseBody
@@ -64,7 +72,68 @@ public class WeChatController extends SpringController {
 			@RequestParam(value = "timestamp", required = false) String timestamp,
 			@RequestParam(value = "nonce", required = false) String nonce,
 			@RequestParam(value = "echostr", required = false) String echostr)
-			throws IOException {
+			throws IOException, AesException {/*
+		//String id=WechatUtil.getCorpId(echostr, "ignqjWIQGmfDXuKcIwGG8nPybWPPJJ42UKc9gcdmvsu");
+		//System.out.println("<<<<<<<<<<<<:corpId:"+id);
+		WxCpInMemoryConfigStorage storage = new WxCpInMemoryConfigStorage();
+		storage.setToken("weixin");
+		storage.setAesKey("ignqjWIQGmfDXuKcIwGG8nPybWPPJJ42UKc9gcdmvsu");
+		
+		
+		WXBizMsgCrypt wxcpt = new WXBizMsgCrypt("weixin", "ignqjWIQGmfDXuKcIwGG8nPybWPPJJ42UKc9gcdmvsu", "123");
+		// String sReqMsgSig = HttpUtils.ParseUrl("msg_signature");
+				String sReqMsgSig = msgSignature;
+				// String sReqTimeStamp = HttpUtils.ParseUrl("timestamp");
+				String sReqTimeStamp = timestamp;
+				// String sReqNonce = HttpUtils.ParseUrl("nonce");
+				String sReqNonce = nonce;
+				// post请求的密文数据
+				// sReqData = HttpUtils.PostData();
+				String sReqData = IOUtils.toString(getRequest().getInputStream(), "UTF-8");
+				try {
+					String sMsg = wxcpt.DecryptMsg(sReqMsgSig, sReqTimeStamp, sReqNonce, sReqData);
+					System.out.println("after decrypt msg: " + sMsg);
+					// TODO: 解析出明文xml标签的内容进行处理
+					// For example:
+					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					StringReader sr = new StringReader(sMsg);
+					InputSource is = new InputSource(sr);
+					Document document = db.parse(is);
+
+					Element root = document.getDocumentElement();
+					NodeList nodelist1 = root.getElementsByTagName("Content");
+					String Content = nodelist1.item(0).getTextContent();
+					System.out.println("Content：" + Content);
+					
+				} catch (Exception e) {
+					// TODO
+					// 解密失败，失败原因请查看异常
+					e.printStackTrace();
+				}
+		WxCpService wxCpService = new WxCpServiceImpl();
+		if ("GET".equals(getRequest().getMethod())) {
+			if (!wxCpService.checkSignature(msgSignature, timestamp, nonce,
+					echostr)) {
+				WxCpCryptUtil cryptUtil = new WxCpCryptUtil(storage);
+				return cryptUtil.decrypt(msgSignature, timestamp, nonce, echostr);
+			}
+		} else if ("POST".equals(getRequest().getMethod())) {
+			if (!wxCpService.checkSignature(msgSignature, timestamp, nonce,
+					echostr)) {
+				WxCpXmlMessage inMessage = WxCpXmlMessage.fromEncryptedXml(
+						getRequest().getInputStream(), storage, timestamp,
+						nonce, msgSignature);
+				WxCpXmlOutMessage outMessage = weChatService
+						.weChatHandler(inMessage);
+				if (outMessage != null) {
+					return outMessage.toEncryptedXml(storage);
+				}
+			}
+		}
+		return null;
+	*/
+
 		WxCpInMemoryConfigStorage storage = (WxCpInMemoryConfigStorage) SessionManager
 				.getSession("storage");
 		WxCpService wxCpService = new WxCpServiceImpl();
@@ -88,6 +157,8 @@ public class WeChatController extends SpringController {
 			}
 		}
 		return null;
+		
+	
 	}
 
 	/**
@@ -419,7 +490,7 @@ public class WeChatController extends SpringController {
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager
 					.getSession("service");
 			if(StringUtils.isNotBlank(employeeId)){
-				setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employeeId, Dicker.DICKER_STATE_UNTREATED));
+				setAttribute("dickerList", dickerService.getUnTreatedDickers(employeeId, Dicker.DICKER_STATE_UNTREATED));
 				setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employeeId));
 				setAttribute("employee", employeeService.getEmployeeById(employeeId));
 				setAttribute("type", type);
@@ -445,7 +516,7 @@ public class WeChatController extends SpringController {
 					employee=weChatService.reGetHeadImgUrl(employee);
 					//employee.setWxCpUser(service.userGet(userId));
 				}
-				setAttribute("dickerList", dickerService.getDickerByReceiverIdAndStatus(employee.getId(), Dicker.DICKER_STATE_UNTREATED));
+				setAttribute("dickerList", dickerService.getUnTreatedDickers(employee.getId(), Dicker.DICKER_STATE_UNTREATED));
 				setAttribute("unTreatedMsgListByOthers", taskService.getUnReceivedTaskByReceiverId(employee.getId()));
 				setAttribute("employee", employee);
 				setAttribute("type", type);
