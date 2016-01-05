@@ -23,13 +23,18 @@ import com.unitever.module.dicker.model.Dicker;
 import com.unitever.module.employee.dao.manual.EmployeeDAO;
 import com.unitever.module.employee.model.Employee;
 import com.unitever.module.evaluation.dao.manual.EvaluationDAO;
+import com.unitever.module.log.model.Log;
 import com.unitever.module.task.dao.manual.TaskDAO;
 import com.unitever.module.task.model.Task;
 import com.unitever.module.task.model.TaskVo;
+import com.unitever.module.user.model.User;
 import com.unitever.module.wechat.manager.SessionManager;
+import com.unitever.module.wechat.util.LogUtil;
+import com.unitever.platform.core.common.helper.UserHelper;
 import com.unitever.platform.core.dao.Page;
 import com.unitever.platform.util.DateUtil;
 import com.unitever.platform.util.DoubleUtil;
+import com.unitever.platform.util.UUID;
 
 @Service
 @Transactional
@@ -109,6 +114,7 @@ public class TaskService {
 	public String publishTask(Task task, String employeeId) throws ParseException {
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm");
 		Date date = df.parse(task.getFinishTime());
+		task.setId(UUID.getUUID());
 		task.getFinishDate().setHours(date.getHours());
 		task.getFinishDate().setMinutes(date.getMinutes());
 		task.setCreateTime(new Date());
@@ -160,10 +166,11 @@ public class TaskService {
 		if (task.getTaskType() == null || StringUtils.isBlank(task.getTaskType().getId())) {
 			return "请选择项目类型";
 		}
-		if (DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getPreBitcoin(), 2) < 0) {
+		if (DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getPreBitcoin(), 8) < 0) {
 			return "您的余额不足！";
 		}
 		taskDAO.save(task);
+		LogUtil.saveLog(employee.getName()+"发布了任务："+task.getTitle(), employee.getName(), Log.ADMIN_TYPE_NO, employee.getId(), Log.LOGTYPE_EMPLOYEE, task.getId(), Log.OPERATE_TASK_SAVE);
 
 		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 		WxCpMessage me = new WxCpMessage();
@@ -255,6 +262,10 @@ public class TaskService {
 			}
 			task.setEmployeesString(employeesString);
 			taskDAO.update(task);
+			
+			LogUtil.saveLog(employee.getName()+"拒绝了任务："+task.getTitle()+"，理由是："+refuseReason, employee.getName(), Log.ADMIN_TYPE_NO, employee.getId(), Log.LOGTYPE_TASK, task.getId(), Log.OPERATE_TASK_REFUSE);
+			
+			
 			// 通知发布还价人
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 			WxCpMessage me = new WxCpMessage();
@@ -276,17 +287,17 @@ public class TaskService {
 			Employee publisher = task.getPublisher();
 			Employee receiver = employeeDAO.get(employeeId);
 			task.setReceiver(receiver);
-			if (DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getFinalBitcoin(), 2) < 0) {
+			if (DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getFinalBitcoin(), 8) < 0) {
 				return "error！";
 			}
 			
-			publisher.setBitcoinConsume(DoubleUtil.add(publisher.getBitcoinConsume(), task.getPreBitcoin(), 2)+"");
-			publisher.setBitcoinSurplus(DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getPreBitcoin(),2)+ "");
+			publisher.setBitcoinConsume(DoubleUtil.add(publisher.getBitcoinConsume(), task.getPreBitcoin(), 8)+"");
+			publisher.setBitcoinSurplus(DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getPreBitcoin(),8)+ "");
 			// publisher.setPublishTaskCount((Integer.parseInt(publisher.getPublishTaskCount())
 			// + 1)+ "");
 			
-			receiver.setBitcoinSurplus(DoubleUtil.add(receiver.getBitcoinSurplus(), task.getPreBitcoin(), 2) + "");
-			receiver.setBitcoinIncome(DoubleUtil.add(receiver.getBitcoinIncome(),task.getPreBitcoin(), 2) + "");
+			receiver.setBitcoinSurplus(DoubleUtil.add(receiver.getBitcoinSurplus(), task.getPreBitcoin(), 8) + "");
+			receiver.setBitcoinIncome(DoubleUtil.add(receiver.getBitcoinIncome(),task.getPreBitcoin(), 8) + "");
 			receiver.setTaskCount((Integer.parseInt(receiver.getTaskCount()) + 1) + "");
 			employeeDAO.update(publisher);
 			employeeDAO.update(receiver);
@@ -299,6 +310,10 @@ public class TaskService {
 				task.setReceiverState(task.getReceiverState() + "," + receiver.getName() + ":接受任务:" + receiver.getUserId());
 			}
 			taskDAO.update(task);
+			
+			LogUtil.saveLog(receiver.getName()+"接受了任务："+task.getTitle(),receiver.getName(), Log.ADMIN_TYPE_NO, receiver.getId(), Log.LOGTYPE_TASK, task.getId(), Log.OPERATE_TASK_ACCEPT);
+			
+			
 			// 通知发布还价人
 			WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 			WxCpMessage me = new WxCpMessage();
@@ -435,9 +450,12 @@ public class TaskService {
 	 * 
 	 * */
 	public void deleteTask(String taskId) {
+		Task task = taskDAO.get(taskId);
 		taskDAO.deleteTaskByTaskId(taskId);
-		dickerDAO.deleteDickerByTaskId(taskId);
-		evaluationDAO.deleteEvaluationByTaskId(taskId);
+		// 日志记录
+		User user = UserHelper.getCurrUser();
+		LogUtil.saveLog("删除任务标题为：" + task.getTitle() + " 的任务。", user.getUsername(), Log.ADMIN_TYPE_YES, user.getId(),
+				Log.LOGTYPE_TASK, task.getId(), Log.OPERATE_TASK_DELETE);
 	}
 
 	/**
@@ -464,6 +482,7 @@ public class TaskService {
 						task.setStatus(Task.TASK_STATE_UNVERIFY);
 						task.setIsSuccess(isSuccess);
 						taskDAO.update(task);
+						LogUtil.saveLog(task.getPublisher().getName()+"对任务："+task.getTitle()+"("+task.getIsSuccessVal()+")"+"提交了审核",task.getPublisher().getName(), Log.ADMIN_TYPE_NO, task.getPublisher().getId(), Log.LOGTYPE_TASK, task.getId(), Log.OPERATE_TASK_COMMITVERIFY);
 						// 通知管理员有员工提交审核
 						WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 						WxCpMessage me = new WxCpMessage();
@@ -478,6 +497,56 @@ public class TaskService {
 			}
 		}
 		return "fail";
+	}
+	
+	
+	/**
+	 * 任务审核
+	 * 
+	 * @param task
+	 *            Task对象
+	 * @param refuseReason
+	 *            拒绝任务情况下的拒绝理由
+	 */
+	public void checkTask(Task task, String refuseReason) throws WxErrorException {
+		// 更新任务状态
+		taskDAO.update(task);
+
+		// 满足一定条件的情况下 进行 任务返利
+		Employee employee = employeeDAO.get(task.getPublisher().getId());
+		if (Task.TASK_STATE_SUCCESS.equals(task.getStatus())) {
+			if (Task.FAIL.equals(task.getIsSuccess())) {
+				employee.setBitcoinSurplus((Double.parseDouble(employee.getBitcoinSurplus())
+						+ Double.parseDouble(task.getFinalBitcoin()) / 2) + "");
+				employeeDAO.update(employee);
+			}
+		}
+
+		// 日志记录
+		User user = UserHelper.getCurrUser();
+		String operateVal = "";
+		if (Task.TASK_STATE_FAIL.equals(task.getStatus())) {
+			operateVal = Log.OPERATE_TASK_VERIFYFAIL;
+		} else if (Task.TASK_STATE_SUCCESS.equals(task.getStatus())) {
+			operateVal = Log.OPERATE_TASK_VERIFYSUCCESS;
+		}
+		LogUtil.saveLog("审核任务 - " + task.getTitle() + " - 状态为：" + task.getStatusVal(), user.getUsername(),
+				Log.ADMIN_TYPE_YES, user.getId(), Log.LOGTYPE_TASK, task.getId(), operateVal);
+
+		// 给提交审核资料人员发送审核结果
+		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
+		WxCpMessage me = new WxCpMessage();
+		me.setMsgType(WxConsts.XML_MSG_TEXT);
+		me.setAgentId("15");
+		me.setToUser(employee.getUserId());
+		String massageStr = "管理员已经对您提交的资料审核完毕\r\n任务为：" + task.getTitle() + "\r\n审核结果为：" + task.getStatusVal();
+		if (StringUtils.isNotBlank(refuseReason) && task.getStatus().equals("6")) {
+			massageStr += "\r\n拒绝理由为：" + refuseReason;
+		}
+		massageStr += "\r\n <a href=\"http://" + employee.getUser().getDomainName() + "/platform/weChat/taskView?id="
+				+ task.getId() + "&employeeId=" + employee.getId() + "\">查看详情>>></a>";
+		me.setContent(massageStr);
+		service.messageSend(me);
 	}
 
 	@Autowired

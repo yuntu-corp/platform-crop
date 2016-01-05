@@ -4,45 +4,31 @@
 <html>
 	<head>  
 		<script type="text/javascript">
-			Namespace.register("com.yunt.employee.index");
-			com.yunt.employee.index = {
+			Namespace.register("com.yunt.systemLog.index");
+			com.yunt.systemLog.index = {
 				loadContent : function(href) {
 					$("body").mask("数据正在加载中，请稍后···");
 					$("#content").load(href,function(){
 						$("body").unmask();
 					});
 				},
-				update : function(href, title) {
-					$.dialog.load(href,{
-						id: '${pageId}employeeInput',
-						title:title,
-						width:600,
-						height:500,
-						ok:function(){
-							com.yunt.employee.employeeInput.doInput('${pageId}employeeInput');
-							return false;
-						},
-						cancel: function(){
-		
-						}
-					});
-				},
 				view : function(href, title) {
 					$.dialog.load(href,{
-						id: '${pageId}employeeInput',
+						id: '${pageId}systemLogInput',
 						title:title,
 						width:600,
 						height:500,
 						ok:function(){
-						}
+						},
+
 					});
 				},
 				refresh : function () {
-					com.yunt.employee.index.loadContent("${path}/employee/list?model.name=" + $("#${pageId}content").val());
+					com.yunt.systemLog.index.loadContent("${path}/systemLog/list?model.operatorName=" + $("#${pageId}content").val());
 				}
 			};
 			$(document).ready(function(){
-				com.yunt.employee.index.refresh();
+				com.yunt.systemLog.index.refresh();
 				var height=$(window).height()-160;
 				$(".details").css("height",height);
 			});
@@ -53,15 +39,11 @@
 			<div class="title">用户管理</div>
 			<div class="details">
 				<div class="details_operation clearfix">
-<%-- 				    <div class="bui_select">
-				    	<img src="${path}/platform/theme/distributionSystem/images/coin.png">
-						<input type="button" value="添 加" class="add hand" onclick="com.yunt.employee.index.input('${path}/employee/input?inputKind=save', '添加');">
-					</div> --%>
 					<div class="fr">
 	                	<form method="" action="" class="box">
-							<label for="pass" style="line-height:30px;padding-left:10px;">关键词:</label>
+							<label for="pass" style="line-height:30px;padding-left:10px;">操作人:</label>
 	                    	<input id="${pageId}content" class="search" type="text" placeholder="关键词" />
-	               			<input type="button" value="搜索" class="searchCoin" onclick="com.yunt.employee.index.refresh();">
+	               			<input type="button" value="搜索" class="searchCoin" onclick="com.yunt.systemLog.index.refresh();">
 						</form>
 					</div>
 				</div>

@@ -93,16 +93,19 @@
 	                        <img src="${path}/platform/theme/distributionSystem/images/home.png">任务管理
 	                    </li>
 	                    <li onclick="com.yunt.index.loadContent('${path}/task/taskCheckIndex');">
-	                        <img src="${path}/platform/theme/distributionSystem/images/home.png">审核管理
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin2.png">审核管理
 	                    </li>
 	                    <li onclick="com.yunt.index.loadContent('${path}/evaluation/index');">
 	                        <img src="${path}/platform/theme/distributionSystem/images/coin3.png">评价管理  
 	                    </li>
 	                    <li onclick="com.yunt.index.loadContent('${path}/employee/index');">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin7.png">人员管理
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin4.png">人员管理
 	                    </li>
 	                    <li onclick="com.yunt.index.loadContent('${path}/taskType/index');">
-	                        <img src="${path}/platform/theme/distributionSystem/images/coin7.png">任务类型管理
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin5.png">任务类型管理
+	                    </li>
+	                    <li onclick="com.yunt.index.loadContent('${path}/systemLog/index');">
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin7.png">查看系统日志
 	                    </li>
 	                </ul>
 	            </div>

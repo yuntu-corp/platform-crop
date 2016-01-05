@@ -25,9 +25,11 @@ import weixin.popular.util.XMLConverUtil;
 
 import com.unitever.module.employee.model.Employee;
 import com.unitever.module.employee.service.EmployeeService;
+import com.unitever.module.log.model.Log;
 import com.unitever.module.user.model.User;
 import com.unitever.module.wechat.aes.WXBizMsgCrypt;
 import com.unitever.module.wechat.manager.SessionManager;
+import com.unitever.module.wechat.util.LogUtil;
 import com.unitever.module.wechat.util.MessageUtil;
 import com.unitever.module.wechat.util.WechatUtil;
 
@@ -43,8 +45,6 @@ public class WeChatService {
 	 * @return
 	 */
 	public WxCpXmlOutMessage weChatHandler(WxCpXmlMessage wxMessage) {  
-		
-		
 			WxCpServiceImpl service =(WxCpServiceImpl) SessionManager.getSession("service");
 			//用户ID
 			String fromUserName = wxMessage.getFromUserName();
@@ -88,7 +88,10 @@ public class WeChatService {
 				}
 				//取消关注
 				else if(WxConsts.EVT_UNSUBSCRIBE.equals(event)){
-					
+					//通过userid获取user
+					WxCpUser user=service.userGet(fromUserName);
+					Employee employee=employeeService.getEmployeeByUserId(user.getUserId());
+					LogUtil.saveLog(employee.getName()+"取消关注", employee.getName(), Log.ADMIN_TYPE_NO, employee.getId(), Log.LOGTYPE_EMPLOYEE, employee.getId(), Log.OPERATE_EMPLOYEE_UNSUBSCRIBE);
 				}
 			}
 		} catch (WxErrorException e) {

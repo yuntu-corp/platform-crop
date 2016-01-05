@@ -37,7 +37,8 @@
 			<div style="padding: 20px;">
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>姓名：</label>
-			     	<input id="${pageId}name" name="model.name" type='text' maxlength="50" class="required" value="${model.name}"/>
+			     	<div class="view_detail2">${model.name}</div>
+			     	<%-- <input id="${pageId}name" name="model.name" type='text' maxlength="50" class="required" value="${model.name}"/> --%>
 				</div>
 <%-- 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>职位:</label>
@@ -45,19 +46,19 @@
 				</div> --%>
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>每月基础币:</label>
-			     	<input id="${pageId}baseBitcoin" name="model.baseBitcoin" type='text' maxlength="50" class="required" value="${model.baseBitcoin}"/>
+			     	<input id="${pageId}baseBitcoin" name="model.baseBitcoin" type='text' maxlength="50" class="required" value="<fmt:formatNumber type="number" value="${model.baseBitcoin}" maxFractionDigits="2"/>"/>
 				</div>
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>当月消耗币:</label>
-			     	<div class="view_detail2">${model.bitcoinConsume}</div>
+			     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.bitcoinConsume}" maxFractionDigits="2"/></div>
 				</div>
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>当月收入币:</label>
-			     	<div class="view_detail2">${model.bitcoinIncome}</div>
+			     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.bitcoinIncome}" maxFractionDigits="2"/></div>
 				</div>
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>当前余额:</label>
-			     	<div class="view_detail2">${model.bitcoinSurplus}</div>
+			     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.bitcoinSurplus}" maxFractionDigits="2"/></div>
 				</div>
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>总体评价:</label>

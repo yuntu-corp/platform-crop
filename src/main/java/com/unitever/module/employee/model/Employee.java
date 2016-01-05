@@ -26,8 +26,6 @@ public class Employee {
 	private WxCpUser wxCpUser;// 引用外部API的员工类
 	private String status;
 	private String evaluationLevel;// 评价平均值
-	private String nowBitcoin;// 当前虚拟币
-	private String nowDate;// 当前系统日期，方便页面使用
 	//private Date minusDate;//为了解决执行两遍minus
 	private String taskCount;
 	private String publishTaskCount;
@@ -162,29 +160,10 @@ public class Employee {
 	}
 
 	/**
-	 * 获取当前虚拟币
-	 * */
-	public String getNowBitcoin() {
-		/*double returnstr = (double)Math.ceil((Double.parseDouble(baseBitcoin) / DateUtil.getDayOfMonth())
-				* Double.parseDouble(DateUtil.getCurrDateString("dd")));*/
-		return DoubleUtil.mul(DoubleUtil.div(baseBitcoin, DateUtil.getDayOfMonth()+"", 2)+"", DateUtil.getCurrDateString("dd")+"", 2)+"";
-		//return  String.format("%.2f", returnstr);
-	}
-
-
-	public void setNowBitcoin(String nowBitcoin) {
-		this.nowBitcoin = nowBitcoin;
-	}
-
-	/**
 	 * 获取当前日期字符串 格式为yyyy-MM-dd
 	 * */
 	public String getNowDate() {
 		return DateUtil.getCurrDateString();
-	}
-
-	public void setNowDate(String nowDate) {
-		this.nowDate = nowDate;
 	}
 
 	

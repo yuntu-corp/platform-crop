@@ -77,10 +77,10 @@ public class EmployeeController extends SpringController {
 			if(StringUtils.isNotBlank(employee.getBaseBitcoin())){
 				/*double returnstr = (double)Math.ceil((Double.parseDouble(employee.getBaseBitcoin()) / DateUtil.getDayOfMonth()));
 				DoubleUtil.div(employee.getBaseBitcoin(), DateUtil.getDayOfMonth()+"", 2);*/
-				employee.setCurrentBitcoin(DoubleUtil.div(employee.getBaseBitcoin(), DateUtil.getDayOfMonth()+"", 2)+"");
+				employee.setCurrentBitcoin(DoubleUtil.div(employee.getBaseBitcoin(), DateUtil.getDayOfMonth()+"", 8)+"");
 			}
 		}
-		employeeService.update(employee);
+		employeeService.updateBaseBitcoin(employee);
 	}
 	
 	@Autowired

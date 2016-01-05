@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="getAll" resultMap="resultTask">
-		select * from cp_task order by createTime desc
+		select * from cp_task where status!=8 order by createTime desc
 	</select>
 	
 	<insert id="save" parameterType="Task">
@@ -65,12 +65,12 @@
 	</update>
 	
 	<select id="getTaskByPublisherId" resultMap="resultTask">
-    	select * from cp_task where publisherId=#{id} order by createTime desc
+    	select * from cp_task where publisherId=#{id} and status!=8 order by createTime desc
     </select>
     
     
     <select id="getTaskByReceiverId" resultMap="resultTask">
-    	select * from cp_task where receiverId=#{id} order by createTime desc
+    	select * from cp_task where receiverId=#{id} and status!=8 order by createTime desc
     </select>
     
     <select id="getTaskByTask" resultMap="resultTask" parameterType="Task">
@@ -107,6 +107,9 @@
 			<if test="status !=null">
 				and status=#{status}
 			</if>
+			<if test="status ==null">
+				and status!=8
+			</if>
 			<if test="isSuccess !=null">
 				and isSuccess=#{isSuccess}
 			</if>
@@ -134,9 +137,12 @@
 		</where> 
 		order by createTime desc
     </select>
-    <delete id="deleteTaskByTaskId" parameterType="String">
-		delete from cp_task where id=#{id}
-    </delete>
-    
-   
+
+    <update id="deleteTaskByTaskId" parameterType="String">
+		update cp_task
+		<set>
+			status=8
+		</set>
+		where id=#{id}
+    </update>
 </mapper>

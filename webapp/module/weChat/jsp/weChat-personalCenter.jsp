@@ -67,15 +67,15 @@ function a(){
 		<!-- first -->
 		<div class="jump-column-frist">
 			<ul class="listitem">
-				<li>${employee.baseBitcoin } <small>月薪</small>
+				<li><fmt:formatNumber type="number" value="${employee.baseBitcoin }" maxFractionDigits="2"/><small>月薪</small>
 				</li>
 				<li
 					style="border-left: 1px solid #fff; border-right: 1px solid #fff;">
-					${employee.bitcoinIncome } <small>本月收入</small>
+					<fmt:formatNumber type="number" value="${employee.bitcoinIncome }" maxFractionDigits="2"/><small>本月收入</small>
 				</li>
-				<li style="border-right: 1px solid #fff;">${employee.bitcoinConsume }  <small>本月消耗</small>
+				<li style="border-right: 1px solid #fff;"><fmt:formatNumber type="number" value="${employee.bitcoinConsume }" maxFractionDigits="2"/>  <small>本月消耗</small>
 				</li>
-				<li>${employee.bitcoinSurplus } <small>当前余额</small>
+				<li><fmt:formatNumber type="number" value="${employee.bitcoinSurplus }" maxFractionDigits="2"/><small>当前余额</small>
 				</li>
 			</ul>
 		</div>
@@ -86,7 +86,7 @@ function a(){
 				<li>
 					<a href="${path}/weChat/goUpdateCurrentBitcoin?employeeId=${employee.id}">
 						<img src="${path}/module/weChat/jump/images/aside/iconline-arrow-right.png" class="iconline-arrow-right">
-						<div class="iconline-icon-right" style="color:#444; background-color:#fff; border-radius:0;">￥${employee.currentBitcoin }</div> 
+						<div class="iconline-icon-right" style="color:#444; background-color:#fff; border-radius:0;">￥<fmt:formatNumber type="number" value="${employee.currentBitcoin }" maxFractionDigits="2"/></div> 
 						<!-- <div class="iconline-icon-right">5</div> -->
 						<div class="text">修改今日价格</div>
 					</a>

@@ -120,11 +120,11 @@
 				<input type="hidden" id="${pageId}spring-security-redirect" name="spring-security-redirect"/>
 				<div class="username_container">
 					<img src="${path}/platform/theme/distributionSystem/images/username.png">
-					<input class="username" type="text" id="${pageId}loginName" placeholder="用户名" tabindex="1" name="j_username" value="btjmrh"/>
+					<input class="username" type="text" id="${pageId}loginName" placeholder="用户名" tabindex="1" name="j_username" />
 				</div>
 				<div class="pass_container">
 					<img src="${path}/platform/theme/distributionSystem/images/passworld.png">
-					<input class="pass" type="password" id="${pageId}password" placeholder="密码" tabindex="2" name="j_password" value="000000"/>
+					<input class="pass" type="password" id="${pageId}password" placeholder="密码" tabindex="2" name="j_password" />
 				</div>
 				<input class="login" type="button" value="登录" onclick="com.ue.courseplatform.welcome.submit();" tabindex="4"/>
 			</uc:form>

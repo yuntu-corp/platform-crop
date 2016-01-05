@@ -19,13 +19,16 @@ import com.unitever.module.dicker.dao.manual.DickerDAO;
 import com.unitever.module.dicker.model.Dicker;
 import com.unitever.module.employee.dao.manual.EmployeeDAO;
 import com.unitever.module.employee.model.Employee;
+import com.unitever.module.log.model.Log;
 import com.unitever.module.task.dao.manual.TaskDAO;
 import com.unitever.module.task.model.Task;
 import com.unitever.module.task.service.TaskService;
 import com.unitever.module.wechat.manager.SessionManager;
+import com.unitever.module.wechat.util.LogUtil;
 import com.unitever.platform.core.web.argument.annotation.FormModel;
 import com.unitever.platform.util.DateUtil;
 import com.unitever.platform.util.DoubleUtil;
+import com.unitever.platform.util.UUID;
 
 @Service
 @Transactional
@@ -101,16 +104,21 @@ public class DickerService {
 	public String doDicker(String taskId,String publisherId,Dicker dicker,String receiverId) throws WxErrorException{
 		Task task=taskDAO.get(taskId);
 		if(Task.TASK_STATE_UNRECEIVE.equals(task.getStatus())){
+			
+			Employee publisherEmployee = employeeDAO.get(publisherId);
 			dicker.setCreateTime(new Date());
-			dicker.setPublisher(new Employee(publisherId));
+			dicker.setId(UUID.getUUID());
+			dicker.setPublisher(publisherEmployee);
 			dicker.setReceiver(new Employee(receiverId));
 			dicker.setStatus(Dicker.DICKER_STATE_UNTREATED);
 			dicker.setTask(new Task(taskId));
 			dickerDAO.save(dicker);
+			
+			LogUtil.saveLog(dicker.getPublisher().getName()+"发布还价："+dicker.getBitcoin(), dicker.getPublisher().getName(), Log.ADMIN_TYPE_NO,dicker.getPublisher().getId(), Log.LOGTYPE_DICKER, dicker.getId(), Log.OPERATE_DICKER_SAVE);
 			/* 
 			 * 设置接收消息人状态
 			 */
-			Employee publisherEmployee = employeeDAO.get(publisherId);
+			
 			if(StringUtils.isBlank(task.getReceiverState())){
 				task.setReceiverState(publisherEmployee.getName() + ":还价:" + publisherEmployee.getUserId());
 			} else {
@@ -139,6 +147,7 @@ public class DickerService {
 		dicker.setStatus(Dicker.DICKER_STATE_REFUSED);
 		dicker.setEndTime(new Date());
 		dickerDAO.update(dicker);
+		
 		/* 
 		 * 设置接收消息人状态
 		 */
@@ -147,6 +156,9 @@ public class DickerService {
 		task.setReceiverState(task.getReceiverState().replaceAll(employee.getName() + ":还价:" + employee.getUserId(),
 				employee.getName() + ":被拒绝还价:" + employee.getUserId()));
 		taskDAO.update(task);
+		
+		LogUtil.saveLog(dicker.getReceiver().getName()+"拒绝"+dicker.getPublisher().getName()+"还价："+dicker.getBitcoin(), task.getReceiver().getName(), Log.ADMIN_TYPE_NO,dicker.getReceiver().getId(), Log.LOGTYPE_DICKER, dicker.getId(), Log.OPERATE_DICKER_REFUSE);
+		
 		//通知发布还价人
 		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 		WxCpMessage me=new WxCpMessage();
@@ -181,16 +193,16 @@ public class DickerService {
 			Employee publisher=task.getPublisher();
 			Employee receiver=task.getReceiver();
 			
-			if(DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getFinalBitcoin(), 2)<0){
+			if(DoubleUtil.sub(publisher.getBitcoinSurplus(), task.getFinalBitcoin(), 8)<0){
 				return "error";
 			}
 			
 			//DoubleUtil.add(receiver.getBitcoinIncome(),task.getFinalBitcoin(), 2)
-			publisher.setBitcoinConsume(DoubleUtil.add(publisher.getBitcoinConsume(), task.getFinalBitcoin(), 2)+"");
-			publisher.setBitcoinSurplus(DoubleUtil.sub(publisher.getBitcoinSurplus(),task.getFinalBitcoin(), 2)+"");
+			publisher.setBitcoinConsume(DoubleUtil.add(publisher.getBitcoinConsume(), task.getFinalBitcoin(), 8)+"");
+			publisher.setBitcoinSurplus(DoubleUtil.sub(publisher.getBitcoinSurplus(),task.getFinalBitcoin(), 8)+"");
 			
-			receiver.setBitcoinSurplus(DoubleUtil.add(receiver.getBitcoinSurplus(),task.getFinalBitcoin(), 2)+"");
-			receiver.setBitcoinIncome(DoubleUtil.add(receiver.getBitcoinIncome(),task.getFinalBitcoin(), 2)+"");
+			receiver.setBitcoinSurplus(DoubleUtil.add(receiver.getBitcoinSurplus(),task.getFinalBitcoin(), 8)+"");
+			receiver.setBitcoinIncome(DoubleUtil.add(receiver.getBitcoinIncome(),task.getFinalBitcoin(), 8)+"");
 			receiver.setTaskCount((Integer.parseInt(receiver.getTaskCount())+1)+"");
 			employeeDAO.update(publisher);
 			employeeDAO.update(receiver);
@@ -206,6 +218,8 @@ public class DickerService {
 					+ "\n <a href=\"http://" + employee.getUser().getDomainName()
 					+ "/platform/weChat/taskView?id="+task.getId()+"&employeeId="+employee.getId()+"\">查看详情>>></a>");
 			service.messageSend(me);
+			
+			LogUtil.saveLog(dicker.getReceiver().getName()+"接受"+dicker.getPublisher().getName()+"的还价："+dicker.getBitcoin(), dicker.getReceiver().getName(), Log.ADMIN_TYPE_NO,dicker.getReceiver().getId(), Log.LOGTYPE_DICKER, dicker.getId(), Log.OPERATE_DICKER_ACCEPT);
 			
 			//通知除发布人和接收人之外的所有人此任务已经被接受
 			for (String employeeId_ : task.getEmployeesString().split(",")) {

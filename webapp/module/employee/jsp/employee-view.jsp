@@ -48,19 +48,19 @@
 			</div> --%>
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>每月基础币:</label>
-		     	<div class="view_detail2">${model.baseBitcoin}</div>
+		     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.baseBitcoin}" maxFractionDigits="2"/></div>
 			</div>
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>当月消耗币:</label>
-		     	<div class="view_detail2">${model.bitcoinConsume}</div>
+		     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.bitcoinConsume}" maxFractionDigits="2"/></div>
 			</div>
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>当月收入币:</label>
-		     	<div class="view_detail2">${model.bitcoinIncome}</div>
+		     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.bitcoinIncome}" maxFractionDigits="2"/></div>
 			</div>
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>当前余额:</label>
-		     	<div class="view_detail2">${model.bitcoinSurplus}</div>
+		     	<div class="view_detail2"><fmt:formatNumber type="number" value="${model.bitcoinSurplus}" maxFractionDigits="2"/></div>
 			</div>
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>总体评价:</label>

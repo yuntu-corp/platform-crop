@@ -27,7 +27,7 @@
 	<div class="jump-container">
     	<div class="jump-content">
            <div style=" border-bottom:1px solid #ddd;border-top:1px solid #ddd;height:40px; margin-top:20px; padding:0 10px;background-color:#fff; ">
-           	<input type="number" style="width:100%; height:100%;" placeholder="${employee.currentBitcoin }" id="currentBitcoin" min="0" max="100000" required>
+           	<input type="number" style="width:100%; height:100%;" placeholder="<fmt:formatNumber type="number" value="${employee.currentBitcoin}" maxFractionDigits="2"/>" id="currentBitcoin" min="0" max="100000" required>
            </div>
             <div style="margin-top:80px; padding:0 10px;"><button class="block" onclick="updateCurrentBitcoin()">提交</button></div>
             <!-- <div style="margin-top:10px; padding:0 10px;"><button class="block cancel" >取消</button></div> -->

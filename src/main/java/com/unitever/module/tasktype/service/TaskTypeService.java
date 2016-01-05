@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.unitever.module.task.model.Task;
+import com.unitever.module.log.model.Log;
 import com.unitever.module.tasktype.dao.manual.TaskTypeDAO;
 import com.unitever.module.tasktype.model.TaskType;
+import com.unitever.module.user.model.User;
+import com.unitever.module.wechat.util.LogUtil;
+import com.unitever.platform.core.common.helper.UserHelper;
 import com.unitever.platform.core.dao.Page;
+import com.unitever.platform.util.UUID;
 
 @Service
 @Transactional
@@ -27,14 +31,34 @@ public class TaskTypeService {
 	}
 
 	public void save(TaskType taskType) {
+		User user = UserHelper.getCurrUser();
 		if (taskType != null) {
+			taskType.setState("1");
+			taskType.setId(UUID.getUUID());
 			taskTypeDAO.save(taskType);
+			LogUtil.saveLog("添加新的任务类型：" + taskType.getTypeName(), user.getUsername(), Log.ADMIN_TYPE_YES, user.getId(),
+					Log.LOGTYPE_TASKTYPE, taskType.getId(), Log.OPERATE_TASKTYPE_SAVE);
 		}
 	}
 
 	public void update(TaskType taskType) {
+		User user = UserHelper.getCurrUser();
 		if (taskType != null) {
 			taskTypeDAO.update(taskType);
+			LogUtil.saveLog("更新任务类型：" + taskType.getTypeName() + " 的内容。", user.getUsername(), Log.ADMIN_TYPE_YES,
+					user.getId(), Log.LOGTYPE_TASKTYPE, taskType.getId(), Log.OPERATE_TASKTYPE_UPDATE);
+		}
+	}
+
+	public void updateTaskType(String taskTypeId) {
+		User user = UserHelper.getCurrUser();
+		if (StringUtils.isNotBlank(taskTypeId)) {
+			TaskType taskType = taskTypeDAO.get(taskTypeId);
+			taskType.setState("0");
+			taskTypeDAO.update(taskType);
+
+			LogUtil.saveLog("删除任务类型：" + taskType.getTypeName(), user.getUsername(), Log.ADMIN_TYPE_YES, user.getId(),
+					Log.LOGTYPE_TASKTYPE, taskType.getId(), Log.OPERATE_TASKTYPE_DELETE);
 		}
 	}
 
@@ -47,13 +71,14 @@ public class TaskTypeService {
 	public List<TaskType> getAllTaskTypes() {
 		return taskTypeDAO.getAll();
 	}
-	
+
 	public List<TaskType> getTaskTypeByTypeKey(String typeKey) {
 		return taskTypeDAO.getTaskTypeByTypeKey(typeKey);
 	}
-	
+
 	/**
 	 * 获取任务类型分页对象
+	 * 
 	 * @param page
 	 * @param order
 	 * @return
@@ -68,7 +93,6 @@ public class TaskTypeService {
 		}
 		return page;
 	}
-	
 
 	@Autowired
 	private TaskTypeDAO taskTypeDAO;

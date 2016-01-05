@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.log.dao.manual.LogDAO">
+	<resultMap type="Log" id="resultLog">  
+        <id column="id" property="id" />
+        <result column="operatorName" property="operatorName" />
+        <result column="createTime" property="createTime" />
+        <result column="content" property="content" />
+        <result column="isAdmin" property="isAdmin" />
+        <result column="operatorId" property="operatorId" />
+        <result column="logType" property="logType" />
+        <result column="objectId" property="objectId" />
+        <result column="operate" property="operate" />
+	</resultMap>
+	
+	<select id="get" resultMap="resultLog" parameterType="String">
+		select * from cp_log 
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultLog">
+		select * from cp_log order by createTime desc
+	</select>
+	
+	<insert id="save" parameterType="Log">
+		insert into cp_log(id,operatorName,createTime,content,isAdmin,operatorId,logType,objectId,operate)
+		value(#{id},#{operatorName},#{createTime},#{content},#{isAdmin},#{operatorId},#{logType},#{objectId},#{operate})
+	</insert>
+    
+    <select id="getLogByLog" resultMap="resultLog" parameterType="Log">
+    	select * From cp_log
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="operatorName != null">
+			     and operatorName like CONCAT('%','${operatorName}','%' )
+			</if>
+			<if test="createTime !=null">
+				and createTime=#{createTime}
+			</if>
+			<if test="content != null">
+			      and content like CONCAT('%','${content}','%' )  
+			</if>
+			<if test="isAdmin !=null">
+				and isAdmin=#{isAdmin}
+			</if>
+			<if test="operatorId !=null">
+				and operatorId=#{operatorId}
+			</if>
+			<if test="logType !=null">
+				and logType=#{logType}
+			</if>
+			<if test="objectId !=null">
+				and objectId=#{objectId}
+			</if>
+			<if test="operate !=null">
+				and operate=#{operate}
+			</if>
+		</where> 
+		order by createTime desc
+	</select>
+</mapper>

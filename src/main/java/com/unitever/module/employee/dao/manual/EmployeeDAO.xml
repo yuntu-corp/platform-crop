@@ -69,8 +69,8 @@
     </select>
     
     <update id="minusBitCoin">
-    		update  cp_employee set bitcoinSurplus=CAST(CAST(bitcoinSurplus AS DECIMAL)-(CAST(baseBitcoin AS DECIMAL)/DAYOFMONTH(last_day(curdate()))) as DECIMAL(15,2)),
-				bitcoinConsume=CAST(CAST(bitcoinConsume AS DECIMAL)+(CAST(baseBitcoin AS DECIMAL)/DAYOFMONTH(last_day(curdate()))) as DECIMAL(15,2))
+    		update  cp_employee set bitcoinSurplus=CAST(CAST(bitcoinSurplus AS DECIMAL(30,8))-(CAST(baseBitcoin AS DECIMAL(30,8))/DAYOFMONTH(last_day(curdate()))) as DECIMAL(30,8)),
+				bitcoinConsume=CAST(CAST(bitcoinConsume AS DECIMAL(30,8))+(CAST(baseBitcoin AS DECIMAL(30,8))/DAYOFMONTH(last_day(curdate()))) as DECIMAL(30,8))
 	</update>
     <select id="getEmployeesByEmployees" resultMap="resultEmployee" parameterType="Employee">
     	select * from cp_employee

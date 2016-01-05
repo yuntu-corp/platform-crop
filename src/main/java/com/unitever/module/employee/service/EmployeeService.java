@@ -11,9 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.unitever.module.employee.dao.manual.EmployeeDAO;
 import com.unitever.module.employee.model.Employee;
+import com.unitever.module.log.model.Log;
 import com.unitever.module.user.dao.manual.UserDAO;
+import com.unitever.module.user.model.User;
 import com.unitever.module.wechat.service.WeChatService;
+import com.unitever.module.wechat.util.LogUtil;
+import com.unitever.platform.core.common.helper.UserHelper;
 import com.unitever.platform.core.dao.Page;
+import com.unitever.platform.util.UUID;
 
 @Service
 @Transactional
@@ -45,7 +50,10 @@ public class EmployeeService {
 	public void updateCurrentBitcoin(Employee employee){
 		if(employee!=null){
 			if(StringUtils.isNotBlank(employee.getId())&&StringUtils.isNotBlank(employee.getCurrentBitcoin())){
-				employeeDAO.update(employee);	
+				Employee employeeReal=employeeDAO.get(employee.getId());
+				employeeReal.setCurrentBitcoin(employee.getCurrentBitcoin());
+				employeeDAO.update(employeeReal);
+				LogUtil.saveLog(employeeReal.getName()+"修改今日价格为："+employee.getCurrentBitcoin(),employeeReal.getName(), Log.ADMIN_TYPE_NO, employeeReal.getId(), Log.LOGTYPE_EMPLOYEE, employeeReal.getId(), Log.OPERATE_EMPLOYEE_UPDATECURRENRINFO);
 			}
 		}
 	}
@@ -79,6 +87,7 @@ public class EmployeeService {
 	public void initEmployee(WxCpUser user){
 		if(employeeDAO.getEmployeeByUserId(user.getUserId())==null){
 			Employee employee=new Employee();
+			employee.setId(UUID.getUUID());
 			employee.setBitcoinConsume("0");
 			employee.setBitcoinIncome("0");
 			employee.setBitcoinSurplus("0");
@@ -95,6 +104,7 @@ public class EmployeeService {
 			//Employee emp=initBaseBitCoin(employee);
 			employee.setCurrentBitcoin(0+"");
 			employeeDAO.save(employee);
+			LogUtil.saveLog(employee.getName()+"关注", employee.getName(), Log.ADMIN_TYPE_NO, employee.getId(), Log.LOGTYPE_EMPLOYEE, employee.getId(), Log.OPERATE_EMPLOYEE_SUBSCRIBE);
 		}
 	}
 	
@@ -193,6 +203,17 @@ public class EmployeeService {
 		}
 		return page;
 	}
+	
+	public void updateBaseBitcoin(Employee employee) {
+		User user = UserHelper.getCurrUser();
+		if (employee != null) {
+			employeeDAO.update(employee);
+			LogUtil.saveLog("修改 - " + employee.getName() + " 的基础虚拟币为 ：" + employee.getBaseBitcoin(), user.getUsername(),
+					Log.ADMIN_TYPE_YES, user.getId(), Log.LOGTYPE_EMPLOYEE, employee.getId(),
+					Log.OPERATE_EMPLOYEE_UPDATEBASEBITCOIN);
+		}
+	}
+	
 	@Autowired
 	private EmployeeDAO employeeDAO;
 	@Autowired

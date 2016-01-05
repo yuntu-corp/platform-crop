@@ -620,7 +620,7 @@ public class WeChatController extends SpringController {
 	@RequestMapping(value="/updateCurrentBitcoin",method=RequestMethod.POST)
 	@ResponseBody
 	public void updateCurrentBitcoin(Employee employee) {
-		employeeService.update(employee);
+		employeeService.updateCurrentBitcoin(employee);
 	}
 	
 	/**

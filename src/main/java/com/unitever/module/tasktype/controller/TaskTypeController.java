@@ -19,25 +19,26 @@ import com.unitever.platform.core.web.controller.SpringController;
 @Controller
 @RequestMapping(value = "/taskType")
 public class TaskTypeController extends SpringController {
-	
-	
+
 	/**
 	 * 跳转至任务类型index页面
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value="/index",method=RequestMethod.GET)
-	public String index(){
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
 		return "module/taskType/jsp/taskType-index";
 	}
 
 	/**
 	 * 跳转至任务类型列表页面
+	 * 
 	 * @param page
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping(value="/list")
-	public String list(@FormModel("page") Page<TaskType> page, @FormModel("model") TaskType taskType){
+	@RequestMapping(value = "/list")
+	public String list(@FormModel("page") Page<TaskType> page, @FormModel("model") TaskType taskType) {
 		try {
 			taskType.setTypeName(URLDecoder.decode(taskType.getTypeName(), "utf-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -47,27 +48,31 @@ public class TaskTypeController extends SpringController {
 		setAttribute("model", taskType);
 		return "module/taskType/jsp/taskType-list";
 	}
+
 	/**
 	 * 跳转至任务类型详情页面
+	 * 
 	 * @param page
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping(value="/view")
-	public String view(@RequestParam(value="id") String id){
+	@RequestMapping(value = "/view")
+	public String view(@RequestParam(value = "id") String id) {
 		setAttribute("model", taskTypeService.getTaskTypeById(id));
 		return "module/taskType/jsp/taskType-view";
 	}
+
 	/**
-	 * 跳转至任务类型详情页面
+	 * 跳转至任务类型输入页面
+	 * 
 	 * @param page
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping(value="/input")
-	public String input(@RequestParam(value="id", required = false) String id){
+	@RequestMapping(value = "/input")
+	public String input(@RequestParam(value = "id", required = false) String id) {
 		String inputKind = getRequest().getParameter("inputKind");
-		if("update".equals(inputKind)) {
+		if ("update".equals(inputKind)) {
 			setAttribute("model", taskTypeService.getTaskTypeById(id));
 		} else {
 			setAttribute("model", new TaskType());
@@ -75,39 +80,38 @@ public class TaskTypeController extends SpringController {
 		setAttribute("inputKind", inputKind);
 		return "module/taskType/jsp/taskType-input";
 	}
+
 	/**
 	 * 任务类型更新或保存
+	 * 
 	 * @param page
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping(value="/saveOrUpdate")
+	@RequestMapping(value = "/saveOrUpdate")
 	@ResponseBody
-	public void saveOrUpdate(@FormModel("model") TaskType taskType){
+	public void saveOrUpdate(@FormModel("model") TaskType taskType) {
 		String inputKind = getRequest().getParameter("inputKind");
-		if("update".equals(inputKind)) {
+		if ("update".equals(inputKind)) {
 			taskTypeService.update(taskType);
 		} else {
-			taskType.setState("1");
 			taskTypeService.save(taskType);
 		}
 	}
+
 	/**
 	 * 任务类型删除
+	 * 
 	 * @param page
 	 * @param order
 	 * @return
 	 */
-	@RequestMapping(value="/delete")
+	@RequestMapping(value = "/delete")
 	@ResponseBody
-	public void delete(@RequestParam("taskTypeId") String taskTypeId){
-		TaskType taskType = new TaskType();
-		taskType.setId(taskTypeId);
-		taskType.setState("0");
-		taskTypeService.update(taskType);
+	public void delete(@RequestParam("taskTypeId") String taskTypeId) {
+		taskTypeService.updateTaskType(taskTypeId);
 	}
-	
-	
+
 	@Autowired
 	private TaskTypeService taskTypeService;
 }
