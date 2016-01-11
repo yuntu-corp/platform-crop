@@ -36,6 +36,10 @@ public class EmployeeDAO extends BaseDAO<Employee, String>{
 		this.update("minusBitCoin", null);
 	}
 	
+	public void initBitcoin(){
+		this.update("initBitcoin", null);
+	}
+	
 	public List<Employee> getEmployeeList(Employee employee) {
 		return this.getList("getEmployeesByEmployees", employee);
 	}

@@ -1,9 +1,11 @@
 package com.unitever.module.employee.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +25,11 @@ import com.unitever.platform.util.DateUtil;
 import com.unitever.platform.util.DoubleUtil;
 import com.unitever.platform.util.UUID;
 
+import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.bean.result.WxError;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpServiceImpl;
+import me.chanjar.weixin.cp.bean.WxCpMessage;
 import me.chanjar.weixin.cp.bean.WxCpUser;
 
 @Service
@@ -154,6 +158,34 @@ public class EmployeeService {
 
 	public void minusBitCoin() {
 		employeeDAO.minusBitCoin();
+	}
+	
+	
+	public void initBitcoin(){
+		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
+		WxCpMessage me = new WxCpMessage();
+		me.setMsgType(WxConsts.XML_MSG_TEXT);
+		me.setAgentId("15");
+		//通知每个用户
+		for(Employee employee:employeeDAO.getAll()){
+			StringBuffer temp=new StringBuffer();
+			temp.append("亲！已经到了是本月最后的时刻，我们将初始化您的虚拟币！如下是您本月的虚拟币记录：\r\r");
+			DateTime time = new DateTime(new Date().getTime());
+			time.minusDays(0);
+			temp.append("结算时间："+time.getYear()+"年"+time.getMonthOfYear()+"月\r\n");
+			temp.append("本月收入："+String.format("%.2f",Double.parseDouble(employee.getBitcoinIncome()))+"\r\n");
+			temp.append("本月消耗："+String.format("%.2f",Double.parseDouble(employee.getBitcoinConsume()))+"\r\n");
+			temp.append("本月剩余："+String.format("%.2f",Double.parseDouble(employee.getBitcoinSurplus())));
+			me.setContent(temp.toString());
+			me.setToUser(employee.getUserId());
+			try {
+				service.messageSend(me);
+			} catch (WxErrorException e) {
+				e.printStackTrace();
+			}
+		}
+		//初始化虚拟币
+		employeeDAO.initBitcoin();
 	}
 
 	/**

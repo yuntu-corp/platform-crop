@@ -171,7 +171,7 @@ public class TaskService {
 			return "您的余额不足！";
 		}
 		taskDAO.save(task);
-		LogUtil.saveLog(employee.getName()+"发布了任务："+task.getTitle(), employee.getName(), Log.ADMIN_TYPE_NO, employee.getId(), Log.LOGTYPE_EMPLOYEE, task.getId(), Log.OPERATE_TASK_SAVE);
+		LogUtil.saveLog(employee.getName()+"发布了任务："+task.getTitle(), employee.getName(), Log.ADMIN_TYPE_NO, employee.getId(), Log.LOGTYPE_TASK, task.getId(), Log.OPERATE_TASK_SAVE);
 
 		WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
 		WxCpMessage me = new WxCpMessage();
