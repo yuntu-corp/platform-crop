@@ -17,10 +17,10 @@
 					if(!$("#${pageId}theForm").valid()){
 						return false;
 					}
-					if( $("input[type='radio']:checked").val() == "6" && $("#refuseReason").val().trim().length <= 0){
+					/* if( $("input[type='radio']:checked").val() == "6" && $("#refuseReason").val().trim().length <= 0){
 						alert("请输入未通过审核的理由！");
 						return false;
-					}
+					} */
 					var formData = $("#${pageId}theForm").serialize();
 					$.ajax({
 					 	type: "POST",
@@ -119,7 +119,7 @@
 			</div>
 			<div class="pl100 lh50">
 		     	<label class="labelTitle"><em style="color: red;">*</em>未通过原因：</label>
-		     	<div class="view_detail2"><textarea id="refuseReason"  class="txtfield" name="refuseReason" style="width: 98%; margin-left: -10px;" placeholder="请输入未通过原因" maxlength="100" /></div>
+		     	<div class="view_detail2"><textarea id="refuseReason"  class="txtfield required"  name="refuseReason" style="width: 98%; margin-left: -10px;" placeholder="请输入未通过原因" minlength="5"  maxlength="100" /></div>
 			</div>
 		</div>
 		</form>

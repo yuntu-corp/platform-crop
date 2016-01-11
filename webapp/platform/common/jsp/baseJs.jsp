@@ -81,6 +81,7 @@
 <script src="${path }/platform/component/maxlength/jquery.maxlength.js"></script>
 <script src="${path }/platform/component/qtip/jquery.qtip.js"></script>
 <script src="${path }/platform/component/page/jquery.page.js"></script>
+<script src="${path }/platform/component/validate/jquery.validate.extend.dwj.js"></script>
 
 <script src="${path }/platform/common/js/common.js"></script>
 <script src="${path }/platform/common/js/co_common.js"></script>

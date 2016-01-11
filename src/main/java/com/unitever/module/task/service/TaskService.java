@@ -27,6 +27,7 @@ import com.unitever.module.log.model.Log;
 import com.unitever.module.task.dao.manual.TaskDAO;
 import com.unitever.module.task.model.Task;
 import com.unitever.module.task.model.TaskVo;
+import com.unitever.module.user.dao.manual.UserDAO;
 import com.unitever.module.user.model.User;
 import com.unitever.module.wechat.manager.SessionManager;
 import com.unitever.module.wechat.util.LogUtil;
@@ -348,7 +349,7 @@ public class TaskService {
 	 * @throws WxErrorException
 	 */
 	public void updateTaskStatus() throws WxErrorException {
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<更新状态");
+		User user=userDAO.getAll().get(0);
 		List<Task> tasks = getAllTasks();
 		for (Task task : tasks) {
 			// 未完成任务到期后自动更新状态为已完成
@@ -358,6 +359,15 @@ public class TaskService {
 					if (new Date().compareTo(task.getFinishDate()) >= 0) {
 						task.setStatus(Task.TASK_STATE_FINISH);
 						taskDAO.update(task);
+						// 通知发布还价人
+						WxCpServiceImpl service = (WxCpServiceImpl) SessionManager.getSession("service");
+						WxCpMessage me = new WxCpMessage();
+						me.setMsgType(WxConsts.XML_MSG_TEXT);
+						me.setAgentId("15");
+						me.setToUser(task.getPublisher().getUserId());
+						me.setContent("您发布的任务：" + task.getTitle() + "已经完成！"+"\n <a href=\"http://" + user.getDomainName()
+					+ "/platform/weChat/taskView?id=" + task.getId() + "&employeeId=" + task.getPublisher().getId() + "\">查看详情>>></a>");
+						service.messageSend(me);
 					}
 				} else {// 如果是销售任务
 					DateTime dateTime = new DateTime(task.getFinishDate().getTime());
@@ -373,7 +383,8 @@ public class TaskService {
 							me.setMsgType(WxConsts.XML_MSG_TEXT);
 							me.setAgentId("15");
 							me.setToUser(task.getPublisher().getUserId());
-							me.setContent("您发布的任务：" + task.getTitle() + "已经到期，请在3日内提交审核！否则系统将不会给您任何补偿！");
+							me.setContent("您发布的任务：" + task.getTitle() + "已经到期，请在3日内提交审核！否则系统将不会给您任何补偿！"+"\n <a href=\"http://" + user.getDomainName()
+									+ "/weChat/myPublishedTask?employeeId=" + task.getPublisher().getId() + "\">查看详情>>></a>");
 							service.messageSend(me);
 						}
 					}
@@ -388,7 +399,8 @@ public class TaskService {
 						me.setMsgType(WxConsts.XML_MSG_TEXT);
 						me.setAgentId("15");
 						me.setToUser(task.getPublisher().getUserId());
-						me.setContent("您发布的任务：" + task.getTitle() + "在任务结束后3天内未提交审核！");
+						me.setContent("您发布的任务：" + task.getTitle() + "在任务结束后3天内未提交审核！"+"\n <a href=\"http://" + user.getDomainName()
+								+ "/platform/weChat/taskView?id=" + task.getId() + "&employeeId=" + task.getPublisher().getId() + "\">查看详情>>></a>");
 						service.messageSend(me);
 					}
 				}
@@ -397,7 +409,6 @@ public class TaskService {
 			if (Task.TASK_STATE_UNRECEIVE.equals(task.getStatus())) {
 				DateTime dateTime = new DateTime(task.getFinishDate().getTime());
 				if (dateTime.isBeforeNow()) {
-					System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<超时："+task.getTitle());
 					task.setStatus(Task.TASK_STATE_OVER);
 					taskDAO.update(task);
 					// 通知发布还价人
@@ -406,7 +417,8 @@ public class TaskService {
 					me.setMsgType(WxConsts.XML_MSG_TEXT);
 					me.setAgentId("15");
 					me.setToUser(task.getPublisher().getUserId());
-					me.setContent("您发布的任务：" + task.getTitle() + "已经超时！");
+					me.setContent("您发布的任务：" + task.getTitle() + "已经超时！"+"\n <a href=\"http://" + user.getDomainName()
+							+ "/platform/weChat/taskView?id=" + task.getId() + "&employeeId=" + task.getPublisher().getId() + "\">查看详情>>></a>");
 					service.messageSend(me);
 				}
 			}
@@ -557,5 +569,7 @@ public class TaskService {
 	private DickerDAO dickerDAO;
 	@Autowired
 	private EvaluationDAO evaluationDAO;
+	@Autowired
+	private UserDAO userDAO;
 
 }

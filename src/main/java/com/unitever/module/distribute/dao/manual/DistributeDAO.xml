@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitever.module.distribute.dao.manual.DistributeDAO">
+	<resultMap type="Distribute" id="resultDistribute">  
+        <id column="id" property="id" />
+        <result column="bitcoin" property="bitcoin" />
+        <result column="date" property="date" />
+        <result column="reason" property="reason" />
+        <association column="id_employee" property="employee" select="com.unitever.module.employee.dao.manual.EmployeeDAO.get"/>
+	</resultMap>
+	
+	<select id="get" resultMap="resultDistribute" parameterType="String">
+		select * from cp_distribute
+		<where>
+			id=#{id}
+		</where>
+	</select>
+	
+	<select id="getAll" resultMap="resultDistribute">
+		select * from cp_distribute where status!=8 order by date desc
+	</select>
+	
+	<insert id="save" parameterType="Distribute">
+		insert into cp_distribute(id,bitcoin,date,reason,id_employee)
+		value(#{id},#{bitcoin},#{date},#{reason},#{employee.id})
+	</insert>
+
+    <select id="getDistributeByDistribute" resultMap="resultDistribute" parameterType="Distribute">
+    	select * From cp_distribute
+   		<where>
+   			1=1
+   			<if test="id != null">
+			     and id =#{id}
+			</if>
+			<if test="bitcoin != null">
+			     and bitcoin=#{bitcoin}
+			</if>
+			<if test="date != null">
+			      and date like CONCAT('%','${date}','%' )  
+			</if>
+			<if test="reason !=null">
+				and reason=#{reason}
+			</if>
+			<if test="employee != null and employee.id != null">
+				and id_employee=#{employee.id}
+			</if>
+		</where> 
+		order by date desc
+    </select>
+
+</mapper>

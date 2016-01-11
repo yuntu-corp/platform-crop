@@ -41,6 +41,10 @@ public class Log {
 	public static final String OPERATE_EMPLOYEE_UPDATECURRENRINFO = "9";
 	/** 操作动作 ：人员--修改基础虚拟币 **/
 	public static final String OPERATE_EMPLOYEE_UPDATEBASEBITCOIN = "10";
+	/** 操作动作 ：人员--添加人员 **/
+	public static final String OPERATE_EMPLOYEE_SAVE = "18";
+	/** 操作动作 ：人员--修改人员信息 **/
+	public static final String OPERATE_EMPLOYEE_UPDATE = "19";
 
 	/** 操作动作 ：评价--提交评价 **/
 	public static final String OPERATE_EVALUATION_SAVE = "11";
@@ -58,6 +62,9 @@ public class Log {
 	public static final String OPERATE_TASKTYPE_DELETE = "16";
 	/** 操作动作 ： 任务类型--更新任务类型 **/
 	public static final String OPERATE_TASKTYPE_UPDATE = "17";
+	
+	/** 操作动作 ： 分发 **/
+	public static final String OPERATE_DISTRIBUTE = "20";
 
 	/** 对象：Task **/
 	public static final String LOGTYPE_TASK = "task";
@@ -69,6 +76,8 @@ public class Log {
 	public static final String LOGTYPE_EVALUATION = "evaluation";
 	/** 对象：Tasktype **/
 	public static final String LOGTYPE_TASKTYPE = "tasktype";
+	/** 对象：Tasktype **/
+	public static final String LOGTYPE_DISTRIBUTE = "distribute";
 
 	/** 是否管理员字段value值，用于网页显示 **/
 	private String isAdminValue;
@@ -205,6 +214,14 @@ public class Log {
 		else if (OPERATE_EMPLOYEE_UPDATEBASEBITCOIN.equals(operate)) {
 			return "人员--修改基础虚拟币";
 		}
+		// 操作动作 ：人员--添加人员
+		else if (OPERATE_EMPLOYEE_SAVE.equals(operate)) {
+			return "人员--添加人员";
+		}
+		// 操作动作 ：人员--修改人员信息
+		else if (OPERATE_EMPLOYEE_UPDATE.equals(operate)) {
+			return "人员--修改人员信息";
+		}
 		// 操作动作 ：评价--提交评价
 		else if (OPERATE_EVALUATION_SAVE.equals(operate)) {
 			return "评价--提交评价";
@@ -232,6 +249,10 @@ public class Log {
 		// 操作动作 ： 任务类型--更新任务类型
 		else if (OPERATE_TASKTYPE_UPDATE.equals(operate)) {
 			return "任务类型--更新任务类型";
+		}
+		// 操作动作 ： 任务类型--更新任务类型
+		else if (OPERATE_DISTRIBUTE.equals(operate)) {
+			return "任务类型--分发虚拟币";
 		}
 		return operateValue;
 	}

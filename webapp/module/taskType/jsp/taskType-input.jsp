@@ -2,6 +2,7 @@
 <%@ page language="java" pageEncoding="utf-8"%>
 <%@ include file="/platform/common/jsp/taglibs.jsp" %>
 <html>
+	<%-- <script  src="${path}/platform/component/validate/jquery.validate.extend.dwj.js"></script> --%>
 	<head>  
 		<script type="text/javascript">
 			Namespace.register("com.yunt.taskType.input");
@@ -25,6 +26,7 @@
 			};
 			$(document).ready(function() {
 				$.hz.validate.init("${pageId}theForm");
+				//$("${pageId}theForm").Validform();
 			});
 		</script>
 	</head>
@@ -35,11 +37,13 @@
 			     	<label class="labelTitle"><em style="color: red;">*</em>类型标识：</label>
 			     	<input type="hidden" name="model.id" value="${model.id }"  />
 			     	<input type="hidden" name="model.state" value="${model.state }"  />
-			     	<input type="text" name="model.typeKey" value="${model.typeKey }" class="required" maxlength="50"/>
+			     	<input type="text" name="model.typeKey" value="${model.typeKey }" class="required" rangelength="[1,20]"  ennum="true"/>
 				</div>
 				<div class="pl100 lh50">
 			     	<label class="labelTitle"><em style="color: red;">*</em>类型名称:</label>
-					<input type="text" name="model.typeName" value="${model.typeName }" class="required" />
+					<input type="text" name="model.typeName" value="${model.typeName }"   class="required" rangelength="[1,10]"/>
+				</div>
+				<div class="pl100 lh50">
 				</div>
 			</form>
 		</div>

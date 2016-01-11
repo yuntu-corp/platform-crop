@@ -62,6 +62,7 @@ public class SystemLogController extends SpringController {
 		setAttribute("model", logService.getLogById(id));
 		return "module/systemLog/jsp/systemLog-view";
 	}
+	
 
 	@Autowired
 	private LogService logService;

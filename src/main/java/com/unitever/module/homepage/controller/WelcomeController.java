@@ -79,4 +79,7 @@ public class WelcomeController extends SpringController {
 		String token = (String) this.getRequest().getSession().getAttribute("PATCHCA");
 		this.print(String.valueOf(imgjudge.equals(token)));
 	}
+	
+	
+	
 }

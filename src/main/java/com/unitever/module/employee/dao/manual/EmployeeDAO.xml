@@ -55,6 +55,7 @@
 		where id=#{id}
 	</update>
 	
+	
 	<select id="getEmployeeByUserId" resultMap="resultEmployee">
     	select * from cp_employee where userId=#{userId} 
     </select>

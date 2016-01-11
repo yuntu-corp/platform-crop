@@ -92,6 +92,9 @@
 	                    <li onclick="com.yunt.index.loadContent('${path}/task/index');" class="left_list_selected">
 	                        <img src="${path}/platform/theme/distributionSystem/images/home.png">任务管理
 	                    </li>
+	                    <li onclick="com.yunt.index.loadContent('${path}/distribute/index');">
+	                        <img src="${path}/platform/theme/distributionSystem/images/coin2.png">分发管理
+	                    </li>
 	                    <li onclick="com.yunt.index.loadContent('${path}/task/taskCheckIndex');">
 	                        <img src="${path}/platform/theme/distributionSystem/images/coin2.png">审核管理
 	                    </li>

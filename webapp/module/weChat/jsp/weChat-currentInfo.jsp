@@ -131,7 +131,7 @@ small {
 									}</small>
 								<small >
 									<span style="text-align: right; width: 72px;">今 日 价 格 ：</span><span > ￥<fmt:formatNumber type="number" value="${employee.currentBitcoin}" maxFractionDigits="2"/></span> <br>
-									<span style="text-align: right; width: 72px;">本 月 收 入 ：</span><span > ￥<fmt:formatNumber type="number" value="${emp.bitcoinIncome}" maxFractionDigits="2"/></span> <br>
+									<span style="text-align: right; width: 72px;">本 月 收 入 ：</span><span > ￥<fmt:formatNumber type="number" value="${employee.bitcoinIncome}" maxFractionDigits="2"/></span> <br>
 									<span style="text-align: right; width: 72px;">已接受任务：</span><span >  ${employee.taskCount}</span> <br>
 									<span style="text-align: right; width: 72px;">已发布任务：</span><span >  ${employee.publishTaskCount}</span> <br>
 								</small>
@@ -174,7 +174,7 @@ small {
 									<div class="text">
 										${emp.name }<small style="float: right;"></small>
 										<small>
-											<span style="text-align: right; width: 72px;">今 日 价 格 ：</span><span >￥<fmt:formatNumber type="number" value="${employee.currentBitcoin}" maxFractionDigits="2"/></span> <br/>
+											<span style="text-align: right; width: 72px;">今 日 价 格 ：</span><span >￥<fmt:formatNumber type="number" value="${emp.currentBitcoin}" maxFractionDigits="2"/></span> <br/>
 											<span style="text-align: right; width: 72px;">本 月 收 入 ：</span><span >￥<fmt:formatNumber type="number" value="${emp.bitcoinIncome}" maxFractionDigits="2"/></span> <br/>
 											<span style="text-align: right; width: 72px;">已接受任务：</span><span > ${emp.taskCount}</span> <br/>
 											<span style="text-align: right; width: 72px;">已发布任务：</span><span > ${emp.publishTaskCount}</span> <br/>

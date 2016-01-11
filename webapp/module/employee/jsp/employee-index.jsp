@@ -12,14 +12,44 @@
 						$("body").unmask();
 					});
 				},
-				update : function(href, title) {
+				input : function(href, title) {
 					$.dialog.load(href,{
 						id: '${pageId}employeeInput',
+						title:title,
+						width:700,
+						height:600,
+						ok:function(){
+							com.yunt.employee.employeeInput.doInput('${pageId}employeeInput');
+							return false;
+						},
+						cancel: function(){
+		
+						}
+					});
+				},
+				updateBaseBitcoin : function(href, title) {
+					$.dialog.load(href,{
+						id: '${pageId}employeeUpdate',
 						title:title,
 						width:600,
 						height:500,
 						ok:function(){
-							com.yunt.employee.employeeInput.doInput('${pageId}employeeInput');
+							com.yunt.employee.updateBaseBitcoin.doUpdateBaseBitcoin('${pageId}employeeUpdate');
+							return false;
+						},
+						cancel: function(){
+		
+						}
+					});
+				},
+				updateEmployee : function(href, title) {
+					$.dialog.load(href,{
+						id: '${pageId}employeeUpdate',
+						title:title,
+						width:600,
+						height:500,
+						ok:function(){
+							com.yunt.employee.updateEmployee.doUpdate('${pageId}employeeUpdate');
 							return false;
 						},
 						cancel: function(){
@@ -53,10 +83,10 @@
 			<div class="title">用户管理</div>
 			<div class="details">
 				<div class="details_operation clearfix">
-<%-- 				    <div class="bui_select">
+				    <div class="bui_select">
 				    	<img src="${path}/platform/theme/distributionSystem/images/coin.png">
-						<input type="button" value="添 加" class="add hand" onclick="com.yunt.employee.index.input('${path}/employee/input?inputKind=save', '添加');">
-					</div> --%>
+						<input type="button" value="添 加" class="add hand" onclick="com.yunt.employee.index.input('${path}/employee/goInput', '添加');">
+					</div>
 					<div class="fr">
 	                	<form method="" action="" class="box">
 							<label for="pass" style="line-height:30px;padding-left:10px;">关键词:</label>
